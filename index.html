@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aside 채용 비서 실습 · 국립경국대학교</title>
-<meta name="description" content="국립경국대학교 현직자 특강 「Aside로 만드는 나만의 채용 비서」 실습 누리집. 프로필 칸을 채우면 실습 글이 완성되고, 복사 한 번으로 Aside나 ChatGPT·Gemini에 붙여 넣습니다.">
+<title>선물 보따리 · 국립경국대학교 현직자 특강 (How에서 What의 시대로)</title>
+<meta name="description" content="국립경국대학교 현직자 특강 「How에서 What의 시대로: AI로 자동화하는 취업 준비와 대학 생활 실전 전략」 선물 보따리 누리집. 프로필만 채우면 오늘 시연한 모든 프롬프트가 완성됩니다.">
 <meta name="theme-color" content="#0066B2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -12,13 +12,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+@font-face { font-family:'Paperlogy'; font-weight:700; font-display:swap; src:local('Paperlogy 7 Bold'), local('Paperlogy-7Bold'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-7Bold.woff2') format('woff2'); }
+@font-face { font-family:'Paperlogy'; font-weight:800; font-display:swap; src:local('Paperlogy 8 ExtraBold'), local('Paperlogy-8ExtraBold'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-8ExtraBold.woff2') format('woff2'); }
 :root{
   --blue:#0066B2; --blue-ink:#004C85; --sky:#00B5F0; --sky-wash:#E6F6FD;
+  --coral:#E11D48; --coral-wash:#FFF1F2;
   --ink:#16202A; --ink-2:#47525E; --ink-3:#7A8590;
   --line:#DCE2E8; --line-2:#EEF1F4; --paper:#FFFFFF; --ground:#F4F6F8;
-  --warn:#B4441C; --warn-wash:#FDF1EC; --ok:#13804B;
-  --r-s:4px; --r-m:8px; --r-l:14px;
-  --display:"IBM Plex Sans KR","Pretendard Variable",Pretendard,sans-serif;
+  --warn:#B4441C; --warn-wash:#FDF1EC; --ok:#13804B; --ok-wash:#ECFDF5;
+  --r-s:6px; --r-m:10px; --r-l:16px;
+  --display:"Paperlogy","IBM Plex Sans KR","Pretendard Variable",Pretendard,sans-serif;
   --body:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
@@ -27,21 +30,18 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
 a{color:var(--blue)}
 .i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-/* 위 막대 */
 .top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
-.top::before{content:"";display:block;height:3px;background:var(--blue)}
+.top::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--blue),var(--sky),#FF5E7E)}
 .top-in{display:flex;align-items:center;gap:12px;max-width:1120px;margin:0 auto;padding:10px 16px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-width:0}
 .brand img{height:22px;width:auto}
-.brand b{font-family:var(--display);font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:2px solid var(--sky);padding-left:12px}
+.brand b{font-family:var(--display);font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:2px solid var(--sky);padding-left:12px}
 .prog{margin-left:auto;font-size:13px;color:var(--ink-2);white-space:nowrap}
 .prog strong{color:var(--blue);font-variant-numeric:tabular-nums}
 .bar{height:2px;background:var(--line-2)}
 .bar span{display:block;height:100%;width:0;background:var(--sky);transition:width .3s ease-out}
 
-/* 단계 고르기 */
 .steps{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:var(--paper);border-bottom:1px solid var(--line);scrollbar-width:none}
 .steps::-webkit-scrollbar{display:none}
 .steps a{flex:none;display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink-2);font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--paper)}
@@ -52,147 +52,124 @@ a{color:var(--blue)}
 .steps .gap{flex:none;width:1px;background:var(--line);margin:4px 4px}
 
 .shell{max-width:1120px;margin:0 auto;padding:0 16px 80px}
-main{max-width:760px}
+main{max-width:780px}
 
-/* 한 단계 */
-section.step{display:none;padding-top:28px}
+section.step{display:none;padding-top:26px}
 section.step.on{display:block}
-.kicker{font-size:14px;color:var(--blue);font-weight:600;margin:0 0 4px}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(25px,6vw,32px);line-height:1.3;margin:0 0 8px;letter-spacing:-.01em}
-.lead{font-size:17px;color:var(--ink-2);margin:0 0 22px}
-h2{font-family:var(--display);font-weight:600;font-size:19px;margin:30px 0 10px}
+.kicker{font-size:14px;color:var(--blue);font-weight:700;margin:0 0 4px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,34px);line-height:1.28;margin:0 0 8px;letter-spacing:-.02em}
+.lead{font-size:16.5px;color:var(--ink-2);margin:0 0 20px}
+h2{font-family:var(--display);font-weight:700;font-size:19px;margin:28px 0 10px}
 p{margin:0 0 12px}
-.muted{color:var(--ink-3);font-size:14px}
 
-/* 할 일 줄 */
+.survey-banner{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;border-radius:var(--r-m);margin:0 0 20px;
+  background:linear-gradient(135deg,#0B162C,#162D59);color:#fff;
+  box-shadow:0 10px 24px rgba(11,22,44,0.16);
+}
+.survey-banner b{display:block;font-family:var(--display);font-size:16px}
+.survey-banner small{color:#BAE6FD;font-size:13.5px}
+
 ol.todo{list-style:none;margin:0 0 8px;padding:0;border-top:1px solid var(--line)}
-ol.todo>li{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);counter-increment:t}
+ol.todo>li{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);counter-increment:t}
 ol.todo{counter-reset:t}
 ol.todo>li::before{content:counter(t);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sky-wash);color:var(--blue-ink);font-weight:700;font-size:14px;margin-top:1px}
 ol.todo>li>div>p:last-child{margin-bottom:0}
 
-/* 넣을 글 */
-.prompt{margin:14px 0 6px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:var(--r-s)}
+.prompt{margin:14px 0 8px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:var(--r-s)}
+.prompt.hot{border-left-color:#E11D48}
 .prompt-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 14px;border-bottom:1px solid var(--line-2);font-size:13px;color:var(--ink-3)}
-.prompt pre{margin:0;padding:14px;white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.7;color:var(--ink);max-height:300px;overflow:auto}
-.prompt pre .fill{background:var(--sky-wash);color:var(--blue-ink);border-radius:2px}
+.prompt pre{margin:0;padding:14px;white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.7;color:var(--ink);max-height:320px;overflow:auto}
+.prompt pre .fill{background:var(--sky-wash);color:var(--blue-ink);border-radius:2px;font-weight:600}
 .prompt pre .empty{background:var(--warn-wash);color:var(--warn);border-radius:2px}
-code,.cmd{font-family:var(--mono);font-size:14px}
-code{background:var(--line-2);padding:1px 5px;border-radius:3px}
-.cmd{display:flex;align-items:center;gap:8px;margin:10px 0;background:#0F1A24;color:#E6EEF5;border-radius:var(--r-s);padding:4px 4px 4px 14px}
-.cmd span{flex:1;overflow-x:auto;white-space:nowrap;padding:8px 0}
-.cmd .btn{background:#22313F;border-color:#22313F;color:#E6EEF5}
+code{font-family:var(--mono);font-size:13.5px;background:var(--line-2);padding:1px 5px;border-radius:3px}
 
-/* 단추 */
-.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:600;padding:8px 12px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;min-height:40px}
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:600;padding:8px 14px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;min-height:40px}
 .btn:hover{border-color:var(--blue);color:var(--blue)}
-.btn:active{transform:translateY(1px)}
 .btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
 .btn.main:hover{background:var(--blue-ink);color:#fff}
-.btn.copied{border-color:var(--ok);color:var(--ok)}
-.btn:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.btn.coral{background:#E11D48;border-color:#E11D48;color:#fff}
+.btn.coral:hover{background:#BE123C;color:#fff}
+.btn.copied{border-color:var(--ok);color:var(--ok);background:var(--ok-wash)}
 .row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 
-/* 붙여넣기 칸 */
-label.field{display:block;font-weight:600;margin:18px 0 6px}
-textarea,input[type=text]{width:100%;font:inherit;font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);border:1px solid #C9D2DB;border-radius:var(--r-m);padding:12px 14px}
-textarea{min-height:150px;resize:vertical}
-textarea::placeholder,input::placeholder{color:#9AA4AE}
+label.field{display:block;font-weight:600;margin:16px 0 6px}
+textarea,input[type=text]{width:100%;font:inherit;font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);border:1px solid #C9D2DB;border-radius:var(--r-m);padding:11px 13px}
+textarea{min-height:130px;resize:vertical}
 .saved{font-size:13px;color:var(--ink-3);margin-top:4px;min-height:20px}
 
-/* 확인 */
 .check{display:flex;align-items:center;gap:10px;margin:22px 0 0;padding:14px 0;border-top:1px solid var(--line);font-weight:600;cursor:pointer}
 .check input{width:22px;height:22px;accent-color:var(--blue)}
-.next{display:flex;justify-content:space-between;gap:10px;margin:18px 0 8px}
-.next .btn{min-height:48px;padding:10px 18px}
+.next{display:flex;justify-content:space-between;gap:10px;margin:16px 0 8px}
+.next .btn{min-height:46px;padding:10px 18px}
 
-/* 접는 칸 */
 details{border-bottom:1px solid var(--line)}
-details:first-of-type{border-top:1px solid var(--line);margin-top:26px}
-summary{cursor:pointer;list-style:none;padding:14px 0;font-weight:600;display:flex;align-items:center;gap:8px}
+details:first-of-type{border-top:1px solid var(--line);margin-top:22px}
+summary{cursor:pointer;list-style:none;padding:13px 0;font-weight:600;display:flex;align-items:center;gap:8px}
 summary::-webkit-details-marker{display:none}
 summary .i{transition:transform .2s ease-out;width:16px;height:16px;color:var(--ink-3)}
 details[open] summary .i{transform:rotate(90deg)}
 details .in{padding:0 0 16px 24px;color:var(--ink-2)}
-details .in ul{margin:0;padding-left:18px}
-details .in li{margin:4px 0}
 
-/* 표 */
 table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 6px;background:var(--paper)}
 th,td{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
 th{background:var(--line-2);font-weight:600;color:var(--ink-2);font-size:14px}
 td:first-child{font-weight:600;white-space:nowrap}
 .scroll{overflow-x:auto}
 
-/* 알림 */
 .note{display:flex;gap:10px;padding:12px 14px;border-radius:var(--r-m);background:var(--sky-wash);color:var(--blue-ink);font-size:15px;margin:14px 0}
 .note.warn{background:var(--warn-wash);color:var(--warn)}
+.note.pink{background:var(--coral-wash);color:#9F1239}
 .note .i{margin-top:3px}
 
-/* 시작 화면 */
-.make{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:0;border-top:2px solid var(--ink)}
-.make li{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
-.make li span{font-family:var(--mono);font-size:13px;color:var(--blue);padding-top:2px}
+.make{list-style:none;padding:0;margin:0 0 6px;border-top:2px solid var(--ink)}
+.make li{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.make li span{font-family:var(--mono);font-size:13px;color:var(--blue);font-weight:600;padding-top:2px}
 .make li b{display:block}
 
-/* How → What */
 .shift{margin:6px 0 10px;border-top:2px solid var(--ink)}
-.shift div{padding:18px 0;border-bottom:1px solid var(--line)}
-.shift .big{font-family:var(--display);font-weight:700;font-size:clamp(24px,6.4vw,34px);line-height:1.25;margin:0 0 8px}
-.shift .big s{color:var(--ink-3);text-decoration-thickness:2px}
+.shift div{padding:16px 0;border-bottom:1px solid var(--line)}
+.shift .big{font-family:var(--display);font-weight:700;font-size:clamp(22px,6vw,30px);line-height:1.25;margin:0 0 6px}
+.shift .big s{color:var(--ink-3)}
 .shift .big em{font-style:normal;color:var(--blue)}
 
-/* 결과 */
 .result{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-m);margin:12px 0}
-.result h3{margin:0;padding:10px 14px;font-size:15px;border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center;gap:8px}
-.result pre{margin:0;padding:14px;white-space:pre-wrap;font-family:var(--body);font-size:15px;max-height:260px;overflow:auto}
+.result h3{margin:0;padding:10px 14px;font-size:15px;border-bottom:1px solid var(--line-2)}
+.result pre{margin:0;padding:14px;white-space:pre-wrap;font-family:var(--body);font-size:15px;max-height:240px;overflow:auto}
 .result pre.none{color:var(--ink-3)}
 
-.jobs{list-style:none;padding:0;margin:8px 0;border-top:1px solid var(--line)}
-.jobs li{padding:12px 0;border-bottom:1px solid var(--line)}
-.jobs li b{display:block}
-
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin:10px 0 0}
-.tabs button{font:inherit;font-size:15px;font-weight:600;background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;color:var(--ink-3);cursor:pointer}
-.tabs button[aria-selected=true]{color:var(--blue);border-bottom-color:var(--blue)}
-.tabpanel[hidden]{display:none}
-
-footer{max-width:760px;margin:40px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
-
-.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:var(--r-m);font-size:14px;transition:opacity .2s ease-out,transform .2s ease-out;pointer-events:none;z-index:40}
+footer{max-width:780px;margin:40px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:var(--r-m);font-size:14px;transition:opacity .2s,transform .2s;pointer-events:none;z-index:40}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 @media (min-width:1000px){
   .steps{display:none}
-  .shell{display:grid;grid-template-columns:200px 1fr;gap:48px}
-  .rail{display:block!important;position:sticky;top:80px;align-self:start;padding-top:28px}
+  .shell{display:grid;grid-template-columns:220px 1fr;gap:44px}
+  .rail{display:block!important;position:sticky;top:80px;align-self:start;padding-top:26px}
   .rail a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-size:14px;padding:7px 10px;border-left:2px solid var(--line)}
   .rail a .n{font-family:var(--mono);font-size:12px;color:var(--ink-3);width:16px}
-  .rail a.on{border-left-color:var(--blue);color:var(--blue);font-weight:600;background:var(--paper)}
+  .rail a.on{border-left-color:var(--blue);color:var(--blue);font-weight:700;background:var(--paper)}
   .rail a.done .n{color:var(--ok)}
   .rail .sep{height:14px}
 }
 .rail{display:none}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media print{.top,.steps,.rail,.next,.check,details,.row,.btn{display:none!important}section.step{display:none!important}#s5{display:block!important}body{background:#fff}}
+@media print{.top,.steps,.rail,.next,.check,details,.row,.btn,.survey-banner{display:none!important}section.step{display:none!important}#s5{display:block!important}body{background:#fff}}
 
-/* 기기 고르기 */
-.dev{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;margin:12px 0 4px;background:var(--paper)}
-.dev button{font:inherit;font-size:15px;font-weight:600;background:none;border:0;padding:14px 10px;color:var(--ink-2);cursor:pointer;text-align:left;line-height:1.35}
+.dev{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;margin:12px 0 4px;background:var(--paper)}
+.dev button{font:inherit;font-size:15px;font-weight:600;background:none;border:0;padding:13px 12px;color:var(--ink-2);cursor:pointer;text-align:left;line-height:1.35}
 .dev button+button{border-left:1px solid var(--line)}
 .dev button small{display:block;font-weight:400;font-size:13px;color:var(--ink-3)}
 .dev button[aria-pressed=true]{background:var(--blue);color:#fff}
 .dev button[aria-pressed=true] small{color:#CFE6F7}
-.devtag{display:inline-block;font-size:12px;font-weight:600;color:var(--blue-ink);background:var(--sky-wash);border-radius:var(--r-s);padding:1px 7px;margin-left:6px;vertical-align:2px}
 [data-only]{display:none}
 body.d-pc li[data-only=pc],body.d-phone li[data-only=phone]{display:list-item}
 body.d-pc .row[data-only=pc],body.d-phone .row[data-only=phone]{display:flex}
 body.d-pc [data-only=pc],body.d-phone [data-only=phone]{display:block}
 body.d-pc span[data-only=pc],body.d-phone span[data-only=phone]{display:inline}
 
-/* 프로필 칸 */
 .pf{display:grid;gap:0 14px}
-.pf label.field{margin-top:14px}
+.pf label.field{margin-top:12px}
 @media (min-width:640px){.pf{grid-template-columns:1fr 1fr}.pf .wide{grid-column:1/-1}}
 .hint{font-size:13px;color:var(--ink-3);margin:4px 0 0}
 </style>
@@ -216,8 +193,8 @@ body.d-pc span[data-only=pc],body.d-phone span[data-only=phone]{display:inline}
 
 <header class="top">
   <div class="top-in">
-    <a class="brand" href="#s0"><img src="gknu_logo.png" alt="국립경국대학교" width="116" height="22"><b>Aside로 만드는 나만의 채용 비서</b></a>
-    <div class="prog" aria-live="polite"><strong id="doneN">0</strong> / 6 했어요</div>
+    <a class="brand" href="#s0"><img src="gknu_logo.png" alt="국립경국대학교" width="116" height="22"><b>How에서 What의 시대로 · 선물 보따리</b></a>
+    <div class="prog" aria-live="polite"><strong id="doneN">0</strong> / 6 확인</div>
   </div>
   <div class="bar"><span id="barFill"></span></div>
   <nav class="steps" id="steps" aria-label="단계"></nav>
@@ -228,302 +205,225 @@ body.d-pc span[data-only=pc],body.d-phone span[data-only=phone]{display:inline}
 <main id="main">
 
 <!-- 0 시작 -->
-<section class="step" id="s0" data-label="시작하기" data-n="0">
-  <p class="kicker">2026. 11. 18.(수) 14:00 · AI를 활용한 취업전략</p>
-  <h1>오늘은 공고 찾는 일을<br>AI 비서에게 맡겨 봐요</h1>
-  <p class="lead">이 화면의 「복사」를 누르고 AI 창에 붙여 넣기만 하면 돼요. 글은 직접 쓰지 않아도 돼요.</p>
+<section class="step" id="s0" data-label="시작 · 선물 보따리" data-n="0">
+  <div class="survey-banner">
+    <div>
+      <b>📋 [글로컬대학사업] 현직자특강 만족도 조사 (11/17~11/23)</b>
+      <small>강의 마치자마자 바로 1분 컷 참여 부탁드려요!</small>
+    </div>
+    <a class="btn coral" href="https://m.site.naver.com/2kFXE" target="_blank" rel="noopener">만족도 조사 바로가기 <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
 
-  <h2>지금 무엇으로 하나요?</h2>
+  <p class="kicker">2026. 11. 18.(수) 14:00~16:00 · AI를 활용한 취업전략 (한창완 교수)</p>
+  <h1>How에서 What의 시대로:<br>특강 선물 보따리 &amp; 실습팩</h1>
+  <p class="lead">특강 시간에 눈으로 본 모든 자동화 프롬프트를 <b>집에서 복사 한 번으로</b> 그대로 따라 해 볼 수 있게 묶어 두었습니다.</p>
+
+  <h2>지금 어떤 기기로 보고 있나요?</h2>
   <div class="dev" role="group" aria-label="기기 고르기">
-    <button type="button" data-dev="pc">노트북<small>Aside로 실습 전부</small></button>
-    <button type="button" data-dev="phone">휴대폰<small>ChatGPT·Gemini 앱으로</small></button>
-  </div>
-  <p class="hint">고르면 아래 모든 글과 단추가 그 기기에 맞게 바뀌어요. 나중에 바꿔도 돼요.</p>
-
-  <div data-only="pc">
-    <ol class="make">
-      <li><span>실습 0</span><div><b>내 취업 프로필</b>빈칸 몇 개만 채우면 끝</div></li>
-      <li><span>실습 1</span><div><b>사람인 공고 10개 → 구글 시트</b>Aside가 찾아서 표로 만들어요</div></li>
-      <li><span>실습 2</span><div><b>순위 + 자기소개서 첫 문단</b>나에게 맞는 순서와 이유까지</div></li>
-      <li><span>실습 3</span><div><b>지원서 칸 채우기 · 매일 아침 알림</b>제출 단추는 내가 눌러요</div></li>
-    </ol>
-    <h2>수업 전에 해 둘 것</h2>
-    <ol class="todo">
-      <li><div><p>노트북에 Aside를 설치해요(맥·윈도우).</p>
-        <div class="row"><a class="btn main" href="https://www.aside.com/download" target="_blank" rel="noopener">Aside 내려받기 <svg class="i"><use href="#i-ext"/></svg></a></div></div></li>
-      <li><div><p>Aside를 열어 <b>무료판</b>으로 가입해요. 무료판은 한 달 500크레딧, 매일 하는 일(루틴) 3개까지 쓸 수 있어요.</p></div></li>
-      <li><div><p>Aside 안에서 <b>구글</b>과 <b>사람인</b>에 로그인해 둬요.</p></div></li>
-      <li><div><p>이 화면을 Aside 탭 하나에 열어 두고, 다른 탭에서 Aside에게 일을 시켜요.</p></div></li>
-    </ol>
+    <button type="button" data-dev="pc">노트북 / PC<small>Aside 브라우저로 풀 자동화 실행</small></button>
+    <button type="button" data-dev="phone">스마트폰<small>ChatGPT · Gemini 앱으로 바로 적용</small></button>
   </div>
 
-  <div data-only="phone">
-    <ol class="make">
-      <li><span>실습 0</span><div><b>내 취업 프로필</b>빈칸 몇 개만 채우면 끝</div></li>
-      <li><span>실습 1</span><div><b>사람인 공고 10개를 표로</b>AI가 찾아서 정리해요</div></li>
-      <li><span>실습 2</span><div><b>순위 + 자기소개서 첫 문단</b>나에게 맞는 순서와 이유까지</div></li>
-      <li><span>실습 3</span><div><b>면접 질문 연습</b>지원서 칸 채우기는 강사 화면으로 봐요</div></li>
-    </ol>
-    <h2>시작 전에 해 둘 것</h2>
-    <ol class="todo">
-      <li><div><p>ChatGPT나 Gemini 앱을 열어요. 앱이 없으면 아래 단추로 브라우저에서 열려요.</p>
-        <div class="row"><a class="btn main" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT 열기 <svg class="i"><use href="#i-ext"/></svg></a><a class="btn" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini 열기 <svg class="i"><use href="#i-ext"/></svg></a></div></div></li>
-      <li><div><p>로그인해요. 학교 계정 말고 <b>개인 계정</b>이 좋아요.</p></div></li>
-      <li><div><p>이 화면은 닫지 말고 남겨 두세요. 이 화면 ↔ AI 앱을 오가며 해요.</p></div></li>
-    </ol>
-    <div class="note"><svg class="i"><use href="#i-info"/></svg><span>Aside는 휴대폰에서 쓸 수 없어요. 오늘은 같은 글을 ChatGPT·Gemini에 넣어 보고, 집 노트북에 Aside를 깔면 그대로 이어서 할 수 있어요.</span></div>
-  </div>
+  <ol class="make">
+    <li><span>파트 1</span><div><b>취업 비서 · 사람인 공고 20개 + 지원서 기입</b>제출 버튼 직전에 멈추는 안전 자동화</div></li>
+    <li><span>파트 2</span><div><b>피클 체험단 × 직무 블로그 일일 자동화</b>공짜 생활비 방어 + 취업 포트폴리오</div></li>
+    <li><span>파트 3</span><div><b>밤샘 과제 3분 컷 · 한글척척 &amp; HTML PPT</b>학교 양식 그대로 · Paperlogy 스타일 웹 슬라이드</div></li>
+    <li><span>파트 4·5</span><div><b>방학 여행 최저가 &amp; 이쁨 받는 데이트 코스 💕</b>광고 글 거른 인스타 찐맛집·동선표</div></li>
+    <li><span>파트 6</span><div><b>Google AI 학생 혜택 2종 &amp; 취업진로본부</b>한국 AI Plus 1년 무료 + 미국 AI Pro·유튜브 번들</div></li>
+  </ol>
 
-  <h2>AI에게 맡기지 않는 것</h2>
+  <h2>AI에게 절대 맡기지 않는 3대 안전선</h2>
   <div class="scroll"><table>
-    <tr><th>원칙</th><th>이렇게 해요</th></tr>
-    <tr><td>넣지 않기</td><td>주민등록번호, 전화번호, 주소, 다른 사람 이름은 AI에 넣지 않아요.</td></tr>
-    <tr><td>제출은 내가</td><td>지원서 제출, 결제처럼 되돌릴 수 없는 일은 AI에게 시키지 않아요.</td></tr>
-    <tr><td>확인하기</td><td>마감일과 자격 요건은 원래 공고를 눌러 다시 봐요.</td></tr>
+    <tr><th>원칙</th><th>꼭 지키기</th></tr>
+    <tr><td>개인정보 금지</td><td>주민등록번호, 상세 주소, 계좌, 비밀번호, 타인 실명은 AI에 입력하지 않아요.</td></tr>
+    <tr><td>최종 제출·결제</td><td>입사지원 최종 제출, 결제 클릭은 반드시 내 눈으로 확인하고 내가 눌러요.</td></tr>
+    <tr><td>원문 사실 확인</td><td>공고 마감일, 여행 취소 기한, 매장 휴무일은 원문 링크에서 한 번 더 봐요.</td></tr>
   </table></div>
 
-  <label class="check"><input type="checkbox" data-done="0"> 준비했어요</label>
-  <div class="next"><span></span><a class="btn main" href="#s1">다음: 실습 0 프로필 <svg class="i"><use href="#i-right"/></svg></a></div>
+  <div class="row" data-only="pc">
+    <a class="btn main" href="https://www.aside.com/download" target="_blank" rel="noopener">Aside 무료 설치 (맥·윈도우) <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
+  <div class="row" data-only="phone">
+    <a class="btn main" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini 열기 <svg class="i"><use href="#i-ext"/></svg></a>
+    <a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT 열기 <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
+
+  <label class="check"><input type="checkbox" data-done="0"> 전체 흐름을 확인했어요</label>
+  <div class="next"><span></span><a class="btn main" href="#s1">다음: 파트 1 취업 자동화 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 1 실습 0 -->
-<section class="step" id="s1" data-label="실습 0 프로필" data-n="1">
-  <p class="kicker">실습 0 · 10분</p>
-  <h1>내 취업 프로필 채우기</h1>
-  <p class="lead">아래 칸을 채우면 실습 1~3의 글에 저절로 들어가요. 한 번만 쓰면 돼요.</p>
+<!-- 1 파트 1 -->
+<section class="step" id="s1" data-label="파트 1 · 취업 자동화" data-n="1">
+  <p class="kicker">파트 1 · 사람인 공고 정리 &amp; 입사지원서 칸 채우기</p>
+  <h1>내 프로필을 채우면<br>취업 프롬프트가 완성돼요</h1>
+  <p class="lead">입력한 내용은 서버에 저장되지 않고 내 브라우저에만 남아요.</p>
 
   <div class="pf">
-    <div><label class="field" for="f_job">희망 직무</label>
-      <input type="text" id="f_job" data-field="job" placeholder="예: 마케팅·홍보(SNS 콘텐츠)"></div>
-    <div><label class="field" for="f_region">희망 지역</label>
-      <input type="text" id="f_region" data-field="region" placeholder="예: 대구·경북"></div>
-    <div><label class="field" for="f_major">전공</label>
-      <input type="text" id="f_major" data-field="major" placeholder="예: 관광학"></div>
-    <div><label class="field" for="f_grad">졸업(예정) 시기</label>
-      <input type="text" id="f_grad" data-field="grad" placeholder="예: 2027년 2월"></div>
-    <div class="wide"><label class="field" for="f_cert">자격증 (없으면 비워요)</label>
-      <input type="text" id="f_cert" data-field="cert" placeholder="예: 컴퓨터활용능력 2급, 운전면허 2종"></div>
-    <div class="wide"><label class="field" for="f_exp">해 본 경험 3~5개 (한 줄에 하나)</label>
-      <textarea id="f_exp" data-field="exp" style="min-height:120px" placeholder="예:&#10;학과 행사 인스타그램 운영&#10;카페 아르바이트 1년&#10;공모전 영상 제작 참여"></textarea>
-      <p class="hint">수업 과제, 아르바이트, 동아리, 봉사처럼 작은 것도 괜찮아요.</p></div>
-    <div class="wide"><label class="field" for="f_avoid">피하고 싶은 조건 (없으면 비워요)</label>
-      <input type="text" id="f_avoid" data-field="avoid" placeholder="예: 수습 기간 6개월 넘는 곳, 주말 근무"></div>
+    <div><label class="field" for="f_job">희망 직무</label><input type="text" id="f_job" data-field="job" placeholder="예: 마케팅·홍보(SNS 콘텐츠)"></div>
+    <div><label class="field" for="f_region">희망 지역</label><input type="text" id="f_region" data-field="region" placeholder="예: 대구·경북"></div>
+    <div><label class="field" for="f_major">전공</label><input type="text" id="f_major" data-field="major" placeholder="예: 유럽문화관광학"></div>
+    <div><label class="field" for="f_grad">졸업(예정)</label><input type="text" id="f_grad" data-field="grad" placeholder="예: 2027년 2월"></div>
+    <div class="wide"><label class="field" for="f_cert">자격증 (선택)</label><input type="text" id="f_cert" data-field="cert" placeholder="예: 컴퓨터활용능력 2급, 운전면허 2종"></div>
+    <div class="wide"><label class="field" for="f_exp">해 본 경험 3~5개 (한 줄에 하나)</label><textarea id="f_exp" data-field="exp" placeholder="예:&#10;학과 인스타그램 홍보 운영&#10;카페 아르바이트 1년&#10;캡스톤디자인 마케팅 기획"></textarea></div>
+    <div class="wide"><label class="field" for="f_avoid">피하고 싶은 조건 (선택)</label><input type="text" id="f_avoid" data-field="avoid" placeholder="예: 수습 6개월 초과, 주말 필수 근무"></div>
   </div>
   <div class="saved" data-saved="exp"></div>
 
-  <h2>완성된 내 프로필</h2>
-  <div class="prompt">
-    <div class="prompt-head"><span>내 프로필</span><button class="btn" data-copy="pf"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-    <pre id="pf"></pre>
-  </div>
-  <div class="note warn"><svg class="i"><use href="#i-alert"/></svg><span>이름, 학번, 전화번호, 주소는 쓰지 않아요. 이 칸에 쓴 내용은 이 기기 브라우저에만 저장되고 어디로도 보내지지 않아요.</span></div>
+  <h2>① 사람인 대구·경북 공고 20개 자동 채점 &amp; 시트 정리</h2>
+  <div class="prompt"><div class="prompt-head"><span>Aside / AI 넣을 글</span><button class="btn" data-copy="p1"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="p1"></pre></div>
 
-  <details><summary><svg class="i"><use href="#i-chev"/></svg>무엇을 써야 할지 모르겠으면</summary><div class="in">
-    <p>아래 글을 복사해 AI에 보내면, AI가 질문을 하나씩 해 줘요. 답이 다 모이면 위 칸에 옮겨 적어요.</p>
-    <div class="prompt">
-      <div class="prompt-head"><span>AI에게 물어보며 만들기</span><button class="btn" data-copy="pAsk"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-      <pre id="pAsk"></pre>
-    </div>
-  </div></details>
+  <h2>② 순위 매기기 + 자기소개서 첫 문단</h2>
+  <div class="prompt"><div class="prompt-head"><span>같은 채팅에 이어 넣기</span><button class="btn" data-copy="p2"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="p2"></pre></div>
 
-  <label class="check"><input type="checkbox" data-done="1"> 프로필을 채웠어요</label>
-  <div class="next"><a class="btn" href="#s0"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s2">다음: 실습 1 <svg class="i"><use href="#i-right"/></svg></a></div>
+  <h2>③ 1순위 공고 입사지원서 칸 채우기 (제출 직전 정지)</h2>
+  <div class="prompt"><div class="prompt-head"><span>Aside 전용</span><button class="btn" data-copy="p3"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="p3"></pre></div>
+  <div class="prompt"><div class="prompt-head"><span>매일 오전 8시 새 공고 루틴</span><button class="btn" data-copy="pR"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pR"></pre></div>
+
+  <label class="field" for="f_sheet">만든 공고 시트·결과 메모 (선택)</label>
+  <textarea id="f_sheet" data-field="sheet" style="min-height:80px" placeholder="나중에 모아 보기 탭에서 확인하고 싶으면 여기에 붙여 넣어요"></textarea>
+
+  <label class="check"><input type="checkbox" data-done="1"> 취업 프롬프트 확인했어요</label>
+  <div class="next"><a class="btn" href="#s0"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s2">다음: 파트 2 피클·블로그 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 2 실습 1 -->
-<section class="step" id="s2" data-label="실습 1 공고 모으기" data-n="2">
-  <p class="kicker">실습 1 · 25분</p>
-  <h1>사람인 공고 10개를<br>표로 모으기</h1>
-  <p class="lead" data-only="pc">Aside가 사람인을 직접 돌아다니며 공고를 찾고, 구글 시트까지 만들어 줘요.</p>
-  <p class="lead" data-only="phone">AI가 사람인 공고를 찾아 표로 정리해 줘요.</p>
+<!-- 2 파트 2 -->
+<section class="step" id="s2" data-label="파트 2 · 피클 & 블로그" data-n="2">
+  <p class="kicker">파트 2 · 생활비 방어 체험단 × 취업 블로그 일일 자동화</p>
+  <h1>피클 체험단으로 공짜 혜택 받고,<br>직무 블로그로 스펙도 쌓기</h1>
+  <p class="lead">블로그 지수가 살아 있어야 체험단 당첨률이 오릅니다. 매일 아침 희망 직무 뉴스 요약 글이 자동 쌓이게 만드세요.</p>
 
+  <h2>① [후킹] 피클 체험단 조건 스캔 &amp; 신청 사유 초안 작성</h2>
+  <div class="prompt hot"><div class="prompt-head"><span>Aside에 넣을 글 (패션·식품·소형가전)</span><button class="btn" data-copy="pPickle"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pPickle"></pre></div>
+
+  <h2>② [취업 연결] 내 직무 뉴스 네이버 블로그 일일 AI 자동화 루틴</h2>
+  <div class="prompt"><div class="prompt-head"><span>Aside 루틴(Settings → Routines)에 등록</span><button class="btn" data-copy="pBlog"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pBlog"></pre></div>
+
+  <div class="note"><svg class="i"><use href="#i-info"/></svg><span>내 프로필(직무/경험)을 1번 화면에 적어 두면 위 블로그 주제와 자기소개서 연결 멘트에 자동으로 들어갑니다!</span></div>
+
+  <label class="check"><input type="checkbox" data-done="2"> 피클 · 블로그 프롬프트 확인했어요</label>
+  <div class="next"><a class="btn" href="#s1"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s3">다음: 파트 3 과제 3분 컷 <svg class="i"><use href="#i-right"/></svg></a></div>
+</section>
+
+<!-- 3 파트 3 -->
+<section class="step" id="s3" data-label="파트 3 · 보고서 & PPT" data-n="3">
+  <p class="kicker">파트 3 · 밤샘 과제 3분 컷 (무료 AI 3총사 활용)</p>
+  <h1>「한글척척」 결과보고서 &amp;<br>「페이퍼로지 스타일」 HTML PPT</h1>
+  <p class="lead">유료 구독 강요 없이 학생 무료 툴(Gemini Canvas · ChatGPT · Antigravity)로 발표자료와 한글 보고서를 끝내요.</p>
+
+  <h2>① 「한글척척」 (.hwpx) 학교 양식 그대로 보고서 채우기</h2>
   <ol class="todo">
-    <li><div><p>아래 <b>복사</b>를 눌러요. 내 프로필이 이미 들어 있어요.</p></div></li>
-    <li><div><p data-only="pc">Aside에서 <b>새 채팅(New Chat)</b>을 열고 붙여 넣어 보내요.</p><p data-only="phone">ChatGPT나 Gemini에서 <b>새 채팅</b>을 열고 붙여 넣어 보내요.</p></div></li>
-    <li><div><p data-only="pc">Aside가 일하는 동안(10분 넘게 걸릴 수 있어요) 이 화면으로 돌아와 다음 설명을 들어요. <b>창을 닫지 마세요.</b></p><p data-only="phone">표가 나오면 공고 2~3개의 링크를 눌러 마감일이 맞는지 봐요.</p></div></li>
-    <li><div><p data-only="pc">시트가 열리면 공고 2~3개의 링크를 눌러 마감일과 자격 요건이 맞는지 직접 봐요.</p><p data-only="phone">이 채팅창은 그대로 두세요. 실습 2를 <b>같은 채팅</b>에 이어서 해요.</p></div></li>
+    <li><div><p>학과/사업단에서 준 빈 양식(<code>.hwpx</code> 또는 변환된 양식)의 디자인·표 테두리를 유지한 채 메모와 사진만 채워 넣습니다.</p></div></li>
+    <li><div><p>학번·연락처·타인 실명 같은 개인정보는 가린 뒤 돌리고, 최종 제출 전 한글 뷰어로 쪽 나눔을 확인합니다.</p></div></li>
   </ol>
-
-  <div class="prompt">
-    <div class="prompt-head"><span><span data-only="pc">Aside</span><span data-only="phone">ChatGPT·Gemini</span>에 넣을 글</span><button class="btn" data-copy="p1"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-    <pre id="p1"></pre>
+  <div class="row">
+    <a class="btn main" href="https://jera0520.github.io/hwp-document-helper/" target="_blank" rel="noopener">한글척척 배포 페이지 열기 <svg class="i"><use href="#i-ext"/></svg></a>
   </div>
-  <div class="row" data-only="phone"><a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT 열기 <svg class="i"><use href="#i-ext"/></svg></a><a class="btn" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini 열기 <svg class="i"><use href="#i-ext"/></svg></a></div>
+  <div class="prompt"><div class="prompt-head"><span>한글 보고서 생성 프롬프트</span><button class="btn" data-copy="pHwp"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pHwp"></pre></div>
 
-  <label class="field" for="f_sheet"><span data-only="pc">만들어진 구글 시트 주소 붙여 넣기</span><span data-only="phone">AI가 만든 공고 표 붙여 넣기</span> (결과 모음에 남아요)</label>
-  <textarea id="f_sheet" data-field="sheet" style="min-height:90px" placeholder="붙여 넣지 않아도 다음 실습은 할 수 있어요"></textarea>
-  <div class="saved" data-saved="sheet"></div>
+  <h2>② 「페이퍼로지 스타일」 HTML PPT 마스터 프롬프트</h2>
+  <p>오늘 특강에서 본 발표자료처럼 폰트가 절대 깨지지 않고, 클릭에 반응하는 인터랙티브 웹 슬라이드를 <b>Gemini Canvas</b>나 ChatGPT에서 한 번에 뽑아보세요.</p>
+  <div class="prompt hot"><div class="prompt-head"><span>Paperlogy HTML PPT 마스터 프롬프트</span><button class="btn" data-copy="pHtmlPpt"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pHtmlPpt"></pre></div>
 
-  <label class="check"><input type="checkbox" data-done="2"> 공고를 모았어요</label>
-  <div class="next"><a class="btn" href="#s1"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s3">다음: 실습 2 <svg class="i"><use href="#i-right"/></svg></a></div>
-
-  <details><summary><svg class="i"><use href="#i-chev"/></svg>막히면 보기</summary><div class="in"><ul>
-    <li data-only="pc">Aside가 「로그인해 주세요」라고 멈추면 그 탭에서 직접 로그인한 뒤 「계속해」라고 보내요. 비밀번호를 채팅에 쓰지 않아요.</li>
-    <li data-only="pc">구글 시트를 못 만들었다고 하면 「표를 채팅에 보여 줘」라고 보내요. 그것도 결과예요.</li>
-    <li>맞는 공고가 10개보다 적으면 「조건을 조금 넓혀서 찾아 줘」라고 보내요.</li>
-    <li data-only="phone">AI가 사람인을 못 열었다고 하면 「사람인 대구·경북 신입 공고를 웹에서 검색해서 찾아 줘」라고 보내요.</li>
-    <li>있는 것처럼 보이는데 링크가 열리지 않는 공고는 지워요. AI가 공고를 잘못 옮길 때가 있어요.</li>
-  </ul></div></details>
+  <label class="check"><input type="checkbox" data-done="3"> 한글척척 · HTML PPT 확인했어요</label>
+  <div class="next"><a class="btn" href="#s2"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s4">다음: 파트 4·5 여행 &amp; 연애 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 3 실습 2 -->
-<section class="step" id="s3" data-label="실습 2 순위·첫 문단" data-n="3">
-  <p class="kicker">실습 2 · 20분</p>
-  <h1>나에게 맞는 순서와<br>자기소개서 첫 문단</h1>
-  <p class="lead">실습 1과 <b>같은 채팅</b>에 이어서 보내요. AI가 방금 찾은 공고를 내 프로필과 비교해요.</p>
+<!-- 4 파트 4·5 -->
+<section class="step" id="s4" data-label="파트 4·5 · 여행 & 데이트" data-n="4">
+  <p class="kicker">머리 식히기 코너 · 대학생활 치트키</p>
+  <h1>여자친구·남자친구에게 이쁨 받는 법 💕<br>&amp; 방학 가성비 여행 최저가 비교</h1>
+  <p class="lead">시간 버리는 비교 검색과 광고 블로그 낚시를 Aside 프롬프트 한 줄로 끝내 보세요.</p>
 
-  <div class="prompt">
-    <div class="prompt-head"><span>같은 채팅에 이어서 넣을 글</span><button class="btn" data-copy="p2"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-    <pre id="p2"></pre>
-  </div>
+  <h2>💕 여자친구 · 남자친구에게 이쁨 받는 법 (인스타 찐핫플 데이트 코스)</h2>
+  <div class="note pink"><svg class="i"><use href="#i-info"/></svg><span><b>핵심 비법:</b> "협찬 · 광고 · 원고료 · 제공받아" 키워드를 자동 필터링하고, 도보 10분 동선 + 웨이팅 플랜B까지 시간표로 받아 두면 절대 실패하지 않아요!</span></div>
+  <div class="prompt hot"><div class="prompt-head"><span>무실패 데이트 코스 프롬프트</span><button class="btn coral" data-copy="pDate"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pDate"></pre></div>
 
-  <h2>나온 첫 문단 확인하기</h2>
-  <ol class="todo">
-    <li><div><p>내가 실제로 한 일만 들어갔나요? 하지 않은 일이나 지어낸 숫자가 있으면 지워요.</p></div></li>
-    <li><div><p>회사 이름만 바꿔도 다른 회사에 낼 수 있는 글이면, 아래 글을 한 번 더 보내요.</p>
-      <div class="prompt">
-        <div class="prompt-head"><span>한 번 더 다듬기</span><button class="btn" data-copy="p2b"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-        <pre id="p2b"></pre>
-      </div></div></li>
-  </ol>
+  <h2>✈️ 방학 가성비 자유여행 (항공·숙소 실시간 총액 비교표)</h2>
+  <div class="prompt"><div class="prompt-head"><span>항공 + 숙소 최저가 비교 프롬프트</span><button class="btn" data-copy="pTravel"><svg class="i"><use href="#i-copy"/></svg>복사</button></div><pre id="pTravel"></pre></div>
 
-  <label class="field" for="f_para">마음에 드는 첫 문단 붙여 넣기</label>
-  <textarea id="f_para" data-field="para" placeholder="AI가 쓴 문단을 붙여 넣고, 내 말투로 고쳐 보세요"></textarea>
-  <div class="saved" data-saved="para"></div>
-
-  <label class="check"><input type="checkbox" data-done="3"> 첫 문단을 받았어요</label>
-  <div class="next"><a class="btn" href="#s2"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s4">다음: 실습 3 <svg class="i"><use href="#i-right"/></svg></a></div>
-
-  <details><summary><svg class="i"><use href="#i-chev"/></svg>새 채팅을 열어 버렸다면</summary><div class="in">
-    <p>실습 1에서 <span data-only="pc">만든 시트 주소</span><span data-only="phone">만든 표</span>를 위 칸에 붙여 넣은 뒤, 「아래 공고 표로」라는 말과 함께 표를 같이 보내요. 그래도 어려우면 실습 1 글을 다시 보내도 돼요.</p>
-  </div></details>
+  <label class="check"><input type="checkbox" data-done="4"> 데이트 · 여행 치트키 저장했어요</label>
+  <div class="next"><a class="btn" href="#s3"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s5">다음: 내 결과 모아보기 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 4 실습 3 -->
-<section class="step" id="s4" data-label="실습 3 지원 준비" data-n="4">
-  <p class="kicker">실습 3 · 20분</p>
-
-  <div data-only="pc">
-    <h1>지원서 칸 채우기와<br>매일 아침 알림</h1>
-    <p class="lead">칸 채우기는 AI에게, 제출 단추는 내가 눌러요.</p>
-
-    <h2>① 지원서 칸 채우기</h2>
-    <div class="prompt">
-      <div class="prompt-head"><span>같은 채팅에 이어서 넣을 글</span><button class="btn" data-copy="p3"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-      <pre id="p3"></pre>
-    </div>
-    <div class="note warn"><svg class="i"><use href="#i-alert"/></svg><span>Aside가 멈추면 칸마다 내용을 읽어 봐요. 오늘은 제출하지 않아요. 잘못 나간 지원서는 되돌릴 수 없어요.</span></div>
-
-    <h2>② 매일 아침 새 공고 알림(루틴)</h2>
-    <ol class="todo">
-      <li><div><p>Aside 왼쪽 아래 프로필 동그라미 → <b>Settings</b> → <b>Routines</b>를 열어요.</p></div></li>
-      <li><div><p>새 루틴을 만들고, 할 일 칸에 아래 글을 붙여 넣어요.</p></div></li>
-      <li><div><p>시간은 <b>매일 오전 8시</b>로 정하고 켜요. 무료판은 루틴 3개까지예요.</p></div></li>
-    </ol>
-    <div class="prompt">
-      <div class="prompt-head"><span>루틴 할 일 칸에 넣을 글</span><button class="btn" data-copy="pR"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-      <pre id="pR"></pre>
-    </div>
-  </div>
-
-  <div data-only="phone">
-    <h1>면접 질문 연습</h1>
-    <p class="lead">지원서 칸 채우기는 노트북 Aside에서만 돼요. 강사 화면으로 보고, 폰으로는 면접 연습을 해요.</p>
-    <div class="prompt">
-      <div class="prompt-head"><span>같은 채팅에 이어서 넣을 글</span><button class="btn" data-copy="p3m"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-      <pre id="p3m"></pre>
-    </div>
-    <div class="note"><svg class="i"><use href="#i-info"/></svg><span>매일 아침 새 공고를 알려 주는 루틴도 노트북 Aside에서 만들어요. 집에서 Aside를 깔면 「실습 3」을 노트북으로 바꿔 보세요.</span></div>
-  </div>
-
-  <label class="check"><input type="checkbox" data-done="4"> 해 봤어요</label>
-  <div class="next"><a class="btn" href="#s3"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s5">다음: 내 결과 <svg class="i"><use href="#i-right"/></svg></a></div>
-
-  <details data-only="pc"><summary><svg class="i"><use href="#i-chev"/></svg>막히면 보기</summary><div class="in"><ul>
-    <li>사람인에서 지원하려면 사람인 이력서가 있어야 해요. 없으면 「사람인 이력서 칸을 내 프로필로 채워 줘. 저장 단추는 누르지 마」로 바꿔 보내요.</li>
-    <li>회사 홈페이지로 지원하는 공고면 그 홈페이지 지원서에서 해도 돼요. 마찬가지로 제출 직전에 멈추게 해요.</li>
-    <li>루틴 메뉴가 안 보이면 Aside를 최신 판으로 업데이트해요.</li>
-  </ul></div></details>
-</section>
-
-<!-- 5 결과 -->
-<section class="step" id="s5" data-label="내 결과" data-n="5">
-  <p class="kicker">내 결과</p>
-  <h1>오늘 만든 것 모아 보기</h1>
-  <p class="lead">파일로 저장하거나 복사해서 메모 앱, 카카오톡 「나와의 채팅」에 남겨 두세요.</p>
-
+<!-- 5 내 결과 -->
+<section class="step" id="s5" data-label="내 결과 모으기" data-n="5">
+  <p class="kicker">내 결과 보관함</p>
+  <h1>작성한 프로필 · 시트 메모 저장하기</h1>
+  <p class="lead">텍스트 파일로 내려받거나 카카오톡 「나와의 채팅」에 붙여 두고 집에서 바로 이어 하세요.</p>
   <div class="row">
     <button class="btn main" id="dlBtn"><svg class="i"><use href="#i-down"/></svg>파일로 저장</button>
     <button class="btn" data-copy="allText"><svg class="i"><use href="#i-copy"/></svg>전부 복사</button>
     <button class="btn" id="printBtn"><svg class="i"><use href="#i-print"/></svg>인쇄·PDF</button>
   </div>
   <div id="results"></div>
-
-  <div class="note warn"><svg class="i"><use href="#i-alert"/></svg><span>학교 컴퓨터처럼 여럿이 쓰는 기기라면, 저장한 뒤 아래 단추로 지워 주세요.</span></div>
   <div class="row"><button class="btn" id="clearBtn"><svg class="i"><use href="#i-trash"/></svg>이 기기에서 지우기</button></div>
-
   <label class="check"><input type="checkbox" data-done="5"> 저장했어요</label>
-  <div class="next"><a class="btn" href="#s4"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s6">다음: 선배가 전하는 말 <svg class="i"><use href="#i-right"/></svg></a></div>
+  <div class="next"><a class="btn" href="#s4"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#s6">다음: 선배의 말 &amp; 취업본부 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 6 선배 -->
-<section class="step" id="s6" data-label="선배가 전하는 말" data-n="6">
-  <p class="kicker">선배가 전하는 말</p>
-  <h1>How의 시대에서<br>What의 시대로</h1>
-  <p class="lead">김진현 · 국립안동대학교(현 국립경국대학교) 졸업, 문화링크협동조합 청년인턴</p>
+<!-- 6 선배가 전하는 말 -->
+<section class="step" id="s6" data-label="선배의 말 · 취업본부" data-n="6">
+  <p class="kicker">선배가 꼭 전하고 싶은 말</p>
+  <h1>How에서 What의 시대로,<br>그리고 혼자 취업한 사람 없습니다</h1>
+  <p class="lead">김진현 · 국립경국대학교(구 안동대) 유럽문화관광·스마트관광 졸업 / 문화링크협동조합 인턴</p>
 
   <div class="shift">
-    <div><p class="big"><s>How</s>의 시대는 끝났어요</p>
-      <p>예전에는 엑셀 함수, 코딩, 디자인 프로그램을 「어떻게」 다루는지가 실력이었어요. 이제 그 「어떻게」는 AI가 몇 분 만에 대신해요.</p></div>
-    <div><p class="big"><em>What</em>의 시대가 왔어요</p>
-      <p>이제 실력은 「무엇을」 맡길지 아는 거예요. 무엇을 하고 싶은지, 무엇이 문제인지, 무엇을 해 봤는지 말할 수 있으면 나머지는 AI가 도와요. 오늘 채운 취업 프로필이 바로 나의 What이에요.</p></div>
-    <div><p class="big">여러분의 What은 이미 있어요</p>
-      <p>저는 관광을 전공했어요. 「예약 문의를 놓치지 않게 하자」는 What 하나를 붙잡고 AI 브라우저로 예약 확인 일을 줄였어요. 수업, 아르바이트, 동아리에서 불편했던 것 하나가 여러분의 What이 돼요.</p></div>
-    <div><p class="big">그래서, 응원해요</p>
-      <p>AI를 아직 잘 몰라도 괜찮아요. AI 쓰는 법은 오늘처럼 두 시간이면 익힐 수 있어요. 하지만 「내가 무엇을 원하는가」는 AI가 대신 답해 주지 못해요. 그 답을 찾는 사람에게 길이 열려요.</p></div>
+    <div><p class="big"><s>How</s>의 시대는 끝났어요</p><p>엑셀 함수나 디자인 툴을 '어떻게' 만지느냐보다, AI에게 무엇을 맡길지 아는 눈이 실력이에요.</p></div>
+    <div><p class="big"><em>What</em>의 시대가 왔어요</p><p>내가 좋아하는 일, 불편했던 문제 하나를 붙잡고 AI로 풀어 보세요.</p></div>
+    <div><p class="big" style="color:var(--blue);">혼자 취업한 사람, 단 한 명도 없습니다</p><p>우리 학교 <b>취업진로본부</b>와 <b>대학일자리플러스센터</b>의 비교과 프로그램 · 1:1 상담을 꼭 신청해서 선배·선생님의 도움을 함께 받으세요!</p></div>
   </div>
 
-  <label class="check"><input type="checkbox" data-done="6"> 끝까지 들었어요</label>
-  <div class="next"><a class="btn" href="#s5"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#sB">부록: 학생 무료 혜택 <svg class="i"><use href="#i-right"/></svg></a></div>
+  <label class="check"><input type="checkbox" data-done="6"> 끝까지 읽었어요</label>
+  <div class="next"><a class="btn" href="#s5"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn main" href="#sB">부록: Google AI &amp; 유튜브 학생 혜택 <svg class="i"><use href="#i-right"/></svg></a></div>
 </section>
 
-<!-- 부록 B -->
-<section class="step" id="sB" data-label="부록 학생 혜택" data-n="B">
-  <p class="kicker">부록 · 2026년 기준</p>
-  <h1>대학생 Google AI Plus<br>1년 무료로 쓰기</h1>
-  <p class="lead">재학생이면 Gemini 유료 요금제 「Google AI Plus」를 12개월 동안 무료로 쓸 수 있어요.</p>
+<!-- B 학생 혜택 & 만족도 -->
+<section class="step" id="sB" data-label="부록 · 학생 혜택 & 만족도" data-n="B">
+  <p class="kicker">부록 · 2026년 최신 대학생 AI 혜택 총정리</p>
+  <h1>한국 Google AI Plus 1년 무료 &amp;<br>미국 AI Pro·유튜브 학생 번들</h1>
+  <p class="lead">혼동하기 쉬운 한국 공식 혜택과 미국 대학생용 혜택을 정확히 구분해서 신청하세요.</p>
 
+  <h2>① 한국 대학생 공식: Google AI Plus 12개월 무료 (마감 2026.12.31)</h2>
   <div class="scroll"><table>
     <tr><th>항목</th><th>내용</th></tr>
-    <tr><td>받는 것</td><td>Gemini 사용량 무료판의 2배, 구글 저장공간 400GB. 한국은 AI Pro가 아니라 AI Plus예요.</td></tr>
-    <tr><td>대상</td><td>만 18세 이상 대학 재학생. 졸업생은 받을 수 없어요.</td></tr>
-    <tr><td>마감</td><td>2026년 12월 31일까지 신청</td></tr>
-    <tr><td>준비물</td><td>개인 Gmail 계정(학교에서 받은 구글 계정은 안 돼요), 결제 카드</td></tr>
+    <tr><td>받는 혜택</td><td><b>Google AI Plus</b> 1년 무료 (Gemini 사용량 2배 · 구글 드라이브 400GB · 학습 노트북)</td></tr>
+    <tr><td>준비물</td><td><b>개인 Gmail 계정</b> (<code>@gknu.ac.kr</code> 학교 계정은 안 됨!), 결제 등록용 카드, 재학 인증(SheerID)</td></tr>
+    <tr><td>주의사항</td><td>1년 뒤 <b>월 7,500원 자동결제</b>. 계속 안 쓸 거면 무료 종료 일주일 전에 폰 달력 알람 넣고 취소!</td></tr>
   </table></div>
+  <div class="row">
+    <a class="btn main" href="https://gemini.google/kr/students/?hl=ko" target="_blank" rel="noopener">한국 학생 신청 페이지 (gemini.google/kr/students) <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
 
-  <h2>신청 순서</h2>
-  <ol class="todo">
-    <li><div><p>개인 Gmail 계정으로 로그인한 채 학생 혜택 페이지를 열어요.</p>
-      <div class="row"><a class="btn" href="https://gemini.google/kr/students/?hl=ko" target="_blank" rel="noopener">gemini.google/kr/students <svg class="i"><use href="#i-ext"/></svg></a></div></div></li>
-    <li><div><p>「무료로 학생 요금제 신청하기」를 눌러요.</p></div></li>
-    <li><div><p>학생 인증(SheerID) 화면에서 학교를 검색하고 안내대로 재학을 인증해요.</p></div></li>
-    <li><div><p>카드를 등록해요. 이때 <b>무료가 끝나는 날</b>과 그 뒤 결제 금액을 꼭 확인해요.</p></div></li>
-    <li><div><p>휴대폰 달력에 「AI Plus 해지 확인」 알림을 무료 종료 일주일 전으로 넣어요.</p></div></li>
-  </ol>
+  <h2>② 미국 대학생용: Google AI Pro 1년 무료 &amp; YouTube Premium 학생 번들 ($8.99/월)</h2>
+  <div class="scroll"><table>
+    <tr><th>항목</th><th>내용</th></tr>
+    <tr><td>번들 구성</td><td><b>Google AI Pro (고급 Gemini Pro 모델 · 2TB 스토리지)</b> + <b>YouTube Premium 개인 멤버십</b> 통합 할인</td></tr>
+    <tr><td>신청 구조</td><td><code>one.google.com/ai-student</code> → SheerID 대학 재학 인증 (미국 대학 학적/국가 기준, 연 1회 재인증 최대 4년)</td></tr>
+    <tr><td>요금 차이</td><td>정가 합산 약 $35.98/월 상당 → 학생 번들 <b>$8.99/월</b> (미국 내 AI Pro 학생 프로모션 및 YT 통합 할인 구조)</td></tr>
+  </table></div>
+  <div class="row">
+    <a class="btn" href="https://one.google.com/ai-student" target="_blank" rel="noopener">글로벌/미국 학생 페이지 (one.google.com/ai-student) <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
 
-  <div class="note warn"><svg class="i"><use href="#i-alert"/></svg><span>1년이 지나면 월 7,500원이 자동으로 결제돼요. 계속 쓰지 않을 거면 끝나기 전에 one.google.com → 설정 → 멤버십 취소를 눌러요.</span></div>
+  <div class="survey-banner" style="margin-top:26px;">
+    <div>
+      <b>📋 마지막 필수! [글로컬대학사업] 현직자특강 만족도 조사</b>
+      <small>참여 기간: 11/17(화) ~ 11/23(월) · 1분 설문</small>
+    </div>
+    <a class="btn coral" href="https://m.site.naver.com/2kFXE" target="_blank" rel="noopener">만족도 조사 제출하기 <svg class="i"><use href="#i-ext"/></svg></a>
+  </div>
 
   <div class="next"><a class="btn" href="#s6"><svg class="i"><use href="#i-left"/></svg> 이전</a><a class="btn" href="#s0">처음으로</a></div>
 </section>
 
-<footer>국립경국대학교 현직자 특강 「Aside로 만드는 나만의 채용 비서」 · 강사 김진현(문화링크협동조합) · 이 누리집은 입력한 내용을 서버로 보내지 않고 이 기기 브라우저에만 저장해요.</footer>
+<footer>국립경국대학교 현직자 특강 「How에서 What의 시대로」 선물 보따리 · 강사 김진현(문화링크협동조합) · 모든 입력 내용은 이 기기 브라우저에만 저장됩니다.</footer>
 </main>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-const KEY = 'gknu-aside-2026';
+const KEY = 'gknu-aside-2026-v8';
 let S = {};
 try { S = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { S = {}; }
 S.f = S.f || {}; S.d = S.d || {};
@@ -535,40 +435,42 @@ const $$ = (q, el = document) => [...el.querySelectorAll(q)];
 const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const v = k => (S.f[k] || '').trim();
 
-// 프로필 칸 → 글. h는 글자를 감싸는 함수(화면은 파란 칠, 복사는 그대로)
 function profile(h) {
   const exp = v('exp').split('\n').map(x => x.replace(/^[-·•\d.)\s]+/, '').trim()).filter(Boolean).join(', ');
   const rows = [['희망 직무', v('job')], ['희망 지역', v('region')], ['전공', v('major')], ['졸업(예정)', v('grad')], ['자격증', v('cert')], ['해 본 경험', exp], ['피하고 싶은 조건', v('avoid')]];
   const need = ['희망 직무', '희망 지역', '해 본 경험'];
-  const out = rows.filter(([t, x]) => x || need.includes(t)).map(([t, x]) => `- ${t}: ${x ? h(x) : h('', '(실습 0에서 채워요)')}`);
+  const out = rows.filter(([t, x]) => x || need.includes(t)).map(([t, x]) => `- ${t}: ${x ? h(x) : h('', '(파트 1에서 채워요)')}`);
   return '[내 프로필]\n' + out.join('\n');
 }
 const region = () => v('region') || '대구·경북';
+const jobTopic = () => v('job') || '마케팅·AI·지역관광 트렌드';
 
 const T = {
-  pf: h => profile(h),
-  pAsk: () => '너는 취업 상담 선생님이야. 내 취업 프로필을 만들 수 있게 질문을 하나씩 해 줘. 희망 직무, 희망 지역, 전공, 졸업(예정) 시기, 자격증, 해 본 경험 3개, 피하고 싶은 조건 순서로 물어봐 줘. 내가 모르겠다고 하면 예를 들어 줘. 다 물어보면 「- 항목: 내용」 목록으로 정리해 줘. 이름과 연락처는 묻지 마.',
-  p1: h => S.dev === 'pc'
-    ? `사람인에서 ${h(region())} 지역 신입 채용공고 가운데 아래 내 프로필의 희망 직무에 맞는 공고 10개를 찾아 줘. 회사, 공고 제목, 마감일, 자격 요건, 링크를 표로 정리해서 구글 시트로 만들어 줘. 공고에 없는 내용은 빈칸으로 둬.\n\n${profile(h)}`
-    : `사람인(saramin.co.kr)에서 ${h(region())} 지역 신입 채용공고 가운데 아래 내 프로필의 희망 직무에 맞는 공고 10개를 찾아 줘. 회사, 공고 제목, 마감일, 자격 요건, 링크를 표로 정리해 줘. 실제로 확인한 공고만 넣고, 공고에 없는 내용은 빈칸으로 둬.\n\n${profile(h)}`,
-  p2: h => `${S.dev === 'pc' ? '방금 만든 구글 시트의' : '방금 정리한 표의'} 공고들을 아래 내 프로필과 비교해서 잘 맞는 순서로 순위를 매기고, 맞는 이유와 부족한 점을 한 줄씩 적어 줘. 그리고 1순위 공고에 낼 자기소개서 첫 문단을 써 줘. 내가 말하지 않은 경험이나 숫자는 넣지 마.\n\n${profile(h)}`,
-  p2b: () => '방금 쓴 첫 문단을 다시 써 줘. 다른 회사가 아니라 이 회사여야 하는 이유가 드러나게, 첫 문장은 내 경험 속 구체적인 장면으로 시작해 줘. 내가 말하지 않은 경험이나 숫자는 여전히 넣지 마.',
-  p3: h => `1순위 공고의 지원서 입력 칸을 아래 내 프로필로 채워 줘. 프로필에 없는 칸은 비워 두고 무엇이 비었는지 알려 줘. 제출 단추는 누르지 말고 제출 직전에 멈춰.\n\n${profile(h)}`,
-  p3m: () => '1순위 공고의 면접에서 나올 만한 질문 3개를 뽑아 줘. 그리고 1번 질문부터 하나씩 나에게 물어봐 줘. 내가 답하면 좋은 점 하나와 고칠 점 하나를 알려 주고, 답을 대신 써 주지는 마.',
-  pR: h => `사람인에서 ${h(region())} 지역 신입 채용공고 가운데 아래 내 프로필에 맞는 새 공고 3개를 찾아서 회사, 공고 제목, 마감일, 링크를 알려 줘. 전에 알려 준 공고는 빼고, 실제로 확인한 공고만 알려 줘.\n\n${profile(h)}`
+  p1: h => `사람인에서 ${h(region())} 지역 신입 채용공고 가운데 아래 내 프로필에 맞는 공고 20개를 찾아 줘. 회사명, 공고 제목, 마감일, 경력/자격 요건, 직무 적합도(10점 만점), 공고 링크를 표로 정리해서 구글 시트로 만들어 줘. 공고에 없는 내용은 빈칸으로 둬.\n\n${profile(h)}`,
+  p2: h => `방금 만든 공고 표를 내 프로필과 비교해서 잘 맞는 순서로 순위를 매기고, 맞는 이유와 부족한 점을 한 줄씩 적어 줘. 그리고 1순위 공고에 낼 자기소개서 첫 문단을 써 줘. 내가 말하지 않은 경험이나 숫자는 넣지 마.\n\n${profile(h)}`,
+  p3: h => `1순위 공고의 지원서 입력 칸을 아래 내 프로필로 채워 줘. 프로필에 없는 칸은 비워 두고 무엇이 비었는지 알려 줘. 제출 버튼은 절대 누르지 말고 제출 직전에 멈춰.\n\n${profile(h)}`,
+  pR: h => `매일 오전 8시에 사람인에서 ${h(region())} 지역 신입 공고 중 내 프로필에 맞는 새 공고 3개를 찾아 알려 줘.\n\n${profile(h)}`,
+  pPickle: () => `체험단 플랫폼 '피클'에 접속해서 현재 모집 중인 [패션·식품·소형가전] 카테고리 중 경쟁률이 낮고 내 블로그 주제와 맞는 체험단 5개를 골라 줘.\n각 모집 요강에 맞춰 진정성 있는 신청 한마디 초안을 입력 칸에 넣고, 최종 신청 전 내 확인을 받아 줘.`,
+  pBlog: h => `매일 오전 9시에 [${h(jobTopic())}] 관련 최신 뉴스 3건을 찾아 핵심 인사이트 3줄과 내 진로 코멘트를 더해 네이버 블로그 '취업 포트폴리오' 카테고리 초안 글 1편을 작성해 줘. (발행 전 맞춤법 점검 포함)`,
+  pHwp: () => `이 학교 캡스톤디자인 공식 양식(.hwpx)의 표 테두리·폰트·다단 디자인을 그대로 유지한 채, 첨부한 활동 개요 메모와 현장 사진 4장을 알맞은 칸과 캡션에 맞춰 넣어서 완성된 결과보고서 .hwpx로 만들어 줘.`,
+  pHtmlPpt: () => `첨부한 기획안 텍스트를 바탕으로 Paperlogy 폰트(word-break: keep-all)와 다크/라이트 교차 대비 테마를 적용한 8장짜리 반응형 HTML 슬라이드를 만들어 줘.\n- 각 장표에 16:9 자동 스케일링과 키보드(←/→/Space) 이동 지원\n- 핵심 전략 슬라이드에는 직접 클릭해 볼 수 있는 인터랙티브 목업/시뮬레이터 포함`,
+  pDate: () => `이번 주말 [안동 시내 / 대구 동성로] 기준 커플 데이트 코스 짜 줘.\n최근 2주 인스타·블로그 게시물 중 '협찬·광고·원고료·제공받아' 문구가 들어간 홍보성 글은 100% 제외하고,\n진짜 내돈내산 찐맛집·감성 카페·소품샵·야경 스팟을 도보 10분 이내 동선(14:00~20:30)으로 묶고,\n웨이팅 길거나 비 올 때 바로 바꿀 수 있는 플랜B까지 시간표로 정리해 줘.`,
+  pTravel: () => `다가오는 방학 2박 3일 [후쿠오카 / 오사카] 가성비 자유여행 기준으로 스카이스캐너·트립닷컴·아고다에서 왕복 직항 항공권 + 도심 3성급 숙소(평점 8.2 이상) 최저가 조합 Top 5를 총액·위탁수하물·무료취소 기한까지 비교표로 정리해 줘.`
 };
 
 function paint(x, empty) { return x ? `<span class="fill">${esc(x)}</span>` : `<span class="empty">${empty}</span>`; }
 function plain(x, empty) { return x || empty; }
 function renderPrompts() {
-  for (const k in T) { const el = $('#' + k); if (el) el.innerHTML = T[k](paint).split(/(<span[^>]*>.*?<\/span>)/).map(p => p.startsWith('<span') ? p : esc(p)).join(''); }
+  for (const k in T) {
+    const el = $('#' + k);
+    if (el) el.innerHTML = T[k](paint).split(/(<span[^>]*>.*?<\/span>)/).map(p => p.startsWith('<span') ? p : esc(p)).join('');
+  }
 }
 function promptText(id) {
   if (T[id]) return T[id](plain);
   if (id === 'allText') return allText();
   return $('#' + id).textContent;
 }
-
 function setDev(d) {
   S.dev = d; save();
   document.body.classList.toggle('d-pc', d === 'pc');
@@ -577,16 +479,15 @@ function setDev(d) {
   renderPrompts();
 }
 
-const RES = [['pf', '실습 0 내 취업 프로필'], ['sheet', '실습 1 모은 공고'], ['para', '실습 2 자기소개서 첫 문단']];
-function resVal(k) { return k === 'pf' ? T.pf(plain) : v(k); }
+const RES = [['pf', '내 취업 프로필'], ['sheet', '공고 시트·메모']];
+function resVal(k) { return k === 'pf' ? profile(plain) : v(k); }
 function allText() {
-  return '국립경국대학교 현직자 특강 「Aside로 만드는 나만의 채용 비서」 내 결과\n\n' +
-    RES.map(([k, t]) => `■ ${t}\n${resVal(k) || '(아직 없음)'}`).join('\n\n') + '\n';
+  return '국립경국대학교 현직자 특강 선물 보따리\n\n' + RES.map(([k, t]) => `■ ${t}\n${resVal(k) || '(비어 있음)'}`).join('\n\n') + '\n';
 }
 function renderResults() {
   $('#results').innerHTML = RES.map(([k, t]) => {
     const x = resVal(k);
-    return `<div class="result"><h3>${t}</h3><pre class="${x ? '' : 'none'}">${x ? esc(x) : '아직 붙여 넣지 않았어요'}</pre></div>`;
+    return `<div class="result"><h3>${t}</h3><pre class="${x ? '' : 'none'}">${x ? esc(x) : '아직 입력하지 않았어요'}</pre></div>`;
   }).join('');
 }
 
@@ -613,7 +514,6 @@ function show() {
   renderNav();
   window.scrollTo(0, 0);
 }
-
 function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('on'), 1800); }
 async function copyText(text) {
   try { await navigator.clipboard.writeText(text); return true; } catch (e) {
@@ -629,10 +529,10 @@ document.addEventListener('click', async e => {
   if (b) {
     const ok = await copyText(promptText(b.dataset.copy));
     if (ok) {
-      const old = b.innerHTML; b.classList.add('copied'); b.innerHTML = '<svg class="i"><use href="#i-copy"/></svg>복사됨';
+      const old = b.innerHTML; b.classList.add('copied'); b.innerHTML = '✓ 복사됨';
       setTimeout(() => { b.classList.remove('copied'); b.innerHTML = old; }, 1500);
-      toast(S.dev === 'pc' ? '복사했어요. Aside에 붙여 넣어요' : '복사했어요. AI 앱에 붙여 넣어요');
-    } else toast('복사가 안 됐어요. 글을 길게 눌러 직접 복사해요');
+      toast('복사되었어요! Aside나 AI 앱에 붙여 넣으세요');
+    } else toast('복사에 실패했어요. 직접 드래그해 복사해 주세요');
   }
 });
 
@@ -643,7 +543,7 @@ $$('[data-field]').forEach(el => {
   el.addEventListener('input', () => {
     S.f[k] = el.value; renderPrompts();
     const msg = $(`[data-saved="${k}"]`) || $('[data-saved="exp"]');
-    clearTimeout(h); h = setTimeout(() => { if (msg) msg.textContent = save() ? '이 기기에 저장했어요' : '저장이 안 되는 브라우저예요. 결과는 복사해 두세요'; }, 400);
+    clearTimeout(h); h = setTimeout(() => { if (msg) msg.textContent = save() ? '이 기기에 저장되었어요' : '브라우저 저장을 지원하지 않아요'; }, 350);
   });
 });
 $$('[data-done]').forEach(el => {
@@ -653,15 +553,13 @@ $$('[data-done]').forEach(el => {
 
 $('#dlBtn').addEventListener('click', () => {
   const blob = new Blob([allText()], {type: 'text/plain;charset=utf-8'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '내결과_Aside채용비서_실습.txt';
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '내결과_국립경국대_현직자특강.txt';
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 $('#printBtn').addEventListener('click', () => window.print());
 $('#clearBtn').addEventListener('click', () => {
-  if (!$('#clearBtn').dataset.sure) { $('#clearBtn').dataset.sure = '1'; $('#clearBtn').lastChild.textContent = '한 번 더 누르면 지워져요'; return; }
   const dev = S.dev; S = {f: {}, d: {}, dev}; try { localStorage.removeItem(KEY); } catch (e) {}
   $$('[data-field]').forEach(el => el.value = ''); $$('[data-done]').forEach(el => el.checked = false);
-  delete $('#clearBtn').dataset.sure; $('#clearBtn').lastChild.textContent = '이 기기에서 지우기';
   renderPrompts(); renderResults(); renderNav(); toast('이 기기에서 지웠어요');
 });
 
