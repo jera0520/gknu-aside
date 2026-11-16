@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[캡스톤 시연본] 제26회 안동국제탈춤페스티벌 × 토스(Toss) 앱테크 2030 마케팅 기획서</title>
+<style>
+@font-face { font-family:'Paperlogy'; font-weight:400; font-display:swap; src:local('Paperlogy 4 Regular'), local('Paperlogy-4Regular'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-4Regular.woff2') format('woff2'); }
+@font-face { font-family:'Paperlogy'; font-weight:600; font-display:swap; src:local('Paperlogy 6 SemiBold'), local('Paperlogy-6SemiBold'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-6SemiBold.woff2') format('woff2'); }
+@font-face { font-family:'Paperlogy'; font-weight:700; font-display:swap; src:local('Paperlogy 7 Bold'), local('Paperlogy-7Bold'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-7Bold.woff2') format('woff2'); }
+@font-face { font-family:'Paperlogy'; font-weight:800; font-display:swap; src:local('Paperlogy 8 ExtraBold'), local('Paperlogy-8ExtraBold'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-8ExtraBold.woff2') format('woff2'); }
+@font-face { font-family:'Paperlogy'; font-weight:900; font-display:swap; src:local('Paperlogy 9 Black'), local('Paperlogy-9Black'), url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff2') format('woff2'); }
+@font-face { font-family:'Pretendard'; font-weight:400; font-display:swap; src:local('Pretendard Regular'), local('Pretendard-Regular'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2'); }
+@font-face { font-family:'Pretendard'; font-weight:600; font-display:swap; src:local('Pretendard SemiBold'), local('Pretendard-SemiBold'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-SemiBold.woff2') format('woff2'); }
+@font-face { font-family:'Pretendard'; font-weight:700; font-display:swap; src:local('Pretendard Bold'), local('Pretendard-Bold'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2'); }
+
+:root {
+  --bg-dark: #070B14;
+  --bg-light: #F4F7FB;
+  --toss: #3182F6;
+  --kblue: #002FA7;
+  --coral: #FF5A79;
+  --amber: #F59E0B;
+  --mint: #10B981;
+  --ink-dark: #0F172A;
+  --ink-light: #F8FAFC;
+  --display: 'Paperlogy', 'Pretendard', -apple-system, sans-serif;
+  --body: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #03060C; color: var(--ink-light);
+  font-family: var(--body);
+  word-break: keep-all; overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+.viewport {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 35%, #111B33 0%, #03060C 75%);
+}
+.stage {
+  width: 1280px; height: 720px; position: relative; overflow: hidden; overflow: clip;
+  border-radius: 16px; box-shadow: 0 32px 90px rgba(0,0,0,0.68), 0 0 0 1px rgba(255,255,255,0.08);
+  transform-origin: center center; background: var(--bg-dark);
+}
+.top-progress { position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 60; background: rgba(255,255,255,0.08); }
+.top-progress span { display: block; height: 100%; width: 12.5%; background: linear-gradient(90deg, #0038A8, #38BDF8, #FF5A79); transition: width .45s cubic-bezier(.22,1,.36,1); }
+
+.slide {
+  position: absolute; inset: 0; padding: 34px 48px 68px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  opacity: 0; pointer-events: none;
+  transform: translateY(14px) scale(0.988);
+  transition: opacity .4s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+}
+.slide.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+.slide.dark {
+  background:
+    radial-gradient(circle at 86% 14%, rgba(49,130,246,0.18), transparent 44%),
+    radial-gradient(circle at 10% 88%, rgba(255,90,121,0.12), transparent 42%),
+    #070B14;
+  color: var(--ink-light);
+}
+.slide.light { background: #F4F7FB; color: var(--ink-dark); }
+
+.slide.active .rv { animation: rvUp .36s cubic-bezier(.22,1,.36,1) both; }
+.slide.active .d1 { animation-delay: .02s; }
+.slide.active .d2 { animation-delay: .08s; }
+.slide.active .d3 { animation-delay: .14s; }
+.slide.active .d4 { animation-delay: .20s; }
+@keyframes rvUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.s-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; border-radius: 999px;
+  font-family: var(--display); font-weight: 800; font-size: 12.5px; letter-spacing: .02em; white-space: nowrap;
+}
+.dark .pill { background: rgba(49,130,246,0.18); color: #7CC0FF; border: 1px solid rgba(49,130,246,0.38); }
+.light .pill { background: #E8F2FF; color: #155EEF; border: 1px solid #C5DDFF; }
+.demo-tag {
+  font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+  background: rgba(255,90,121,0.16); color: #FF7D97; border: 1px solid rgba(255,90,121,0.35);
+}
+.light .demo-tag { background: #FFEAF0; color: #D92652; border-color: #FFC6D4; }
+.act-pill-btn {
+  border: 1.5px solid #38BDF8; background: rgba(56,189,248,0.16); color: #7DD3FC;
+  font-family: var(--display); font-weight: 800; font-size: 12.5px; padding: 6px 14px;
+  border-radius: 999px; cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.act-pill-btn:hover { background: #38BDF8; color: #070B14; transform: translateY(-1px); }
+
+h2.title { font-family: var(--display); font-weight: 900; font-size: 34px; line-height: 1.22; letter-spacing: -0.025em; margin: 4px 0 2px; }
+.sub { font-size: 16px; line-height: 1.5; opacity: 0.86; }
+.grad-toss {
+  background: linear-gradient(95deg, #7CC0FF 0%, #3182F6 48%, #FF5A79 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.bento { display: grid; gap: 14px; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.card { border-radius: 14px; padding: 16px 18px; position: relative; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+.dark .card { background: rgba(17,24,39,0.85); border: 1px solid rgba(255,255,255,0.1); }
+.light .card { background: #FFFFFF; border: 1px solid #E2E8F0; box-shadow: 0 8px 22px rgba(15,23,42,0.05); }
+.card h3 { font-family: var(--display); font-weight: 800; font-size: 18px; margin-bottom: 5px; }
+.card p { font-size: 14px; line-height: 1.5; opacity: 0.88; }
+
+.seg {
+  display: inline-flex; background: #E2E8F0; padding: 4px; border-radius: 999px; gap: 4px;
+}
+.dark .seg { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
+.seg button {
+  border: 0; background: transparent; padding: 6px 14px; border-radius: 999px;
+  font-family: var(--display); font-weight: 800; font-size: 12.5px; color: #475569; cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+}
+.dark .seg button { color: #CBD5E1; }
+.seg button.active { background: #002FA7; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,47,167,0.28); }
+.dark .seg button.active { background: #38BDF8; color: #070B14; }
+
+/* -------- SLIDE 1: 3D Parallax Capstone Cover -------- */
+.cover-visual {
+  position: relative; height: 390px; display: grid; place-items: center;
+  perspective: 900px;
+}
+.parallax-rig {
+  position: relative; width: 390px; height: 390px; transform-style: preserve-3d;
+  transition: transform .15s ease-out;
+}
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spinRev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+.ring-outer {
+  position: absolute; inset: 14px; border-radius: 50%;
+  border: 1.5px dashed rgba(56,189,248,0.45);
+  animation: spinSlow 24s linear infinite;
+}
+.ring-inner {
+  position: absolute; inset: 48px; border-radius: 50%;
+  border: 2px solid rgba(255,90,121,0.38); border-top-color: #38BDF8; border-right-color: #FF5A79;
+  animation: spinRev 14s linear infinite;
+}
+.mask-orb {
+  position: absolute; inset: 74px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(49,130,246,0.34), rgba(15,23,42,0.92) 72%);
+  border: 1.5px solid rgba(125,211,252,0.42);
+  box-shadow: 0 0 60px rgba(49,130,246,0.32), inset 0 0 32px rgba(56,189,248,0.18);
+  display: grid; place-items: center;
+}
+.p-badge {
+  position: absolute; padding: 7px 13px; border-radius: 999px;
+  background: rgba(15,23,42,0.88); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2); font-family: var(--display); font-weight: 800; font-size: 12.5px;
+  color: #F8FAFC; white-space: nowrap; box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+  animation: floatBadge 4.2s ease-in-out infinite;
+}
+.agenda-btn {
+  text-align: left; border-radius: 12px; padding: 12px 15px; cursor: pointer;
+  background: rgba(17,24,39,0.82); border: 1px solid rgba(255,255,255,0.13); color: #F8FAFC;
+  transition: all .22s cubic-bezier(.22,1,.36,1);
+}
+.agenda-btn:hover {
+  transform: translateY(-4px); border-color: #38BDF8;
+  background: rgba(49,130,246,0.2); box-shadow: 0 12px 26px rgba(49,130,246,0.25);
+}
+.agenda-desc { font-size: 12px; color: #94A3B8; margin-top: 3px; transition: color .2s; }
+.agenda-btn:hover .agenda-desc { color: #BAE6FD; }
+
+/* -------- SLIDE 2: 2030 Funnel -------- */
+.funnel-box {
+  background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 16px; padding: 18px 22px;
+  position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+  box-shadow: 0 12px 32px rgba(15,23,42,0.06);
+}
+.funnel-row { display: grid; grid-template-columns: 165px 1fr 90px; align-items: center; gap: 12px; position: relative; z-index: 2; }
+.funnel-track { height: 38px; background: #F1F5F9; border-radius: 10px; overflow: hidden; position: relative; border: 1px solid #E2E8F0; }
+.funnel-bar {
+  height: 100%; border-radius: 9px; width: 0%;
+  transition: width .85s cubic-bezier(.22,.68,.18,1), background .4s ease;
+  display: flex; align-items: center; padding-left: 12px; color: #fff; font-weight: 800; font-size: 12.5px; white-space: nowrap;
+}
+@keyframes leakDrop {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  100% { transform: translate(20px, 28px) scale(0.3); opacity: 0; }
+}
+@keyframes flowDot {
+  0% { left: 48%; opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.9; }
+  100% { left: 96%; opacity: 0; }
+}
+.funnel-bar > span:first-child { position: relative; z-index: 2; }
+.f-particle {
+  position: absolute; top: 50%; left: 48%; opacity: 0; width: 7px; height: 7px; border-radius: 50%; margin-top: -3.5px; z-index: 1;
+  background: rgba(255,255,255,0.88); box-shadow: 0 0 8px rgba(255,255,255,0.9);
+  pointer-events: none; animation: flowDot 1.9s linear infinite;
+}
+
+/* -------- SLIDE 3: STP & 2D Positioning Map -------- */
+.stp-btn {
+  width: 100%; text-align: left; padding: 10px 13px; border-radius: 12px; cursor: pointer;
+  background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12); color: #CBD5E1;
+  transition: all .2s;
+}
+.stp-btn:hover { border-color: rgba(56,189,248,0.5); color: #fff; }
+.stp-btn.on { background: rgba(49,130,246,0.22); border-color: #38BDF8; color: #FFFFFF; box-shadow: 0 0 20px rgba(56,189,248,0.18); }
+.stp-bar-track { height: 10px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; margin-top: 4px; }
+.stp-bar-fill { height: 100%; border-radius: 999px; width: 0%; transition: width .7s cubic-bezier(.22,.68,.18,1); }
+.pos-traj-path {
+  stroke-dasharray: 460; stroke-dashoffset: 460;
+  transition: stroke-dashoffset 1.15s cubic-bezier(.22,.68,.18,1);
+}
+.pos-traj-path.drawn { stroke-dashoffset: 0; }
+#posTargetBubble {
+  transition: transform 1.15s cubic-bezier(.22,.68,.18,1);
+}
+
+/* -------- SLIDE 4: Klein Blue Charts + 100-Cell Waffle -------- */
+.k-bar-svg .kbar { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); transition: transform .85s cubic-bezier(.22,.68,.18,1); cursor: pointer; }
+.k-bar-svg.grow .kbar { transform: scaleX(1); }
+.k-bar-svg .kbar:hover { filter: brightness(1.15); stroke: #1D2026; stroke-width: 2; }
+.waffle-grid {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; width: 290px; height: 260px;
+  padding: 10px; background: #F8FAFC; border: 1.5px solid #D0D6DE;
+}
+@keyframes wfPop {
+  0% { transform: scale(0.2); opacity: 0.15; }
+  70% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.wf-cell {
+  border-radius: 2px; transition: opacity .2s ease, transform .2s ease; cursor: pointer;
+}
+.wf-cell.pop { animation: wfPop .34s cubic-bezier(.22,1,.36,1) var(--d, 0ms) both; }
+.wf-cell.dim { opacity: 0.22; }
+
+/* -------- SLIDE 5: Toss Phone Mockup & Flow Steps -------- */
+.flow-step {
+  background: #FFFFFF; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 10px 14px;
+  transition: all .25s ease;
+}
+.flow-step.cur {
+  border-color: #002FA7; background: #EAEEF8; box-shadow: 0 6px 18px rgba(0,47,167,0.14);
+  transform: translateX(4px);
+}
+.phone-frame {
+  width: 348px; height: 486px; border-radius: 34px; padding: 13px;
+  background: #0F172A; border: 4px solid #334155;
+  box-shadow: 0 24px 60px rgba(0,47,167,0.22);
+  display: flex; flex-direction: column; margin: 0 auto;
+}
+.phone-screen {
+  background: #FFFFFF; color: #191F28; border-radius: 22px; flex: 1;
+  padding: 15px; display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.toss-badge { display: inline-block; background: #E8F3FF; color: #1B64DA; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 8px; }
+.quiz-opt {
+  width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px;
+  border: 1.5px solid #E5E8EB; background: #F9FAFB; font: inherit;
+  font-weight: 700; font-size: 13.5px; color: #191F28; cursor: pointer; margin-bottom: 7px; transition: all .18s ease;
+}
+.quiz-opt:hover { border-color: var(--toss); background: #EFF6FF; }
+.quiz-opt.correct { border-color: #10B981; background: #ECFDF5; color: #047857; }
+.quiz-opt.wrong { border-color: #EF4444; background: #FEF2F2; color: #B91C1C; }
+.viral-modal {
+  position: absolute; inset: 8px; background: #0F172A; color: #F8FAFC; border-radius: 18px;
+  padding: 18px; display: none; flex-direction: column; justify-content: space-between; z-index: 25;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  animation: rvUp .25s ease both;
+}
+.viral-modal.open { display: flex; }
+
+/* -------- SLIDE 6: 4Ps Mix & Timeline Flywheel -------- */
+.p4-card {
+  background: rgba(17,24,39,0.86); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 14px;
+  padding: 14px 16px; cursor: pointer; transition: all .24s ease;
+}
+.p4-card:hover { transform: translateY(-3px); border-color: rgba(56,189,248,0.6); }
+.p4-card.on { border-color: #38BDF8; background: rgba(49,130,246,0.22); box-shadow: 0 12px 28px rgba(49,130,246,0.22); }
+.tl-node {
+  background: rgba(15,23,42,0.92); border: 1.5px solid rgba(255,255,255,0.14); border-radius: 14px;
+  padding: 14px 16px; transition: all .28s ease; position: relative; z-index: 2;
+}
+.tl-node.lit {
+  border-color: #FF5A79; background: rgba(255,90,121,0.16);
+  box-shadow: 0 0 26px rgba(255,90,121,0.28); transform: translateY(-2px);
+}
+@keyframes pulseDash {
+  to { stroke-dashoffset: -40; }
+}
+.flow-line { stroke-dasharray: 10 10; animation: pulseDash 1.2s linear infinite; }
+
+/* -------- SLIDE 7: Levers -------- */
+.lever-range { -webkit-appearance: none; width: 100%; height: 6px; background: #D9E0F2; border-radius: 4px; outline: none; cursor: pointer; }
+.lever-range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #002FA7; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,47,167,.4); cursor: pointer; }
+
+.prompt-box {
+  background: #0F172A; color: #E2E8F0; border-radius: 14px; padding: 16px 20px;
+  font-family: 'Pretendard', monospace; font-size: 13.8px; line-height: 1.62;
+  border: 1px solid rgba(255,255,255,0.12); white-space: pre-wrap;
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer;
+  padding: 10px 18px; border-radius: 10px; font-family: var(--display); font-weight: 800; font-size: 14px;
+  background: #002FA7; color: #fff; box-shadow: 0 8px 22px rgba(0,47,167,0.32); transition: transform .2s;
+}
+.copy-btn:hover { transform: translateY(-2px); }
+
+.dock {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 70;
+  display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px;
+  background: rgba(15,23,42,0.88); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.14); color: #F8FAFC; font-size: 13px;
+}
+.dock button { border: 0; background: rgba(255,255,255,0.09); color: #F8FAFC; border-radius: 999px; padding: 5px 11px; font: inherit; font-weight: 700; cursor: pointer; }
+.dock button:hover { background: rgba(0,47,167,0.8); }
+.dock .counter { font-family: var(--display); font-weight: 800; padding: 0 8px; min-width: 56px; text-align: center; }
+
+.grid-overlay {
+  position: absolute; inset: 0; z-index: 90; background: rgba(7,11,20,0.95); backdrop-filter: blur(16px);
+  padding: 36px 48px; display: none; flex-direction: column;
+}
+.grid-overlay.open { display: flex; }
+.grid-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+.grid-item { background: #131C31; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px; cursor: pointer; text-align: left; color: #fff; }
+.grid-item.cur { border-color: #FF5A79; background: #1E2949; }
+
+.toast {
+  position: absolute; bottom: 64px; left: 50%; transform: translateX(-50%) translateY(10px);
+  background: #10B981; color: #fff; font-weight: 800; padding: 9px 20px; border-radius: 999px;
+  font-size: 14px; opacity: 0; pointer-events: none; transition: all .25s; z-index: 99;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ================= PAPERLOGY ENGINES (A/B/C/D) ================= */
+.pgy-btn-pill{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;
+  font-family:var(--display);font-weight:700;font-size:13px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:inherit;
+  transition:all .2s ease;
+}
+.pgy-btn-pill:hover{transform:translateY(-1px);filter:brightness(1.1);}
+.pgy-btn-pill.on{background:#FFFFFF;color:#0F172A;border-color:#FFFFFF;}
+
+/* -------- ENGINE A: Liquid Metaball Refraction Cover -------- */
+.eng-a{
+  padding:38px 52px 68px !important;
+  background:#090C12 !important;
+  color:#EAE6DF !important;
+  cursor:crosshair;
+}
+.eng-a-stage{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.eng-a-base, .eng-a-refract{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding-bottom:36px;
+}
+.eng-a-hero-word{
+  font-family:var(--display);font-weight:900;font-size:215px;line-height:0.95;
+  letter-spacing:-0.045em;white-space:nowrap;user-select:none;
+  color:#EAE6DF;
+  text-shadow:-4px 0 28px rgba(56,189,248,0.34), 4px 0 28px rgba(251,146,60,0.26);
+}
+.eng-a-refract{
+  background:radial-gradient(circle at 50% 48%, #EFECE5 0%, #D9E4F5 65%, #162038 100%);
+  transform-origin:center center;
+}
+.eng-a-refract .eng-a-hero-word{
+  color:#090C12;
+  text-shadow:-5px 0 18px rgba(0,85,255,0.45), 5px 0 18px rgba(255,122,0,0.45);
+  transform:scale(1.038);
+}
+.eng-a-svg-overlay{
+  position:absolute;inset:0;width:1280px;height:720px;pointer-events:none;z-index:4;
+}
+.eng-a-hud{position:relative;z-index:6;display:flex;flex-direction:column;height:100%;justify-content:space-between;pointer-events:none;}
+.eng-a-hud .interactive{pointer-events:auto;}
+.eng-a-presets{display:inline-flex;gap:6px;background:rgba(255,255,255,0.07);padding:4px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);}
+.eng-a-presets button{
+  border:0;background:transparent;color:#CBD5E1;font-family:var(--display);font-weight:700;font-size:12.5px;
+  padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .2s;
+}
+.eng-a-presets button.on{background:#EAE6DF;color:#090C12;}
+
+/* -------- ENGINE B: 3-Mode Rolling Odometer + 365 Matrix + Circular Radar -------- */
+.eng-b{
+  padding:0 !important;
+  transition:background .35s ease, color .35s ease;
+}
+.eng-b-canvas{
+  position:relative;width:100%;height:100%;padding:26px 48px 66px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:background .35s ease, color .35s ease;
+}
+.eng-b-canvas.mode-0{background:#EDEDEB;color:#18181B;}
+.eng-b-canvas.mode-1{background:#0B0C0F;color:#F4F4F5;}
+.eng-b-canvas.mode-2{background:#0038A8;color:#FFFFFF;}
+
+.eng-b-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.eng-b-eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:0.06em;opacity:0.62;text-transform:uppercase;}
+.eng-b-title{font-family:var(--display);font-weight:900;font-size:31px;line-height:1.16;letter-spacing:-0.025em;margin-top:4px;}
+.eng-b-sub{font-size:14.5px;opacity:0.72;margin-top:4px;}
+
+.eng-b-tabs{display:inline-flex;gap:6px;align-items:center;flex-wrap:nowrap;flex-shrink:0;white-space:nowrap;}
+.eng-b-tab{
+  padding:6px 12px;border-radius:999px;font-family:var(--display);font-weight:800;font-size:12.5px;
+  cursor:pointer;border:1.5px solid currentColor;background:transparent;color:inherit;opacity:0.65;
+  transition:all .2s;white-space:nowrap;
+}
+.mode-0 .eng-b-tab.on{background:#18181B;color:#EDEDEB;border-color:#18181B;opacity:1;}
+.mode-1 .eng-b-tab.on{background:#F4F4F5;color:#0B0C0F;border-color:#F4F4F5;opacity:1;}
+.mode-2 .eng-b-tab.on{background:#FFFFFF;color:#0038A8;border-color:#FFFFFF;opacity:1;}
+
+.eng-b-pane{display:none;flex:1;min-height:0;padding-top:10px;}
+.eng-b-pane.on{display:flex;flex-direction:column;justify-content:space-between;}
+
+/* Vertical Rolling Odometer */
+.odo{
+  display:inline-flex;align-items:baseline;font-family:var(--display);font-weight:800;
+  font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.04em;
+}
+.odo-col{
+  display:inline-block;height:1.02em;overflow:hidden;vertical-align:top;position:relative;
+}
+.odo-strip{
+  display:flex;flex-direction:column;
+  transition:transform .58s cubic-bezier(.22,.68,.18,1);
+  will-change:transform;
+}
+.odo-strip span{display:block;height:1.02em;line-height:1.02em;text-align:center;}
+
+/* Mode 01 layout */
+.m0-grid{display:grid;grid-template-columns:0.86fr 1.14fr;gap:28px;flex:1;align-items:stretch;}
+.m0-left{display:flex;flex-direction:column;justify-content:space-between;}
+.m0-matrix-wrap{
+  background:rgba(255,255,255,0.52);border:1.5px solid #C8CDD4;border-radius:10px;padding:12px 18px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.m0-matrix{
+  display:grid;grid-template-columns:repeat(25,1fr);gap:3px 5px;align-items:center;justify-items:center;flex:1;padding:4px 0;
+}
+.mx-cell{
+  width:14px;height:14px;display:grid;place-items:center;font-size:13px;font-weight:700;
+  color:#9CA3AF;line-height:1;transition:transform .25s ease, color .2s ease;
+}
+.mx-cell::after{content:"+";}
+@keyframes mxDotPop{
+  0%{transform:scale(0.15);opacity:0.1;}
+  65%{transform:scale(1.28);opacity:1;}
+  100%{transform:scale(1);opacity:1;}
+}
+.mx-cell.on::after{
+  content:"";width:12px;height:12px;border-radius:50%;background:#0038A8;display:block;
+  box-shadow:0 1px 4px rgba(0,56,168,.35);
+  animation:mxDotPop 0.36s cubic-bezier(0.22,1,0.36,1) var(--d, 0ms) both;
+}
+.mx-cell.on{transform:scale(1.02);}
+
+.steppers-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;border-top:1px solid #C8CDD4;padding-top:10px;}
+.stepper-box{display:flex;flex-direction:column;gap:4px;}
+.stepper-box label{font-size:12px;font-weight:700;color:#52525B;}
+.stepper-ctrl{display:flex;align-items:center;gap:10px;}
+.stepper-val{font-family:var(--display);font-weight:800;font-size:25px;font-variant-numeric:tabular-nums;min-width:66px;}
+.stepper-val small{font-size:13px;font-weight:600;margin-left:2px;}
+.cir-btn{
+  width:28px;height:28px;border-radius:50%;border:1.5px solid currentColor;background:transparent;
+  color:inherit;font-size:16px;font-weight:700;line-height:1;cursor:pointer;display:grid;place-items:center;
+  transition:all .15s;
+}
+.cir-btn:hover{background:currentColor;color:#fff;}
+.mode-0 .cir-btn:hover{background:#18181B;color:#fff;}
+.mode-1 .cir-btn:hover{background:#fff;color:#0B0C0F;}
+
+/* Mode 02 dark formula layout */
+.eq-row{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.14);padding-bottom:14px;margin-top:4px;
+}
+.eq-term{display:flex;flex-direction:column;align-items:flex-start;}
+.eq-num{font-size:74px;color:#FFFFFF;}
+.eq-num-outline{color:transparent !important;}
+.eq-num-outline .odo-strip span{color:transparent;-webkit-text-stroke:2px #F4F4F5;}
+.eq-op{font-family:var(--display);font-weight:400;font-size:46px;color:#71717A;padding-top:16px;}
+.eq-res-row{display:grid;grid-template-columns:1.15fr 0.85fr;gap:24px;align-items:center;margin-top:8px;}
+.eq-klein-box{
+  display:inline-flex;align-items:baseline;background:#0038A8;color:#FFFFFF;
+  padding:10px 20px;border-radius:6px;margin-left:10px;
+}
+.eq-table{border-top:1px solid rgba(255,255,255,0.14);}
+.eq-table-row{
+  display:flex;justify-content:space-between;align-items:center;padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,0.12);font-size:14.5px;
+}
+.eq-table-row b{font-family:var(--display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums;}
+.eq-barcode{
+  display:flex;align-items:stretch;gap:3px;height:24px;padding:3px 0;
+  border-top:1px solid rgba(255,255,255,0.16);border-bottom:1px solid rgba(255,255,255,0.16);
+}
+.eq-tick{
+  flex:1;background:rgba(255,255,255,0.14);border-radius:1px;
+  transition:background .18s ease, transform .22s ease;
+  transition-delay:var(--d, 0ms);
+}
+.eq-tick.on{background:#F4F4F5;}
+
+/* Mode 03 Klein Blue radar layout */
+.m2-grid{display:grid;grid-template-columns:0.95fr 1.05fr;gap:24px;flex:1;align-items:center;}
+.m2-slider{
+  -webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.32);border-radius:4px;outline:none;cursor:pointer;
+}
+.m2-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#FFFFFF;border:4px solid #0038A8;box-shadow:0 2px 10px rgba(0,0,0,0.4);cursor:pointer;
+}
+.rd-dot{fill:rgba(0,15,55,0.45);stroke:none;transition:fill .25s ease, stroke .25s ease;}
+.rd-dot.saved{fill:#FFFFFF;stroke:none;}
+.rd-dot.used{fill:transparent;stroke:rgba(255,255,255,0.88);stroke-width:1.5px;}
+
+/* Engine B Footer Bar */
+.eng-b-foot{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  border-top:1px solid rgba(128,128,128,0.28);padding-top:8px;margin-top:6px;
+  font-size:12px;font-weight:700;
+}
+.mode-0 .eng-b-foot{border-top-color:#C8CDD4;color:#52525B;}
+.mode-1 .eng-b-foot{border-top-color:rgba(255,255,255,0.14);color:#A1A1AA;}
+.mode-2 .eng-b-foot{border-top-color:rgba(255,255,255,0.22);color:rgba(255,255,255,0.82);}
+.eng-b-foot-actions{display:inline-flex;gap:8px;align-items:center;flex-shrink:0;}
+.eng-b-foot-btn{
+  padding:5px 12px;border-radius:999px;font-family:var(--display);font-weight:800;font-size:12px;
+  cursor:pointer;border:1.5px solid currentColor;background:transparent;color:inherit;
+  transition:all .18s;white-space:nowrap;
+}
+.eng-b-foot-btn:hover,.eng-b-foot-btn.on{background:currentColor;}
+.mode-0 .eng-b-foot-btn:hover,.mode-0 .eng-b-foot-btn.on{background:#18181B;color:#EDEDEB;border-color:#18181B;}
+.mode-1 .eng-b-foot-btn:hover,.mode-1 .eng-b-foot-btn.on{background:#F4F4F5;color:#0B0C0F;border-color:#F4F4F5;}
+.mode-2 .eng-b-foot-btn:hover,.mode-2 .eng-b-foot-btn.on{background:#FFFFFF;color:#0038A8;border-color:#FFFFFF;}
+
+/* -------- ENGINE C: Yellow Brutalist Pixel-Shatter Triage -------- */
+.eng-c{
+  padding:32px 46px 66px !important;
+  background:#D7C226 !important;
+  color:#141412 !important;
+}
+.eng-c-grain{
+  position:absolute;inset:0;pointer-events:none;opacity:0.10;
+  background-image:radial-gradient(rgba(0,0,0,0.42) 1px, transparent 0);
+  background-size:4px 4px;
+}
+.eng-c-top{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:flex-start;}
+.eng-c-body{
+  position:relative;z-index:4;flex:1;display:grid;grid-template-columns:152px 1fr 152px;
+  align-items:center;gap:12px;margin:4px 0;
+}
+.triage-col{
+  display:flex;flex-direction:column;gap:6px;height:360px;overflow:hidden;justify-content:flex-start;
+}
+.triage-badge{
+  background:#141412;color:#EFECE3;padding:6px 10px;border-radius:4px;
+  font-family:var(--display);font-weight:800;font-size:13px;
+  animation:rvUp .22s ease both;
+}
+.triage-col.ai .triage-badge{background:rgba(20,20,18,0.16);color:#141412;border:1.5px solid #141412;text-align:right;}
+.eng-c-stage{position:relative;width:100%;height:380px;display:grid;place-items:center;}
+.eng-c-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8;}
+.eng-c-svg{width:100%;height:100%;overflow:visible;}
+@keyframes walkSil{
+  0%{transform:translateX(-180px);}
+  100%{transform:translateX(760px);}
+}
+@keyframes walkSilSlow{
+  0%{transform:translateX(720px) scaleX(-1);}
+  100%{transform:translateX(-180px) scaleX(-1);}
+}
+.sil-g1{animation:walkSil 9s linear infinite;}
+.sil-g2{animation:walkSilSlow 12s linear infinite;}
+.sil-g3{animation:walkSil 14s linear -4s infinite;}
+
+@keyframes shakeHard{
+  0%,100%{transform:translateX(0);}
+  18%{transform:translateX(-16px) rotate(-1.5deg);}
+  36%{transform:translateX(15px) rotate(1.5deg);}
+  54%{transform:translateX(-11px);}
+  72%{transform:translateX(9px);}
+}
+.shake-hard{animation:shakeHard .42s ease;}
+
+.eng-c-footer{
+  position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;
+  border-top:2px solid rgba(20,20,18,0.22);padding-top:12px;
+}
+.triage-act-btn{
+  display:inline-flex;align-items:center;gap:12px;background:#141412;color:#EFECE3;border:0;
+  padding:10px 18px;border-radius:8px;cursor:pointer;font-family:var(--display);font-weight:900;font-size:17px;
+  transition:transform .15s, background .15s;
+}
+.triage-act-btn:hover{transform:translateY(-2px);background:#000;}
+.triage-mini-btn{
+  background:rgba(20,20,18,0.12);border:1.5px solid rgba(20,20,18,0.35);color:#141412;
+  padding:7px 12px;border-radius:6px;font-family:var(--display);font-weight:800;font-size:12.5px;cursor:pointer;
+}
+.triage-mini-btn:hover{background:#141412;color:#EFECE3;}
+
+/* -------- ENGINE D: Paperlogy Official #002FA7 Swiss Data & Lever System -------- */
+.eng-d{
+  background:#FFFFFF !important;color:#1D2026 !important;
+  --kblue:#002FA7;--kpanel:#EAEEF8;--kacc:#FF7A00;--krule:#D0D6DE;--knote:#5B6773;
+  padding:36px 52px 68px !important;
+}
+.eng-d .kcard{
+  background:#FFFFFF;border:1.5px solid var(--krule);border-radius:0;padding:18px 22px;
+}
+.eng-d .kcard.hi{background:var(--kpanel);border-color:var(--kblue);}
+.eng-d .kbtn{
+  background:#FFFFFF;border:1.5px solid var(--kblue);color:var(--kblue);
+  font-family:var(--display);font-weight:800;font-size:13.5px;padding:7px 14px;cursor:pointer;white-space:nowrap;flex-shrink:0;
+}
+.eng-d .kbtn.on, .eng-d .kbtn:hover{background:var(--kblue);color:#FFFFFF;}
+.eng-d .kbig{
+  font-family:var(--display);font-weight:900;font-size:66px;line-height:1;
+  color:var(--kblue);font-variant-numeric:tabular-nums;letter-spacing:-0.03em;
+}
+.eng-d .kbig small{font-size:22px;color:#1D2026;font-weight:700;margin-left:4px;}
+.eng-d-bar-fill{
+  height:100%;background:var(--kblue);transition:width .75s cubic-bezier(.22,.68,.18,1);
+}
+.eng-d-drawer{
+  position:absolute;top:0;right:0;bottom:0;width:440px;background:#FFFFFF;z-index:40;
+  border-left:2px solid var(--kblue);box-shadow:-20px 0 50px rgba(0,28,100,0.2);
+  padding:32px 28px;transform:translateX(105%);transition:transform .38s cubic-bezier(.22,.68,.18,1);
+  display:flex;flex-direction:column;justify-content:space-between;color:#1D2026;
+}
+.eng-d-drawer.open{transform:translateX(0);}
+
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="stage" id="stage">
+    <div class="top-progress"><span id="progBar"></span></div>
+
+    <!-- ==================== SLIDE 1: AUTHENTIC CAPSTONE COVER ==================== -->
+    <section class="slide dark active" id="slide_cap1" data-title="표지 · 제26회 안동국제탈춤페스티벌 리포지셔닝">
+      <div class="s-head rv d1">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="pill">국립경국대학교 관광홍보 캡스톤디자인 최종 발표</span>
+          <span style="font-size:13px;font-weight:700;color:#94A3B8;">유럽문화관광 · 스마트관광학 김진현</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="demo-tag">제26회 안동국제탈춤페스티벌 기획서</span>
+          <span style="font-family:monospace;font-size:13px;color:#94A3B8;font-weight:700;">01 / 08</span>
+        </div>
+      </div>
+
+      <div class="bento rv d2" style="grid-template-columns:1.18fr 0.82fr;gap:26px;align-items:center;margin:auto 0;">
+        <div>
+          <div style="font-family:var(--display);font-weight:800;font-size:15px;color:#7DD3FC;letter-spacing:.02em;margin-bottom:10px;">
+            CAPSTONE MARKETING PROPOSAL // 2030 REPOSITIONING
+          </div>
+          <h1 style="font-family:var(--display);font-weight:900;font-size:48px;line-height:1.18;letter-spacing:-0.03em;margin-bottom:16px;">
+            전통 탈춤 축제에<br><span class="grad-toss">‘토스(Toss) 앱테크’</span>를 입히다
+          </h1>
+          <p class="sub" style="color:#CBD5E1;font-size:17px;max-width:650px;">
+            "누가 표적인지 모르겠는 일방향 홍보"에서,<br>
+            <b style="color:#FFFFFF;">2030 세대가 매일 스스로 접속해 퀴즈를 풀고 숏폼을 퍼뜨리는 참여형 바이럴 축제</b>로 전환하는 디지털 홍보 전략 제안
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;font-size:13px;font-weight:700;">
+            <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);padding:6px 12px;border-radius:8px;color:#E2E8F0;">🎯 핵심 타겟: 국내외 2030 MZ세대</span>
+            <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);padding:6px 12px;border-radius:8px;color:#E2E8F0;">📱 핵심 접점: 토스 앱테크 × 숏폼</span>
+            <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);padding:6px 12px;border-radius:8px;color:#E2E8F0;">💼 예산 설계: 총 2억 원 (예시)</span>
+          </div>
+        </div>
+
+        <div class="cover-visual" id="coverParallaxStage">
+          <div class="parallax-rig" id="coverRig">
+            <div class="ring-outer"></div>
+            <div class="ring-inner"></div>
+            <div class="mask-orb">
+              <!-- Stylized Hahoe Mask Vector Emblem -->
+              <svg viewBox="0 0 180 180" style="width:155px;height:155px;filter:drop-shadow(0 8px 20px rgba(49,130,246,0.45));">
+                <defs>
+                  <linearGradient id="maskGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#F8FAFC"/>
+                    <stop offset="100%" stop-color="#93C5FD"/>
+                  </linearGradient>
+                </defs>
+                <!-- Mask Silhouette -->
+                <path d="M90 20 C52 20, 34 48, 34 86 C34 128, 56 158, 90 162 C124 158, 146 128, 146 86 C146 48, 128 20, 90 20 Z"
+                      fill="rgba(15,23,42,0.75)" stroke="url(#maskGrad)" stroke-width="3.2"/>
+                <!-- Forehead & Cheek Lines -->
+                <path d="M62 44 Q90 36 118 44" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Smiling Crescent Eyes -->
+                <path d="M52 72 Q65 59 78 72" fill="none" stroke="#F8FAFC" stroke-width="4.2" stroke-linecap="round"/>
+                <path d="M102 72 Q115 59 128 72" fill="none" stroke="#F8FAFC" stroke-width="4.2" stroke-linecap="round"/>
+                <!-- Nose -->
+                <path d="M90 66 L84 98 L96 98 Z" fill="rgba(56,189,248,0.22)" stroke="#7DD3FC" stroke-width="2.2" stroke-linejoin="round"/>
+                <!-- Generous Yangban Laughing Mouth & Detachable Jaw Line -->
+                <path d="M56 116 Q90 144 124 116" fill="none" stroke="#FF5A79" stroke-width="4.5" stroke-linecap="round"/>
+                <path d="M64 134 Q90 148 116 134" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-dasharray="4 4"/>
+              </svg>
+            </div>
+            <div class="p-badge" data-depth="1.2" style="top:10px;left:-14px;border-color:#38BDF8;color:#7DD3FC;animation-delay:0s;">🏛️ 유네스코 인류무형문화유산</div>
+            <div class="p-badge" data-depth="0.9" style="top:28px;right:-10px;border-color:#60A5FA;color:#BAE6FD;animation-delay:0.8s;">🎯 2030 타겟팅</div>
+            <div class="p-badge" data-depth="1.4" style="bottom:30px;left:-16px;border-color:#FF5A79;color:#FF9BB0;animation-delay:1.4s;">🎮 앱테크 게이미피케이션</div>
+            <div class="p-badge" data-depth="1.0" style="bottom:12px;right:-14px;border-color:#34D399;color:#6EE7B7;animation-delay:2.0s;">🔥 알고리즘 숏폼 확산</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento cols-4 rv d3">
+        <button class="agenda-btn" onclick="go(1)">
+          <div style="font-size:11.5px;color:#38BDF8;font-weight:800;">01 · OVERVIEW</div>
+          <div style="font-family:var(--display);font-weight:800;font-size:15.5px;margin-top:2px;">축제 현황 및 문제점</div>
+          <div class="agenda-desc">"왜 2030 표적이 보이지 않을까?"</div>
+        </button>
+        <button class="agenda-btn" onclick="go(2)">
+          <div style="font-size:11.5px;color:#60A5FA;font-weight:800;">02 · TARGET MARKET</div>
+          <div style="font-family:var(--display);font-weight:800;font-size:15.5px;margin-top:2px;">STP 전략 · SWOT 분석</div>
+          <div class="agenda-desc">2030 조준 &amp; 토스 앱테크 선정</div>
+        </button>
+        <button class="agenda-btn" onclick="go(4)">
+          <div style="font-size:11.5px;color:#FF7D97;font-weight:800;">03 · EXECUTION</div>
+          <div style="font-family:var(--display);font-weight:800;font-size:15.5px;margin-top:2px;">토스 퀴즈 &amp; 4Ps 전략</div>
+          <div class="agenda-desc">하회탈 퀴즈 + 강제 숏폼 루프</div>
+        </button>
+        <button class="agenda-btn" onclick="go(6)">
+          <div style="font-size:11.5px;color:#34D399;font-weight:800;">04 · IMPACT</div>
+          <div style="font-family:var(--display);font-weight:800;font-size:15.5px;margin-top:2px;">예산 2억 · 기대효과</div>
+          <div class="agenda-desc">3레버 모객 시뮬 &amp; 프롬프트</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: 2030 FUNNEL & PROBLEM DIAGNOSIS ==================== -->
+    <section class="slide light" id="slide_cap2" data-title="1. 축제 개요 및 문제점 · 2030 이탈 퍼널">
+      <div class="s-head rv d1">
+        <span class="pill">01 // FESTIVAL OVERVIEW &amp; PROBLEM · 축제 현황 및 문제점</span>
+        <div class="seg">
+          <button class="active" id="fnBtnCurrent" onclick="setFunnelMode('current', this)">🚨 기존: 타겟 없는 일방향 홍보</button>
+          <button id="fnBtnProposed" onclick="setFunnelMode('proposed', this)">⚡ 제안: 2030 맞춤형 앱테크 전환</button>
+        </div>
+      </div>
+
+      <div class="rv d2">
+        <h2 class="title" id="fnHeadline">유네스코 세계유산 브랜드는 최고인데,<br><span style="color:#E11D48;">왜 2030 표적이 보이지 않을까?</span></h2>
+      </div>
+
+      <div class="bento rv d3" style="grid-template-columns:0.84fr 1.16fr;gap:20px;flex:1;margin-top:8px;align-items:stretch;">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:12px;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <div class="card" style="padding:12px 14px;border-top:3px solid #002FA7;">
+              <div style="font-size:11.5px;font-weight:800;color:#475569;">유네스코 브랜드</div>
+              <div id="fnMet1" style="font-family:var(--display);font-weight:900;font-size:30px;color:#002FA7;margin-top:4px;">92%</div>
+              <div style="font-size:11px;color:#64748B;">문화자산 신뢰도</div>
+            </div>
+            <div class="card" style="padding:12px 14px;border-top:3px solid #E11D48;" id="fnMet2Card">
+              <div style="font-size:11.5px;font-weight:800;color:#475569;">2030 자발적 공유</div>
+              <div id="fnMet2" style="font-family:var(--display);font-weight:900;font-size:30px;color:#E11D48;margin-top:4px;">18%</div>
+              <div id="fnMet2Sub" style="font-size:11px;color:#64748B;">현행 이탈 상태</div>
+            </div>
+            <div class="card" style="padding:12px 14px;border-top:3px solid #F59E0B;" id="fnMet3Card">
+              <div style="font-size:11.5px;font-weight:800;color:#475569;">인지-참여 격차</div>
+              <div id="fnMet3" style="font-family:var(--display);font-weight:900;font-size:30px;color:#D97706;margin-top:4px;">-74%p</div>
+              <div id="fnMet3Sub" style="font-size:11px;color:#64748B;">예시 단절 폭</div>
+            </div>
+          </div>
+
+          <div class="card" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px;">
+            <div>
+              <span style="display:inline-block;background:#FEE2E2;color:#B91C1C;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:800;" id="fnDiagBadge">현황 진단 · 마케팅 맹점 2가지</span>
+              <h3 style="margin-top:10px;font-size:18px;" id="fnDiagTitle">인스타·유튜브 매체는 많지만 "누가 표적인지"가 빠져 있습니다</h3>
+              <ul style="margin:10px 0 0 18px;font-size:14px;line-height:1.75;color:#334155;" id="fnDiagList">
+                <li><b>일방향 홍보 나열:</b> 인스타·유튜브·배너에 행사 소식만 올려 MZ세대의 클릭 동기가 없음</li>
+                <li><b>올드한 이미지 고착:</b> "전통 축제는 어른들만 가는 지루한 행사"라는 2030의 인식 벽</li>
+                <li><b>측정·확산 부재:</b> 보고 지나치면 끝나는 구조라 SNS 알고리즘 확산이 일어나지 않음</li>
+              </ul>
+            </div>
+            <div style="background:#F1F5F9;padding:10px 12px;border-radius:8px;font-size:12.5px;color:#475569;border-left:3px solid #002FA7;" id="fnDiagNote">
+              ※ 위 퍼널 비율은 캡스톤 기획서 문제 진단을 설명하기 위한 예시 시나리오입니다. 상단 버튼을 눌러 해결 전환 시 퍼널 변화를 비교해 보세요!
+            </div>
+          </div>
+        </div>
+
+        <div class="funnel-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <b style="font-family:var(--display);font-size:16.5px;color:#0F172A;" id="fnChartTitle">4단계 2030 유입 퍼널 (기존 일방향 홍보 시 82% 이탈)</b>
+            <span style="font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:#FFF1F2;color:#E11D48;" id="fnLoopTag">바이럴 루프 없음</span>
+          </div>
+
+          <div style="display:grid;gap:14px;margin:auto 0;">
+            <div class="funnel-row">
+              <div style="font-size:13.5px;font-weight:800;">01 · 매체 노출<div style="font-size:11.5px;font-weight:500;color:#64748B;">SNS / 앱 알림 접점</div></div>
+              <div class="funnel-track"><div class="funnel-bar" id="fBar0" style="background:#002FA7;">노출 100%<span class="f-particle"></span><span class="f-particle" style="animation-delay:0.9s;"></span></div></div>
+              <div style="font-family:var(--display);font-weight:900;font-size:20px;text-align:right;" id="fVal0">100%</div>
+            </div>
+
+            <div class="funnel-row">
+              <div style="font-size:13.5px;font-weight:800;">02 · 2030 클릭<div style="font-size:11.5px;font-weight:500;color:#64748B;" id="fSub1">일방향 포스터 스킵</div></div>
+              <div class="funnel-track"><div class="funnel-bar" id="fBar1" style="background:#4D6DC1;">클릭 42%<span class="f-particle"></span></div></div>
+              <div style="font-family:var(--display);font-weight:900;font-size:20px;text-align:right;" id="fVal1">42%</div>
+            </div>
+
+            <div class="funnel-row">
+              <div style="font-size:13.5px;font-weight:800;">03 · 콘텐츠 참여<div style="font-size:11.5px;font-weight:500;color:#64748B;" id="fSub2">읽고 바로 이탈</div></div>
+              <div class="funnel-track"><div class="funnel-bar" id="fBar2" style="background:#F59E0B;">참여 24%</div></div>
+              <div style="font-family:var(--display);font-weight:900;font-size:20px;text-align:right;" id="fVal2">24%</div>
+            </div>
+
+            <div class="funnel-row">
+              <div style="font-size:13.5px;font-weight:800;">04 · 자발적 공유<div style="font-size:11.5px;font-weight:500;color:#64748B;" id="fSub3">숏폼 · 친구 초대</div></div>
+              <div class="funnel-track"><div class="funnel-bar" id="fBar3" style="background:#E11D48;">공유 18%</div></div>
+              <div style="font-family:var(--display);font-weight:900;font-size:20px;text-align:right;color:#E11D48;" id="fVal3">18%</div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E2E8F0;padding-top:10px;font-size:12.5px;color:#475569;" id="fnFootNote">
+            <span>👉 해결 방향: 일방향 홍보 대신 <b>보상과 게임(앱테크)</b>으로 2030을 능동적 참여자로 바꿉니다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: STP STRATEGY & 2D POSITIONING MAP ==================== -->
+    <section class="slide dark" id="slide_cap3" data-title="2. 타겟마켓 설정 ① · STP & 2D 포지셔닝 맵">
+      <div class="s-head rv d1">
+        <span class="pill">02 // TARGET MARKET (STP) · 세분화(S) · 타겟(T) · 포지셔닝(P)</span>
+        <button class="act-pill-btn" onclick="playPosAnim()">🚀 포지셔닝 이동 시연</button>
+      </div>
+
+      <div class="rv d2">
+        <h2 class="title">연령별 세분화(S)로 <span class="grad-toss">2030(T)</span>을 조준하고,<br>축제 인식을 <span style="color:#7DD3FC;">‘힙한 앱테크 축제’</span>로 재배치(P)합니다</h2>
+      </div>
+
+      <div class="bento rv d3" style="grid-template-columns:0.94fr 1.06fr;gap:20px;flex:1;margin-top:8px;align-items:stretch;">
+        <!-- LEFT: S & T Interactive Age Segmentation -->
+        <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:12px;font-weight:800;color:#7DD3FC;margin-bottom:8px;">S · 연령별 시장 세분화 (클릭하여 타겟 적합도 비교)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <button class="stp-btn" onclick="pickSeg('10s', this)"><b>10대 청소년</b><div style="font-size:11.5px;opacity:.75;">학교·유튜브 중심</div></button>
+              <button class="stp-btn on" id="segBtn2030" onclick="pickSeg('2030', this)"><b>★ 2030 MZ세대 (핵심 T)</b><div style="font-size:11.5px;opacity:.85;">국내 토스 + 해외 K-컬처</div></button>
+              <button class="stp-btn" onclick="pickSeg('4050', this)"><b>4050 가족층</b><div style="font-size:11.5px;opacity:.75;">주말 가족 나들이</div></button>
+              <button class="stp-btn" onclick="pickSeg('60p', this)"><b>60+ 전통 관람층</b><div style="font-size:11.5px;opacity:.75;">기존 주 방문객</div></button>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:13px 15px;display:grid;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <b id="segTitle" style="font-family:var(--display);font-size:16px;color:#7DD3FC;">2030 MZ세대 · 국내외 핵심 타겟</b>
+              <span id="segTag" style="background:#0038A8;color:#fff;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;">PRIMARY TARGET</span>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;"><span>토스 · 앱테크 이용 빈도</span><span id="segM1Txt">92%</span></div>
+              <div class="stp-bar-track"><div class="stp-bar-fill" id="segBar1" style="background:#38BDF8;width:92%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;"><span>숏폼 생산 · 자발적 공유력</span><span id="segM2Txt">95%</span></div>
+              <div class="stp-bar-track"><div class="stp-bar-fill" id="segBar2" style="background:#FF5A79;width:95%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;"><span>‘탈춤=힙하다’ 이미지 전환 효과</span><span id="segM3Txt">90%</span></div>
+              <div class="stp-bar-track"><div class="stp-bar-fill" id="segBar3" style="background:#34D399;width:90%;"></div></div>
+            </div>
+          </div>
+
+          <div id="segNote" style="font-size:13px;line-height:1.5;color:#CBD5E1;background:rgba(56,189,248,0.1);border-left:3px solid #38BDF8;padding:9px 12px;border-radius:6px;">
+            <b>타겟(T) 이중 축:</b> ① 국내 2030(토스 앱테크 고빈도 유저) + ② 한류에 관심 있는 해외 2030 관광객(인플루언서·MICE 투어)을 동시 공략!
+          </div>
+        </div>
+
+        <!-- RIGHT: P · 2D Interactive Positioning Map -->
+        <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;padding:14px 18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12.5px;font-weight:800;color:#7DD3FC;">P · 2차원 인식 포지셔닝 맵 (AS-IS → TO-BE)</span>
+            <span style="font-size:11.5px;color:#94A3B8;">탈춤 하면 ‘안동’이 바로 떠오르도록</span>
+          </div>
+
+          <svg viewBox="0 0 540 360" style="width:100%;height:335px;display:block;">
+            <defs>
+              <radialGradient id="goldZone" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(49,130,246,0.38)"/>
+                <stop offset="100%" stop-color="rgba(49,130,246,0)"/>
+              </radialGradient>
+              <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="7" refY="3.5" orient="auto">
+                <polygon points="0 0, 8 3.5, 0 7" fill="#38BDF8"/>
+              </marker>
+            </defs>
+
+            <!-- Golden Target Zone (Top Right) -->
+            <circle cx="405" cy="95" r="95" fill="url(#goldZone)"/>
+            <rect x="305" y="26" width="210" height="132" rx="14" fill="rgba(49,130,246,0.12)" stroke="rgba(56,189,248,0.45)" stroke-dasharray="5 4"/>
+            <text x="410" y="47" text-anchor="middle" fill="#7DD3FC" font-size="11.5" font-weight="800">★ 2030 GOLDEN ZONE</text>
+
+            <!-- Grid Axes -->
+            <line x1="270" y1="22" x2="270" y2="336" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+            <line x1="36" y1="180" x2="504" y2="180" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+
+            <!-- Axis Labels -->
+            <text x="270" y="15" text-anchor="middle" fill="#6EE7B7" font-size="12" font-weight="800">▲ 보상형 바이럴 · 자발적 공유</text>
+            <text x="270" y="354" text-anchor="middle" fill="#94A3B8" font-size="12" font-weight="700">▼ 일방향 관람 · 단순 정보 전달</text>
+            <text x="36" y="170" text-anchor="start" fill="#94A3B8" font-size="11.5" font-weight="700">전통 보존 중심</text>
+            <text x="504" y="170" text-anchor="end" fill="#7DD3FC" font-size="11.5" font-weight="800">디지털 게임화 · 앱테크</text>
+
+            <!-- Competitors & AS-IS -->
+            <circle cx="150" cy="242" r="22" fill="rgba(148,163,184,0.18)" stroke="#64748B" stroke-width="1.5"/>
+            <text x="150" y="246" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-weight="700">지자체 축제</text>
+
+            <circle cx="378" cy="256" r="20" fill="rgba(245,158,11,0.14)" stroke="#F59E0B" stroke-width="1.2"/>
+            <text x="378" y="260" text-anchor="middle" fill="#FBBF24" font-size="10.5" font-weight="700">단순 경품 SNS</text>
+
+            <!-- AS-IS Ghost Origin -->
+            <circle cx="130" cy="285" r="28" fill="rgba(225,29,72,0.14)" stroke="#FB7185" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="130" y="282" text-anchor="middle" fill="#FDA4AF" font-size="11" font-weight="800">기존 인식</text>
+            <text x="130" y="297" text-anchor="middle" fill="#FDA4AF" font-size="10">올드·타겟 불명</text>
+
+            <!-- Animated Trajectory Arc -->
+            <path id="posTrajPath" class="pos-traj-path" d="M 152 268 Q 225 130 374 102" fill="none" stroke="#38BDF8" stroke-width="3.5" marker-end="url(#arrowHead)"/>
+
+            <!-- Moving Target Bubble -->
+            <g id="posTargetBubble" style="transform:translate(130px, 285px);">
+              <circle cx="0" cy="0" r="38" fill="#0038A8" stroke="#FFFFFF" stroke-width="2.5"/>
+              <text x="0" y="-5" text-anchor="middle" fill="#FFFFFF" font-family="Paperlogy, sans-serif" font-size="12.5" font-weight="900">안동탈춤</text>
+              <text x="0" y="12" text-anchor="middle" fill="#7DD3FC" font-size="10.5" font-weight="800">× 토스 앱테크</text>
+            </g>
+          </svg>
+
+          <div style="font-size:12.5px;color:#94A3B8;display:flex;justify-content:space-between;">
+            <span>포지셔닝 핵심: "지루한 전통" → <b>"퀴즈 풀고 돈 벌며 노는 축제"</b></span>
+            <span style="color:#38BDF8;font-weight:700;">상단 버튼으로 이동 재생</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: CUSTOMER ANALYSIS (TOSS) & SWOT (ENGINE D) ==================== -->
+    <section class="slide eng-d" id="slide_cap4" data-title="2. 타겟마켓 설정 ② · 토스 채널 분석 & SWOT 서랍">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-family:var(--display);font-weight:800;font-size:13.5px;color:var(--kblue);">02 // CUSTOMER ANALYSIS &amp; SWOT · 왜 하필 토스(Toss)인가?</div>
+          <h2 style="font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-0.025em;margin-top:4px;">일방향 홍보 대신, <span style="color:var(--kblue);">2030이 매일 켜는 토스 앱</span>으로 들어갑니다</h2>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+          <button class="kbtn on" id="kChartBtnBar" onclick="setCap4Mode('bar', this)">막대 비교 보기</button>
+          <button class="kbtn" id="kChartBtnGrid" onclick="setCap4Mode('grid', this)">100칸 비율 격자</button>
+          <button class="kbtn" style="background:#1D2026;color:#fff;border-color:#1D2026;" onclick="toggleCap4Drawer(true)">📂 SWOT · 전략 서랍</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:0.82fr 1.18fr;gap:22px;flex:1;align-items:stretch;margin-top:14px;">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:12px;">
+          <div class="kcard hi">
+            <div style="font-size:13px;font-weight:800;color:var(--kblue);">핵심 채널 · 토스(Toss) 소셜 앱테크 적합도</div>
+            <div style="display:flex;align-items:baseline;margin-top:8px;">
+              <div class="odo kbig" id="cap4OdoScore" style="color:#002FA7;"></div>
+              <small style="font-size:20px;color:#1D2026;font-weight:700;margin-left:5px;">점 (예시 지수)</small>
+            </div>
+            <p style="font-size:14px;color:#334155;margin-top:8px;"><b>토스 '빼빼로 줍기' 화제성 벤치마킹</b> — 2030 세대가 매일 확인하는 금융 앱으로 들어가 자발적 퀴즈 참여와 공유를 유도합니다.</p>
+          </div>
+          <div class="kcard" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--knote);">CHANNELS &amp; SWOT INSIGHT (항목을 클릭해 상세 확인)</div>
+            <div id="cap4BarNote" style="background:var(--kpanel);padding:12px 14px;font-size:14px;line-height:1.52;border-left:4px solid var(--kblue);color:#1D2026;">
+              <b>토스 앱테크 · SNS 집중 (1.0억 · 50%):</b> 퀴즈 성공 '자랑하기' + 실패 '공유 재도전'에 탈춤 숏폼을 묶어 알고리즘에 강제 노출합니다.
+            </div>
+            <button class="kbtn" style="align-self:flex-start;" onclick="toggleCap4Drawer(true)">SWOT 4분면 · 교차전략 서랍 펼치기 →</button>
+          </div>
+        </div>
+
+        <div class="kcard" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <b id="cap4ChartTitle" style="font-family:var(--display);font-size:17.5px;">매체별 2030 타겟 도달·바이럴 적합도 비교 (100점 기준 가정)</b>
+            <span style="font-size:12px;color:var(--knote);" id="cap4ChartHint">막대를 클릭하면 상세 전략이 바뀝니다</span>
+          </div>
+
+          <!-- VIEW 1: Animated Klein Blue Horizontal Bars -->
+          <div id="cap4BarView" style="flex:1;display:flex;align-items:center;">
+            <svg class="k-bar-svg" id="cap4BarSvg" viewBox="0 0 640 270" style="width:100%;height:255px;">
+              <g font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="#1D2026">
+                <text x="0" y="34">토스 앱테크 × 숏폼 바이럴</text>
+                <rect class="kbar" x="210" y="14" width="355" height="28" fill="#002FA7" onclick="pickCap4Bar('toss')"/>
+                <text x="575" y="34" fill="#002FA7" font-weight="800">94점</text>
+
+                <text x="0" y="100">해외 인플루언서 × K-컬처</text>
+                <rect class="kbar" x="210" y="80" width="295" height="28" fill="#4D6DC1" onclick="pickCap4Bar('global')"/>
+                <text x="515" y="100" fill="#4D6DC1" font-weight="800">78점</text>
+
+                <text x="0" y="166">KTX · 공항 체험존 연계</text>
+                <rect class="kbar" x="210" y="146" width="210" height="28" fill="#99ACDB" onclick="pickCap4Bar('ktx')"/>
+                <text x="430" y="166" fill="#475569" font-weight="800">56점</text>
+
+                <text x="0" y="232">기존 종이 전단 · 일방향 공지</text>
+                <rect class="kbar" x="210" y="212" width="88" height="28" fill="#D0D6DE" onclick="pickCap4Bar('old')"/>
+                <text x="308" y="232" fill="#6B7C85" font-weight="800">23점</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- VIEW 2: 100-Cell Waffle Allocation Grid -->
+          <div id="cap4GridView" style="display:none;flex:1;align-items:center;justify-content:space-between;gap:24px;">
+            <div class="waffle-grid" id="cap4Waffle"></div>
+            <div style="flex:1;display:grid;gap:10px;font-size:13.5px;">
+              <div style="font-size:12px;font-weight:800;color:var(--knote);">1칸 = 총 예산 2억 원 중 1% (200만 원)</div>
+              <button class="kbtn on" style="text-align:left;display:flex;justify-content:space-between;" onclick="pickCap4Waffle('toss')">
+                <span>■ 토스 퀴즈 + 숏폼 시딩</span><span>50칸 (1억 원)</span>
+              </button>
+              <button class="kbtn" style="text-align:left;display:flex;justify-content:space-between;border-color:#4D6DC1;color:#1D2026;" onclick="pickCap4Waffle('ktx')">
+                <span style="color:#4D6DC1;">■ 체험관 · KTX · 글로벌</span><span>25칸 (5,000만)</span>
+              </button>
+              <button class="kbtn" style="text-align:left;display:flex;justify-content:space-between;border-color:#FF7A00;color:#1D2026;" onclick="pickCap4Waffle('local')">
+                <span style="color:#C2410C;">■ 안동 상권 · 숙박 제휴</span><span>15칸 (3,000만)</span>
+              </button>
+              <button class="kbtn" style="text-align:left;display:flex;justify-content:space-between;border-color:#94A3B8;color:#1D2026;" onclick="pickCap4Waffle('reserve')">
+                <span style="color:#5B6773;">■ 리워드 예치 예비비</span><span>10칸 (2,000만)</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="font-size:12px;color:var(--knote);border-top:1px solid var(--krule);padding-top:8px;">
+            ※ 본 도표는 캡스톤 제안서 설명을 위한 예시 시나리오 배분입니다. 우측 [SWOT · 전략 서랍]에서 내·외부 환경 분석을 확인하세요.
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide-out SWOT Evidence Drawer -->
+      <aside class="eng-d-drawer" id="cap4Drawer">
+        <div style="overflow-y:auto;">
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--kblue);padding-bottom:10px;">
+            <span style="font-family:var(--display);font-weight:900;font-size:19px;color:var(--kblue);">📂 SWOT 분석 &amp; 교차전략 서랍</span>
+            <button onclick="toggleCap4Drawer(false)" style="border:0;background:#EAEEF8;color:#002FA7;font-weight:800;font-size:18px;width:32px;height:32px;cursor:pointer;">✕</button>
+          </div>
+          <div style="margin-top:14px;display:grid;gap:10px;font-size:13.5px;line-height:1.55;">
+            <div style="background:#EAEEF8;padding:11px 13px;border-left:4px solid #002FA7;">
+              <b>S (Strengths · 강점)</b><br>• 유네스코 인류무형문화유산 등재 브랜드 파워<br>• 한국 전통문화의 대표적 상징성
+            </div>
+            <div style="background:#FFF1F2;padding:11px 13px;border-left:4px solid #E11D48;">
+              <b>W (Weaknesses · 약점)</b><br>• 해외 시장 인지도 부족<br>• 젊은 세대(2030)에게 다소 지루하게 느껴질 가능성
+            </div>
+            <div style="background:#ECFDF5;padding:11px 13px;border-left:4px solid #10B981;">
+              <b>O (Opportunities · 기회)</b><br>• K-컬처 한류 열풍으로 전통문화 관심 증가<br>• 토스 '빼빼로 줍기'류 디지털 소셜 앱테크 유행
+            </div>
+            <div style="background:#FFF7ED;padding:11px 13px;border-left:4px solid #FF7A00;">
+              <b>T (Threats · 위협)</b><br>• 타 지자체 경쟁 축제·관광지 증가 및 외부 관광 리스크
+            </div>
+            <div style="background:#F8FAFC;padding:11px 13px;border:1px solid #D0D6DE;">
+              <b>💡 W-O 돌파 전략</b><br>올드하다는 약점(W)을 토스 앱테크 게이미피케이션(O)과 결합해 '2030이 먼저 찾아 푸는 퀴즈 축제'로 전환!
+            </div>
+          </div>
+        </div>
+        <button class="kbtn on" style="width:100%;padding:11px;margin-top:10px;" onclick="toggleCap4Drawer(false)">서랍 닫고 슬라이드 보기</button>
+      </aside>
+    </section>
+
+    <!-- ==================== SLIDE 5: LIVE TOSS APP QUIZ MOCKUP (26,000원 맥락 등장!) ==================== -->
+    <section class="slide light" id="slide_cap5" data-title="3. 마케팅 전략 ① · 토스 하회탈 26,000원 퀴즈 시제품">
+      <div class="s-head rv d1">
+        <span class="pill">03 // STRATEGY &amp; EXECUTION ① · 토스 앱테크 5단계 퀴즈 시제품</span>
+        <span class="demo-tag">발표 중 슬라이드 안에서 직접 클릭 시연</span>
+      </div>
+
+      <div class="bento" style="grid-template-columns:1.12fr 0.88fr;gap:24px;flex:1;align-items:center;margin-top:4px;">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div>
+            <h2 class="title" style="font-size:33px;">제26회 기념 <span style="color:#002FA7;">26,000원</span> 도전으로<br>성공해도·실패해도 탈춤을 보게 만듭니다</h2>
+            <p class="sub" style="margin-top:4px;color:#475569;font-size:14.5px;">오른쪽 토스 앱에서 보기를 눌러 보세요! 진행에 맞춰 왼쪽 4단계 실행 루프와 상금이 실시간 연동됩니다.</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+            <div class="flow-step cur" id="flowStep0">
+              <div style="font-size:11.5px;font-weight:800;color:#002FA7;">STEP 1 · 토스 알림 유입</div>
+              <div style="font-size:13px;font-weight:700;margin-top:2px;">"하회탈 같이 맞출 사람?"</div>
+              <div style="font-size:11.5px;color:#64748B;">제26회 기념 26,000원 도전 훅</div>
+            </div>
+            <div class="flow-step" id="flowStep1">
+              <div style="font-size:11.5px;font-weight:800;color:#4D6DC1;">STEP 2 · 1~5단계 게임</div>
+              <div style="font-size:13px;font-weight:700;margin-top:2px;">하회탈 이름·유래 맞추기</div>
+              <div style="font-size:11.5px;color:#64748B;">단계 통과 시 포인트 즉시 적립</div>
+            </div>
+            <div class="flow-step" id="flowStep2">
+              <div style="font-size:11.5px;font-weight:800;color:#059669;">STEP 3 · 성공 시 자랑하기</div>
+              <div style="font-size:13px;font-weight:700;margin-top:2px;">5~10초 탈춤 숏폼 포함 필수</div>
+              <div style="font-size:11.5px;color:#64748B;">인스타·SNS 알고리즘 자동 확산</div>
+            </div>
+            <div class="flow-step" id="flowStep3">
+              <div style="font-size:11.5px;font-weight:800;color:#E11D48;">STEP 4 · 실패 시 재도전</div>
+              <div style="font-size:13px;font-weight:700;margin-top:2px;">친구 공유 → +1회 기회 획득</div>
+              <div style="font-size:11.5px;color:#64748B;">다시 하기 직전 5초 탈춤 광고</div>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF;border:1.5px solid #002FA7;border-radius:12px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:#002FA7;">현재 시연 누적 리워드 (제26회 기념 최대 26,000원)</div>
+              <div style="display:flex;align-items:baseline;gap:4px;margin-top:2px;">
+                <div class="odo" id="quizOdo" style="font-size:46px;color:#002FA7;"></div>
+                <span style="font-family:var(--display);font-weight:800;font-size:18px;color:#0F172A;">원</span>
+              </div>
+            </div>
+            <button class="copy-btn" style="padding:8px 14px;font-size:13px;" onclick="resetQuiz()">↺ 1단계부터 다시</button>
+          </div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="toss-badge" id="qStepBadge">STEP 1 / 3 · 현재 0원</span>
+                <span id="tryLeft" style="font-size:11.5px;font-weight:700;color:#6B7684;">도전 기회 1회</span>
+              </div>
+              <div style="margin-top:10px;background:#EFF6FF;border-radius:10px;padding:7px 10px;font-size:11.5px;font-weight:700;color:#1D4ED8;">
+                🔔 토스 알림: 안동탈춤 26회 기념 · 26,000원 도전!
+              </div>
+              <h3 id="qTitle" style="font-family:var(--display);font-weight:800;font-size:17.5px;margin:10px 0 5px;color:#191F28;">1단계: 웃는 표정으로 유명한 하회탈은?</h3>
+              <p id="qSub" style="font-size:12px;color:#4E5968;margin-bottom:10px;">정답을 누르면 상금 적립과 함께 다음 단계로 넘어갑니다!</p>
+              <div id="quizOpts"></div>
+            </div>
+            <div id="quizResult" style="background:#F2F4F6;border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.45;color:#333D4B;">
+              👆 위 보기를 클릭해 실제 앱 흐름을 시연해 보세요!
+            </div>
+
+            <!-- Viral Popup Overlay Inside Phone -->
+            <div class="viral-modal" id="viralModal">
+              <div>
+                <span id="vmBadge" style="display:inline-block;padding:4px 10px;border-radius:999px;font-size:11.5px;font-weight:800;background:#3182F6;color:#fff;">VIRAL LOOP</span>
+                <h3 id="vmTitle" style="font-family:var(--display);font-size:20px;margin-top:10px;color:#fff;">탈춤 숏폼 자랑하기</h3>
+                <p id="vmDesc" style="font-size:13px;color:#CBD5E1;margin-top:6px;line-height:1.5;">5~10초 안동탈춤 하이라이트 영상이 자동 첨부되어 친구 피드에 노출됩니다.</p>
+                <div style="margin-top:12px;background:rgba(255,255,255,0.08);border:1px dashed rgba(125,211,252,0.5);border-radius:12px;padding:14px;text-align:center;">
+                  <div style="font-size:26px;">🎭 🎬 ✨</div>
+                  <div id="vmClipTxt" style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-top:4px;">[8초 숏폼] 양반탈 군무 하이라이트 재생 중...</div>
+                </div>
+              </div>
+              <button onclick="closeViralModal()" style="width:100%;padding:11px;border-radius:12px;border:0;background:#3182F6;color:#fff;font-family:var(--display);font-weight:800;font-size:14px;cursor:pointer;" id="vmCloseBtn">확인하고 계속하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: 4Ps MARKETING MIX & TIMELINE FLYWHEEL ==================== -->
+    <section class="slide dark" id="slide_cap6" data-title="3. 마케팅 전략 ② · 4Ps 믹스 & 타임라인 플라이휠">
+      <div class="s-head rv d1">
+        <span class="pill">03 // MARKETING MIX (4Ps) &amp; TIMELINE · 실행 전략과 확산 루프</span>
+        <button class="act-pill-btn" onclick="playFlywheel()">▶ 바이럴 플라이휠 시연</button>
+      </div>
+
+      <div class="rv d2">
+        <h2 class="title">4Ps 마케팅 믹스로 <span class="grad-toss">온라인 숏폼 폭발</span>을<br>안동 현장 방문·지역경제 활성화로 연결합니다</h2>
+      </div>
+
+      <!-- 4Ps Interactive Grid -->
+      <div class="bento cols-4 rv d3" style="margin-top:6px;">
+        <div class="p4-card on" id="p4c0" onclick="pick4P(0)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--display);font-weight:900;font-size:22px;color:#60A5FA;">P1</span>
+            <span style="font-size:11.5px;font-weight:800;color:#93C5FD;">PRODUCT</span>
+          </div>
+          <h3 style="margin-top:6px;font-size:16.5px;">체험형 콘텐츠 상품화</h3>
+          <p style="font-size:13px;color:#CBD5E1;">토스 5단계 하회탈 퀴즈 + 축제장 탈춤 체험존 · MICE 인센티브 투어</p>
+        </div>
+        <div class="p4-card" id="p4c1" onclick="pick4P(1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--display);font-weight:900;font-size:22px;color:#FF7D97;">P2</span>
+            <span style="font-size:11.5px;font-weight:800;color:#FDA4AF;">PRICE</span>
+          </div>
+          <h3 style="margin-top:6px;font-size:16.5px;">무료 참여 + 리워드 가치</h3>
+          <p style="font-size:13px;color:#CBD5E1;">앱 퀴즈 참여 0원 · 제26회 26,000원 도전 + 안동 지역상권 할인 바우처</p>
+        </div>
+        <div class="p4-card" id="p4c2" onclick="pick4P(2)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--display);font-weight:900;font-size:22px;color:#FBBF24;">P3</span>
+            <span style="font-size:11.5px;font-weight:800;color:#FDE68A;">PLACE</span>
+          </div>
+          <h3 style="margin-top:6px;font-size:16.5px;">온·오프라인 접점 연결</h3>
+          <p style="font-size:13px;color:#CBD5E1;">온라인(토스·인스타·틱톡·유튜브) ↔ 오프라인(KTX 안동역·하회마을)</p>
+        </div>
+        <div class="p4-card" id="p4c3" onclick="pick4P(3)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--display);font-weight:900;font-size:22px;color:#34D399;">P4</span>
+            <span style="font-size:11.5px;font-weight:800;color:#6EE7B7;">PROMOTION</span>
+          </div>
+          <h3 style="margin-top:6px;font-size:16.5px;">강제 바이럴 &amp; 매체 맞춤</h3>
+          <p style="font-size:13px;color:#CBD5E1;">자랑하기 &amp; 공유 재도전 숏폼 노출 + 채널 성격별 인플루언서 협업</p>
+        </div>
+      </div>
+
+      <!-- Lower Section: Animated Timeline & Algorithm Flywheel -->
+      <div class="card rv d4" style="padding:16px 20px;margin-top:8px;position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <b style="font-family:var(--display);font-size:15.5px;color:#7DD3FC;">⏱️ 추진 타임라인 &amp; AI 알고리즘 전 플랫폼 확산 흐름</b>
+          <span id="p4DetailTxt" style="font-size:13px;color:#E2E8F0;font-weight:700;">💡 4P 카드를 클릭하거나 [바이럴 플라이휠 시연]으로 확산 단계를 확인하세요!</span>
+        </div>
+
+        <div style="position:relative;">
+          <svg viewBox="0 0 1100 32" style="position:absolute;top:50%;left:4%;width:92%;height:26px;transform:translateY(-50%);pointer-events:none;z-index:1;">
+            <line x1="0" y1="13" x2="1100" y2="13" stroke="rgba(56,189,248,0.45)" stroke-width="3" class="flow-line"/>
+          </svg>
+          <div class="bento cols-3" style="gap:18px;">
+            <div class="tl-node lit" id="tlNode0">
+              <div style="font-size:11.5px;font-weight:800;color:#38BDF8;">PHASE 1 · 사전 티징 (D-30)</div>
+              <h3 style="font-size:16px;margin-top:4px;">토스 알림 × 인플루언서 시딩</h3>
+              <p style="font-size:12.8px;color:#CBD5E1;">"하회탈 같이 맞출 사람?" 푸시 알림 발송 &amp; 매체별 2030 크리에이터 숏폼 점화</p>
+            </div>
+            <div class="tl-node" id="tlNode1">
+              <div style="font-size:11.5px;font-weight:800;color:#FF7D97;">PHASE 2 · 본 축제 실행 (D-Day)</div>
+              <h3 style="font-size:16px;margin-top:4px;">퀴즈 피크 &amp; KTX·현장 쿠폰 연동</h3>
+              <p style="font-size:12.8px;color:#CBD5E1;">성공 자랑·실패 공유 루프 가동 + 적립 리워드/바우처를 안동 음식점·숙박으로 유입</p>
+            </div>
+            <div class="tl-node" id="tlNode2">
+              <div style="font-size:11.5px;font-weight:800;color:#34D399;">PHASE 3 · 알고리즘 확산 (Post)</div>
+              <h3 style="font-size:16px;margin-top:4px;">전 플랫폼 도배 → 지역경제 활성화</h3>
+              <p style="font-size:12.8px;color:#CBD5E1;">추천 알고리즘이 인스타·틱톡·유튜브에 탈춤 노출 → "탈춤=안동" 2030 각인</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: 3-LEVER BUDGET & KPI SIMULATOR (ENGINE D) ==================== -->
+    <section class="slide eng-d" id="slide_cap7" data-title="4. 결론 및 기대효과 · 3레버 예산 시뮬레이터">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-family:var(--display);font-weight:800;font-size:13.5px;color:var(--kblue);">04 // CONCLUSION &amp; 3-LEVER SIMULATOR · 레버를 움직이면 성과가 바뀝니다</div>
+          <h2 style="font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-0.025em;margin-top:4px;">총 예산·토스 비중·전환율에 따른 <span style="color:var(--kblue);">모객 성과 시뮬레이션</span></h2>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="kbtn" onclick="resetSim()">↺ 기준값(2억·50%·15%) 복원</button>
+          <span style="background:#EAEEF8;color:#002FA7;border:1.5px solid #002FA7;padding:6px 12px;font-size:12px;font-weight:800;">예시 데이터 · 비례 계산</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;flex:1;margin-top:14px;align-items:stretch;">
+        <div class="kcard" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="font-family:var(--display);font-weight:800;font-size:16px;border-bottom:1px solid var(--krule);padding-bottom:8px;">🎛️ 3개 전략 레버 조절하기</div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14.5px;margin-bottom:6px;"><span>1. 총 마케팅 예산 (억 원)</span><b id="lv1Val" style="color:var(--kblue);font-size:18px;">2.0억 원</b></div>
+            <input type="range" class="lever-range" id="lv1" min="10" max="40" step="5" value="20" oninput="updateSim()">
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14.5px;margin-bottom:6px;"><span>2. 토스 앱테크 · 숏폼 집중 비중 (%)</span><b id="lv2Val" style="color:var(--kblue);font-size:18px;">50%</b></div>
+            <input type="range" class="lever-range" id="lv2" min="20" max="80" step="5" value="50" oninput="updateSim()">
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14.5px;margin-bottom:6px;"><span>3. 퀴즈 참여자 → 안동 현장·상권 전환 가정 (%)</span><b id="lv3Val" style="color:#FF7A00;font-size:18px;">15%</b></div>
+            <input type="range" class="lever-range" id="lv3" min="5" max="30" step="1" value="15" oninput="updateSim()">
+          </div>
+          <div id="simExplain" style="background:var(--kpanel);padding:12px 14px;font-size:13.5px;line-height:1.5;border-left:4px solid var(--kblue);">
+            산식 요약: 디지털 배정(1.0억) ÷ 1인 유입 1,000원 가정 = 100천 명 참여 · 전환율 적용.
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="kcard hi">
+              <div style="font-size:13px;font-weight:800;color:var(--kblue);">가정 퀴즈 참여 유저 (천 명)</div>
+              <div style="display:flex;align-items:baseline;margin-top:8px;">
+                <div class="odo kbig" id="simOdoUsers"></div>
+                <span style="font-size:20px;font-weight:800;margin-left:4px;">천명</span>
+              </div>
+              <div style="font-size:12px;color:var(--knote);margin-top:6px;">1인 평균 유입단가 1,000원 가정</div>
+            </div>
+            <div class="kcard hi" style="border-color:#FF7A00;background:#FFF7ED;">
+              <div style="font-size:13px;font-weight:800;color:#C2410C;">안동 현장 전환 모객 (천 명)</div>
+              <div style="display:flex;align-items:baseline;margin-top:8px;">
+                <div class="odo kbig" id="simOdoVisit" style="color:#FF7A00;"></div>
+                <span style="font-size:20px;font-weight:800;margin-left:4px;color:#1D2026;">천명</span>
+              </div>
+              <div style="font-size:12px;color:#9A3412;margin-top:6px;">KTX·지역상권 바우처 전환 가정</div>
+            </div>
+          </div>
+
+          <div class="kcard" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-weight:800;font-size:14.5px;display:flex;justify-content:space-between;">
+              <span>기준 계획(2억·50%) 대비 배분 구조 변화</span>
+              <span id="simDeltaBadge" style="color:var(--kblue);font-size:12.5px;">기준안과 동일</span>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:5px;"><span>토스 · 숏폼 디지털 배정액</span><span id="simBar1Txt">1.00억 원 (50%)</span></div>
+              <div style="height:18px;background:#EEF0F2;overflow:hidden;"><div id="simBar1" class="eng-d-bar-fill" style="width:0%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:5px;"><span>오프라인 체험 · 지역 상권 제휴액</span><span id="simBar2Txt">1.00억 원 (50%)</span></div>
+              <div style="height:18px;background:#EEF0F2;overflow:hidden;"><div id="simBar2" class="eng-d-bar-fill" style="width:0%;background:#FF7A00;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 8: GAMMA VS HTML PPT COMPARISON & MASTER PROMPT ==================== -->
+    <section class="slide dark" id="slide_cap8" data-title="부록 · 감마(Gamma) vs HTML PPT 비교 & 마스터 프롬프트">
+      <div class="s-head rv d1">
+        <span class="pill">APPENDIX // GOODBYE GAMMA · 왜 감마 대신 HTML PPT인가?</span>
+        <span class="demo-tag">지금 보신 7장을 내 과제에 그대로 적용하기</span>
+      </div>
+      <div class="rv d2">
+        <h2 class="title" style="font-size:33px;">같은 캡스톤 기획안을 넣었을 때 <span class="grad-toss">교수님·청중 반응이 갈리는 이유</span></h2>
+      </div>
+
+      <div class="bento cols-2 rv d3" style="margin-top:4px;">
+        <div class="card" style="background:rgba(127,29,29,0.22);border:1.5px solid rgba(248,113,113,0.4);padding:14px 18px;">
+          <span style="background:#EF4444;color:#fff;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:6px;">❌ 감마(Gamma) 양산형 AI PPT</span>
+          <h3 style="margin-top:8px;font-size:17px;color:#FCA5A5;">"이거 AI로 10초 만에 돌렸네" 바로 티 남</h3>
+          <p style="font-size:13.5px;color:#FECACA;margin-top:4px;">• 누가 봐도 똑같은 3단 아이콘 카드 나열 + 억지 영어 소제목<br>• 발표 중 퍼널 전환, 2D 맵 이동, 앱 목업 클릭, 예산 시뮬 <b>전부 불가능</b></p>
+        </div>
+
+        <div class="card" style="background:linear-gradient(155deg,rgba(0,56,168,0.34),rgba(17,24,39,0.95));border:2px solid #38BDF8;padding:14px 18px;">
+          <span style="background:#0038A8;color:#fff;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:6px;">⭕ 페이퍼로지 스타일 HTML PPT (방금 보신 발표)</span>
+          <h3 style="margin-top:8px;font-size:17px;color:#7DD3FC;">장표마다 살아 움직이며 설득하는 프레젠테이션</h3>
+          <p style="font-size:13.5px;color:#E2E8F0;margin-top:4px;">• <b>1쪽</b> 3D 패럴랙스 표지 → <b>2쪽</b> 2030 이탈 퍼널 → <b>3쪽</b> STP·포지셔닝 맵<br>• <b>4~7쪽</b> 클라인 블루 차트·토스 앱 목업·4Ps 플라이휠·3레버 시뮬레이터</p>
+        </div>
+      </div>
+
+      <div class="rv d4" style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+        <div class="prompt-box" id="demoPromptBox">[감마(Gamma) 금지] 아래 첨부한 [내 캡스톤·조별과제 기획안]으로 페이퍼로지 스타일 '단일 인터랙티브 HTML PPT'를 만들어 줘.
+
+1. 폰트 &amp; 캔버스: Paperlogy(800/900) + Pretendard, word-break: keep-all, 1280×720 자동 스케일링(←/→/Space/F/G 지원).
+2. 정통 발표 표지: 전공·발표자·제목·목차 카드가 정갈하게 담긴 3D 패럴랙스 표지(뜬금없는 숫자 나열 금지).
+3. 진단 &amp; 전략 모션: 문제 진단에는 4단계 이탈 퍼널 애니메이션, STP 장표에는 클릭 반응 세그먼트 + 2D 포지셔닝 맵 이동 모션 탑재.
+4. 본론 &amp; 시뮬레이터: #002FA7 클라인 블루 차트(막대 ↔ 100칸 격자) + SWOT 근거 서랍, 직접 눌러보는 앱 시제품 목업, 4Ps 플라이휠, 3레버 예산 시뮬레이터(예시 데이터 명시).</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;">
+          <span style="font-size:13.5px;color:#CBD5E1;">💡 <b>Gemini Canvas(대학생 1년 무료)</b>나 Claude에 기획안 + 위 프롬프트를 넣고, 완성된 <code>.html</code>을 크롬 <code>F11</code>으로 발표하세요!</span>
+          <button class="copy-btn" onclick="copyMaster()">📋 마스터 프롬프트 복사</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="dock">
+      <button onclick="go(cur-1)" title="이전 (←)">◀</button>
+      <span class="counter" id="counter">1 / 8</span>
+      <button onclick="go(cur+1)" title="다음 (→ / Space)">▶</button>
+      <button onclick="toggleGrid()" title="전체 보기 (G)">전체보기</button>
+      <button onclick="PgyAudio.toggle(this)" class="js-sound-btn" title="소리 (S)">🔈 소리 끔 (S)</button>
+      <button onclick="toggleFS()" title="전체화면 (F)">⛶</button>
+    </div>
+
+    <div class="grid-overlay" id="gridOverlay">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="font-family:var(--display);font-size:24px;">안동국제탈춤페스티벌 × 토스 앱테크 캡스톤 전체보기 (8장)</h2>
+        <button class="copy-btn" style="padding:8px 16px;" onclick="toggleGrid()">닫기 (Esc)</button>
+      </div>
+      <div class="grid-cards" id="gridCards"></div>
+    </div>
+
+    <div class="toast" id="toast">✅ 마스터 프롬프트가 복사되었습니다!</div>
+  </div>
+</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let cur = 0;
+
+function fitStage() {
+  const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+  document.getElementById('stage').style.transform = `scale(${s})`;
+}
+window.addEventListener('resize', fitStage);
+fitStage();
+
+
+/* ================= PAPERLOGY SHARED ENGINES JS ================= */
+const PgyAudio = (() => {
+  let ctx = null;
+  window.pgySoundOn = false;
+  function ensure() {
+    if (!window.pgySoundOn) return null;
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) ctx = new AC();
+    }
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(()=>{});
+    return ctx;
+  }
+  function tone(freq, dur, type='sine', gainVal=0.06, delay=0) {
+    const c = ensure(); if (!c) return;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, c.currentTime + delay);
+    g.gain.setValueAtTime(0.0001, c.currentTime + delay);
+    g.gain.exponentialRampToValueAtTime(gainVal, c.currentTime + delay + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + delay + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(c.currentTime + delay); o.stop(c.currentTime + delay + dur + 0.02);
+  }
+  return {
+    toggle(btn) {
+      window.pgySoundOn = !window.pgySoundOn;
+      document.querySelectorAll('.js-sound-btn').forEach(b => {
+        b.textContent = window.pgySoundOn ? '🔊 소리 켬 (S)' : '🔈 소리 끔 (S)';
+        b.classList.toggle('on', window.pgySoundOn);
+      });
+      if (window.pgySoundOn) this.chord();
+    },
+    tick() { tone(520, 0.055, 'triangle', 0.05); },
+    shatter() { [640, 510, 390].forEach((f, i) => tone(f, 0.055, 'square', 0.03, i * 0.028)); },
+    reject() { tone(135, 0.24, 'sawtooth', 0.08); tone(102, 0.26, 'sawtooth', 0.07, 0.08); },
+    chime() { [523.25, 659.25, 783.99].forEach((f, i) => tone(f, 0.18, 'sine', 0.06, i * 0.06)); },
+    chord() { [220, 277.18, 329.63, 440].forEach((f, i) => tone(f, 0.45, 'sine', 0.035, i * 0.03)); }
+  };
+})();
+
+/* Build or update vertical rolling odometer inside el */
+function setOdometer(el, val, digitsCount, fromZero) {
+  if (!el) return;
+  const raw = String(Math.max(0, Math.round(val)));
+  const s = digitsCount ? raw.padStart(digitsCount, '0') : raw;
+  const tok = (el._odoTok = (el._odoTok || 0) + 1);
+  const rebuild = el.children.length !== s.length;
+  if (rebuild) {
+    el.innerHTML = [...s].map(() =>
+      '<span class="odo-col"><span class="odo-strip" style="transition:none;transform:translateY(0%);">' +
+      '<span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>' +
+      '<span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>' +
+      '</span></span>'
+    ).join('');
+  } else if (fromZero) {
+    [...el.children].forEach(col => {
+      const strip = col.firstElementChild;
+      if (strip) {
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateY(0%)';
+      }
+    });
+  }
+
+  if (rebuild || fromZero) {
+    void el.offsetHeight;
+    requestAnimationFrame(() => {
+      if (el._odoTok !== tok) return;
+      [...el.children].forEach((col, i) => {
+        const d = parseInt(s[i], 10) || 0;
+        const strip = col.firstElementChild;
+        if (strip) {
+          strip.style.transition = `transform 0.72s cubic-bezier(0.16, 1, 0.3, 1) ${i * 65}ms`;
+          strip.style.transform = `translateY(${-d * 10}%)`;
+        }
+      });
+    });
+  } else {
+    [...el.children].forEach((col, i) => {
+      const d = parseInt(s[i], 10) || 0;
+      const strip = col.firstElementChild;
+      if (strip) {
+        strip.style.transition = 'transform .58s cubic-bezier(.22,.68,.18,1)';
+        strip.style.transform = `translateY(${-d * 10}%)`;
+      }
+    });
+  }
+}
+
+/* Engine A Metaball Controller */
+function initEngineA(cfg) {
+  const slide = document.getElementById(cfg.slideId);
+  if (!slide) return;
+  const clipPath = document.getElementById('blobPath_' + cfg.uid);
+  const strokePath = document.getElementById('blobStroke_' + cfg.uid);
+  const strokeRing = document.getElementById('blobRing_' + cfg.uid);
+  const retDot = document.getElementById('blobRet_' + cfg.uid);
+  const retInner = document.getElementById('blobDot_' + cfg.uid);
+  const baseHero = document.getElementById('heroBase_' + cfg.uid);
+  const refHero = document.getElementById('heroRef_' + cfg.uid);
+  const subEl = document.getElementById('heroSub_' + cfg.uid);
+
+  let targetX = 820, targetY = 305, curX = 820, curY = 305, mouseActive = false, lastMove = 0;
+
+  slide.addEventListener('mousemove', e => {
+    const r = slide.getBoundingClientRect();
+    targetX = ((e.clientX - r.left) / r.width) * 1280;
+    targetY = ((e.clientY - r.top) / r.height) * 720;
+    mouseActive = true;
+    lastMove = performance.now();
+  });
+  slide.addEventListener('mouseleave', () => { mouseActive = false; });
+
+  window['setPreset_' + cfg.uid] = (idx, btn) => {
+    const p = cfg.presets[idx];
+    if (!p) return;
+    if (btn) {
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+    }
+    baseHero.textContent = p.hero;
+    refHero.textContent = p.hero;
+    baseHero.style.fontSize = p.size + 'px';
+    refHero.style.fontSize = p.size + 'px';
+    if (subEl && p.sub) subEl.innerHTML = p.sub;
+    PgyAudio.tick();
+  };
+
+  function makeBlobPath(cx, cy, t, baseR) {
+    const N = 16;
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const a = (Math.PI * 2 * i) / N;
+      const w = 1
+        + 0.16 * Math.sin(3 * a + t * 1.9)
+        + 0.11 * Math.cos(4 * a - t * 1.4)
+        + 0.07 * Math.sin(5 * a + t * 2.3);
+      const rad = baseR * w;
+      pts.push([cx + Math.cos(a) * rad * 1.18, cy + Math.sin(a) * rad * 0.94]);
+    }
+    let d = '';
+    for (let i = 0; i < N; i++) {
+      const p0 = pts[(i - 1 + N) % N], p1 = pts[i], p2 = pts[(i + 1) % N], p3 = pts[(i + 2) % N];
+      if (i === 0) d += `M ${p1[0].toFixed(1)} ${p1[1].toFixed(1)} `;
+      const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+      const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+      const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+      const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+      d += `C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)} `;
+    }
+    return d + 'Z';
+  }
+
+  function frame(now) {
+    if (slide.classList.contains('active')) {
+      const t = now * 0.001;
+      if (!mouseActive || (now - lastMove > 4200)) {
+        targetX = 760 + Math.cos(t * 0.72) * 230 + Math.sin(t * 1.3) * 45;
+        targetY = 305 + Math.sin(t * 0.95) * 68;
+      }
+      curX += (targetX - curX) * 0.12;
+      curY += (targetY - curY) * 0.12;
+      const dOuter = makeBlobPath(curX, curY, t, 148);
+      const dInner = makeBlobPath(curX + Math.sin(t*2)*5, curY + Math.cos(t*1.7)*4, t + 1.2, 138);
+      if (clipPath) clipPath.setAttribute('d', dOuter);
+      if (strokePath) strokePath.setAttribute('d', dOuter);
+      if (strokeRing) strokeRing.setAttribute('d', dInner);
+      if (retDot) {
+        retDot.setAttribute('cx', curX.toFixed(1));
+        retDot.setAttribute('cy', curY.toFixed(1));
+      }
+      if (retInner) {
+        retInner.setAttribute('cx', curX.toFixed(1));
+        retInner.setAttribute('cy', curY.toFixed(1));
+      }
+      const rx = ((curX - 640) * 0.025).toFixed(1);
+      const ry = ((curY - 360) * 0.025).toFixed(1);
+      if (refHero) refHero.style.transform = `translate(${rx}px, ${ry}px) scale(1.042)`;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* Engine B 3-Mode Odometer + 365 Dot Matrix + Circular Radar Controller */
+function initEngineB(cfg) {
+  const st = { ...cfg.defaults }; // a, b, c, d, pct, mode
+  const slide = document.getElementById('slide_' + cfg.uid);
+  const canvas = document.getElementById('engB_canvas_' + cfg.uid);
+  const mxBox = document.getElementById('engB_mx_' + cfg.uid);
+  const radarSvg = document.getElementById('engB_radar_' + cfg.uid);
+  const barcodeBox = document.getElementById('engB_barcode_' + cfg.uid);
+  const sliderEl = document.getElementById('engB_slider_' + cfg.uid);
+  const demoBtn = document.getElementById('engB_demoBtn_' + cfg.uid);
+  if (!canvas || !mxBox) return;
+
+  // Populate exact 365 matrix cells and 120 barcode ticks once
+  mxBox.innerHTML = Array.from({length: 365}, (_, i) => `<span class="mx-cell" data-i="${i}"></span>`).join('');
+  const mxCells = [...mxBox.children];
+  const rdDots = radarSvg ? [...radarSvg.querySelectorAll('.rd-dot')] : [];
+  if (barcodeBox) {
+    barcodeBox.innerHTML = Array.from({length: 120}, (_, i) => `<span class="eq-tick" data-i="${i}"></span>`).join('');
+  }
+  const eqTicks = barcodeBox ? [...barcodeBox.children] : [];
+
+  let demoTimers = [];
+  function stopDemo() {
+    demoTimers.forEach(t => clearTimeout(t));
+    demoTimers = [];
+    if (demoBtn) {
+      demoBtn.classList.remove('on');
+      demoBtn.textContent = '▶ 자동 시연';
+    }
+  }
+
+  function calc() {
+    const hours = st.a * st.b * st.c * st.d / 60;
+    const days = Math.min(365, Math.max(1, Math.round(hours / 8)));
+    const saved = Math.round(days * st.pct / 100);
+    return { hours: Math.round(hours), days, saved };
+  }
+
+  function animateNum(el, target, formatFn, dur = 550) {
+    if (!el) return;
+    if (el._numRaf) cancelAnimationFrame(el._numRaf);
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.innerHTML = formatFn(Math.round(target * eased));
+      if (p < 1) el._numRaf = requestAnimationFrame(step);
+      else {
+        el.innerHTML = formatFn(target);
+        el._numRaf = null;
+      }
+    }
+    el._numRaf = requestAnimationFrame(step);
+  }
+
+  function updateUI(animate = false) {
+    const { hours, days, saved } = calc();
+    const titleEl = document.getElementById('engB_title_' + cfg.uid);
+    if (titleEl) {
+      if (st.mode === 0) titleEl.innerHTML = cfg.titleM0(days, hours);
+      else if (st.mode === 1) titleEl.innerHTML = cfg.titleM1(days, hours);
+      else titleEl.innerHTML = cfg.titleM2(days, saved, st.pct);
+    }
+
+    // Odometers (no forced leading zero; roll from 0 when animate is true on visible pane)
+    setOdometer(document.getElementById('engB_odo0_' + cfg.uid), days, 0, animate && st.mode === 0);
+    setOdometer(document.getElementById('engB_odo1_' + cfg.uid), days, 0, animate && st.mode === 1);
+    setOdometer(document.getElementById('engB_odo2_' + cfg.uid), saved, 0, animate && st.mode === 2);
+    setOdometer(document.getElementById('engB_a_' + cfg.uid), st.a, 0, animate && st.mode === 1);
+    setOdometer(document.getElementById('engB_b_' + cfg.uid), st.b, 0, animate && st.mode === 1);
+    setOdometer(document.getElementById('engB_c_' + cfg.uid), st.c, 0, animate && st.mode === 1);
+    setOdometer(document.getElementById('engB_d_' + cfg.uid), st.d, 0, animate && st.mode === 1);
+
+    // Numeric text values
+    ['a', 'b', 'c', 'd'].forEach(k => {
+      const el = document.getElementById(`engB_v_${k}_${cfg.uid}`);
+      if (!el) return;
+      if (animate && st.mode === 0 && k !== 'b') {
+        animateNum(el, st[k], n => `${n}<small>${cfg.units[k]}</small>`, 540);
+      } else {
+        if (el._numRaf) { cancelAnimationFrame(el._numRaf); el._numRaf = null; }
+        el.innerHTML = `${st[k]}<small>${cfg.units[k]}</small>`;
+      }
+    });
+
+    const hrEl = document.getElementById('engB_hours_' + cfg.uid);
+    if (hrEl) {
+      if (animate && st.mode === 1) animateNum(hrEl, hours, n => n.toLocaleString(), 600);
+      else {
+        if (hrEl._numRaf) { cancelAnimationFrame(hrEl._numRaf); hrEl._numRaf = null; }
+        hrEl.textContent = hours.toLocaleString();
+      }
+    }
+
+    const m2BaseEl = document.getElementById('engB_m2base_' + cfg.uid);
+    if (m2BaseEl) m2BaseEl.textContent = `${days}일 가운데 돌아오는 시간`;
+
+    const pctEl = document.getElementById('engB_pctval_' + cfg.uid);
+    if (pctEl) {
+      if (animate && st.mode === 2) animateNum(pctEl, st.pct, n => `${n}%`, 500);
+      else {
+        if (pctEl._numRaf) { cancelAnimationFrame(pctEl._numRaf); pctEl._numRaf = null; }
+        pctEl.textContent = `${st.pct}%`;
+      }
+    }
+    if (sliderEl && Number(sliderEl.value) !== st.pct) sliderEl.value = st.pct;
+
+    const r1 = document.getElementById('engB_r1_' + cfg.uid);
+    const r2 = document.getElementById('engB_r2_' + cfg.uid);
+    const r3 = document.getElementById('engB_r3_' + cfg.uid);
+    if (r1) r1.textContent = `${(st.c * st.d / 60).toFixed(1)} 시간`;
+    if (r2) r2.textContent = `${(st.a * st.c * st.d / 60).toFixed(1)} 시간`;
+    if (r3) r3.textContent = `${(hours / 52).toFixed(1)} 시간`;
+
+    const pctDaysEl = document.getElementById('engB_pctDays_' + cfg.uid);
+    if (pctDaysEl) pctDaysEl.textContent = `${days} / 365일 (${((days / 365) * 100).toFixed(1)}%)`;
+
+    const footFormula = document.getElementById('engB_formula_' + cfg.uid);
+    if (footFormula) {
+      footFormula.textContent =
+        `${st.a}${cfg.units.a} × ${st.b}${cfg.units.b} × ${st.c}${cfg.units.c} × ${st.d}${cfg.units.d} ÷ 60 ÷ 8시간 = ${days}일 (${hours.toLocaleString()}시간) · 예시 계산`;
+    }
+
+    // Mode 0: 365 dot matrix wave
+    if (animate && st.mode === 0) {
+      mxCells.forEach(c => { c.classList.remove('on'); c.style.setProperty('--d', '0ms'); });
+      void mxBox.offsetWidth;
+      const stepDelay = days > 85 ? 5 : 10;
+      mxCells.forEach((c, i) => {
+        if (i < days) {
+          c.style.setProperty('--d', `${Math.min(i * stepDelay, 760)}ms`);
+          c.classList.add('on');
+        }
+      });
+    } else {
+      mxCells.forEach((c, i) => {
+        c.style.setProperty('--d', '0ms');
+        c.classList.toggle('on', i < days);
+      });
+    }
+
+    // Mode 1: 120 barcode vertical ticks
+    const activeTicks = Math.round((days / 365) * eqTicks.length);
+    if (animate && st.mode === 1 && barcodeBox) {
+      eqTicks.forEach(t => { t.classList.remove('on'); t.style.setProperty('--d', '0ms'); });
+      void barcodeBox.offsetWidth;
+      requestAnimationFrame(() => {
+        eqTicks.forEach((t, i) => {
+          if (i < activeTicks) {
+            t.style.setProperty('--d', `${i * 11}ms`);
+            t.classList.add('on');
+          }
+        });
+      });
+    } else {
+      eqTicks.forEach((t, i) => {
+        t.style.setProperty('--d', '0ms');
+        t.classList.toggle('on', i < activeTicks);
+      });
+    }
+
+    // Mode 2: 365 clockwise radar sweep (saved / used / remaining)
+    if (animate && st.mode === 2 && radarSvg) {
+      rdDots.forEach(dot => {
+        dot.classList.remove('saved', 'used');
+        dot.style.transitionDelay = '0ms';
+      });
+      void radarSvg.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        rdDots.forEach((dot, i) => {
+          if (i < days) {
+            dot.style.transitionDelay = `${Math.min(i * 6, 720)}ms`;
+            if (i < saved) dot.classList.add('saved');
+            else dot.classList.add('used');
+          }
+        });
+      });
+    } else {
+      rdDots.forEach((dot, i) => {
+        dot.style.transitionDelay = '0ms';
+        dot.classList.toggle('saved', i < saved);
+        dot.classList.toggle('used', i >= saved && i < days);
+      });
+    }
+  }
+
+  function switchMode(m, fromDemo = false) {
+    if (!fromDemo) stopDemo();
+    st.mode = m;
+    canvas.className = `eng-b-canvas mode-${m}`;
+    [0, 1, 2].forEach(i => {
+      const pane = document.getElementById(`engB_p${i}_${cfg.uid}`);
+      const tab = document.getElementById(`engB_t${i}_${cfg.uid}`);
+      if (pane) pane.classList.toggle('on', i === m);
+      if (tab) tab.classList.toggle('on', i === m);
+    });
+    updateUI(true);
+    PgyAudio.tick();
+  }
+
+  window['engB_mode_' + cfg.uid] = (m) => switchMode(m, false);
+
+  window['engB_step_' + cfg.uid] = (k, delta) => {
+    stopDemo();
+    const [mn, mx] = cfg.bounds[k];
+    st[k] = Math.min(mx, Math.max(mn, st[k] + delta));
+    updateUI(false);
+    PgyAudio.tick();
+  };
+
+  window['engB_slide_' + cfg.uid] = (val) => {
+    stopDemo();
+    st.pct = parseInt(val, 10) || 50;
+    updateUI(false);
+  };
+
+  window['engB_shuffle_' + cfg.uid] = (fromDemo = false) => {
+    if (!fromDemo) stopDemo();
+    const prevA = st.a;
+    ['a', 'c', 'd'].forEach(k => {
+      const [mn, mx] = cfg.bounds[k];
+      const step = k === 'd' ? 5 : 1;
+      const count = Math.floor((mx - mn) / step) + 1;
+      st[k] = mn + Math.floor(Math.random() * count) * step;
+    });
+    if (st.a === prevA) {
+      const [mn, mx] = cfg.bounds.a;
+      st.a = st.a + 3 <= mx ? st.a + 3 : Math.max(mn, st.a - 3);
+    }
+    updateUI(true);
+    PgyAudio.tick();
+  };
+
+  window['engB_demo_' + cfg.uid] = () => {
+    if (demoTimers.length > 0) {
+      stopDemo();
+      return;
+    }
+    if (demoBtn) {
+      demoBtn.classList.add('on');
+      demoBtn.textContent = '⏹ 시연 멈춤';
+    }
+    switchMode(0, true);
+    demoTimers.push(setTimeout(() => { window['engB_shuffle_' + cfg.uid](true); }, 1100));
+    demoTimers.push(setTimeout(() => { switchMode(1, true); }, 2500));
+    demoTimers.push(setTimeout(() => { switchMode(2, true); }, 4200));
+    demoTimers.push(setTimeout(() => {
+      st.pct = 75;
+      if (sliderEl) sliderEl.value = 75;
+      updateUI(false);
+      PgyAudio.tick();
+    }, 5600));
+    demoTimers.push(setTimeout(() => {
+      st.pct = 50;
+      if (sliderEl) sliderEl.value = 50;
+      updateUI(false);
+      stopDemo();
+    }, 6700));
+  };
+
+  if (slide && typeof MutationObserver !== 'undefined') {
+    let wasActive = slide.classList.contains('active');
+    const obs = new MutationObserver(() => {
+      const isActive = slide.classList.contains('active');
+      if (isActive && !wasActive) {
+        updateUI(true);
+      } else if (!isActive && wasActive) {
+        stopDemo();
+      }
+      wasActive = isActive;
+    });
+    obs.observe(slide, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  updateUI(false);
+}
+
+/* Engine C Yellow Brutalist Pixel-Shatter Triage Controller */
+function initEngineC(cfg) {
+  const slide = document.getElementById(cfg.slideId);
+  const stageBox = document.getElementById('engC_stage_' + cfg.uid);
+  const wordText = document.getElementById('engC_word_' + cfg.uid);
+  const clipText = document.getElementById('engC_clipword_' + cfg.uid);
+  const sh1 = document.getElementById('engC_sh1_' + cfg.uid);
+  const sh2 = document.getElementById('engC_sh2_' + cfg.uid);
+  const subDesc = document.getElementById('engC_desc_' + cfg.uid);
+  const cntEl = document.getElementById('engC_cnt_' + cfg.uid);
+  const leftQ = document.getElementById('engC_leftQ_' + cfg.uid);
+  const rightQ = document.getElementById('engC_rightQ_' + cfg.uid);
+  const leftNum = document.getElementById('engC_leftN_' + cfg.uid);
+  const rightNum = document.getElementById('engC_rightN_' + cfg.uid);
+  const canvas = document.getElementById('engC_cvs_' + cfg.uid);
+  if (!stageBox || !canvas) return;
+
+  let idx = 0, kept = [], sent = [], busy = false, autoTimer = null;
+
+  function renderCard() {
+    if (idx >= cfg.cards.length) {
+      // Final giant number screen (matching post3 00:15)
+      const countStr = String(sent.length);
+      [wordText, clipText, sh1, sh2].forEach(el => {
+        if (!el) return;
+        el.textContent = countStr;
+        el.setAttribute('font-size', '275');
+      });
+      subDesc.innerHTML = `<b style="font-size:20px;">${cfg.cards.length}가지 가운데 ${sent.length}가지를 넘겼습니다.</b><br><span style="opacity:.8;">남은 ${kept.length}가지가 진짜 내 경쟁력입니다.</span>`;
+      cntEl.textContent = `${cfg.cards.length} / ${cfg.cards.length}`;
+      PgyAudio.chime();
+      return;
+    }
+    const c = cfg.cards[idx];
+    const len = c.word.length;
+    const fSize = len <= 2 ? 255 : len === 3 ? 215 : len === 4 ? 172 : 144;
+    [wordText, clipText, sh1, sh2].forEach(el => {
+      if (!el) return;
+      el.textContent = c.word;
+      el.setAttribute('font-size', String(fSize));
+    });
+    subDesc.innerHTML = c.desc;
+    cntEl.textContent = `${String(idx+1).padStart(2,'0')} / ${String(cfg.cards.length).padStart(2,'0')}`;
+  }
+
+  function renderQueues() {
+    leftNum.textContent = kept.length;
+    rightNum.textContent = sent.length;
+    leftQ.innerHTML = kept.map(w => `<div class="triage-badge">${w}</div>`).join('');
+    rightQ.innerHTML = sent.map(w => `<div class="triage-badge">${w}</div>`).join('');
+  }
+
+  function shatterEffect(cb) {
+    busy = true;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width = stageBox.clientWidth || 860;
+    const H = canvas.height = stageBox.clientHeight || 380;
+    const blocks = [];
+    const sz = 20;
+    for (let x = W * 0.16; x < W * 0.84; x += sz + 2) {
+      for (let y = H * 0.16; y < H * 0.82; y += sz + 2) {
+        if (Math.random() > 0.35) {
+          blocks.push({
+            x, y, vx: 8 + Math.random() * 22, vy: (Math.random() - 0.5) * 9,
+            c: Math.random() > 0.45 ? '#141412' : '#EFECE3',
+            life: 1.0
+          });
+        }
+      }
+    }
+    let step = 0;
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      step++;
+      blocks.forEach(b => {
+        b.x += b.vx; b.y += b.vy; b.vy += 0.55; b.life -= 0.065;
+        if (b.life > 0) {
+          ctx.globalAlpha = Math.max(0, b.life);
+          ctx.fillStyle = b.c;
+          ctx.fillRect(Math.round(b.x / 4) * 4, Math.round(b.y / 4) * 4, sz, sz);
+        }
+      });
+      ctx.globalAlpha = 1;
+      if (step < 16) requestAnimationFrame(tick);
+      else {
+        ctx.clearRect(0, 0, W, H);
+        busy = false;
+        cb();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function act(dir) {
+    if (busy || idx >= cfg.cards.length) return;
+    const c = cfg.cards[idx];
+    if (dir === 'right' && c.protected) {
+      PgyAudio.reject();
+      stageBox.classList.remove('shake-hard');
+      void stageBox.offsetWidth;
+      stageBox.classList.add('shake-hard');
+      subDesc.innerHTML = `<span style="background:#141412;color:#FF7A00;padding:4px 12px;border-radius:6px;font-weight:900;">⚠️ ${c.warn || '책임은 AI에게 넘어가지 않습니다!'}</span>`;
+      return;
+    }
+    if (dir === 'right') {
+      PgyAudio.shatter();
+      sent.push(c.word);
+      shatterEffect(() => { idx++; renderQueues(); renderCard(); });
+    } else {
+      PgyAudio.tick();
+      kept.push(c.word);
+      idx++;
+      renderQueues();
+      renderCard();
+    }
+  }
+
+  window['engC_act_' + cfg.uid] = act;
+  window['engC_reset_' + cfg.uid] = () => {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    idx = 0; kept = []; sent = []; busy = false;
+    renderQueues(); renderCard();
+  };
+  window['engC_auto_' + cfg.uid] = () => {
+    window['engC_reset_' + cfg.uid]();
+    let stepDelay = 0;
+    autoTimer = setInterval(() => {
+      if (!slide.classList.contains('active')) { clearInterval(autoTimer); autoTimer = null; return; }
+      if (idx >= cfg.cards.length) { clearInterval(autoTimer); autoTimer = null; return; }
+      const c = cfg.cards[idx];
+      if (c.protected && stepDelay === 0) {
+        act('right');
+        stepDelay = 1;
+      } else {
+        stepDelay = 0;
+        act(c.target === 'ai' ? 'right' : 'left');
+      }
+    }, 850);
+  };
+
+  renderQueues();
+  renderCard();
+}
+
+
+/* -------- Slide 1: 3D Parallax Rig -------- */
+(function initCoverParallax() {
+  const slide1 = document.getElementById('slide_cap1');
+  const rig = document.getElementById('coverRig');
+  if (!slide1 || !rig) return;
+  const badges = [...rig.querySelectorAll('.p-badge')];
+  let tx = 0, ty = 0, cx = 0, cy = 0, hovered = false;
+
+  slide1.addEventListener('mousemove', e => {
+    const r = slide1.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    hovered = true;
+  });
+  slide1.addEventListener('mouseleave', () => { hovered = false; tx = 0; ty = 0; });
+
+  function loop(now) {
+    if (slide1.classList.contains('active')) {
+      if (!hovered) {
+        const t = now * 0.0012;
+        tx = Math.sin(t) * 0.35;
+        ty = Math.cos(t * 0.8) * 0.25;
+      }
+      cx += (tx - cx) * 0.1;
+      cy += (ty - cy) * 0.1;
+      rig.style.transform = `rotateY(${(cx * 12).toFixed(2)}deg) rotateX(${(-cy * 10).toFixed(2)}deg)`;
+      badges.forEach(b => {
+        const d = parseFloat(b.dataset.depth || '1');
+        b.style.marginLeft = `${(cx * 12 * d).toFixed(1)}px`;
+        b.style.marginTop = `${(cy * 10 * d).toFixed(1)}px`;
+      });
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* -------- Slide 2: Interactive 2030 Funnel -------- */
+let funnelMode = 'current';
+const FUNNEL_DATA = {
+  current: {
+    headline: '유네스코 세계유산 브랜드는 최고인데,<br><span style="color:#E11D48;">왜 2030 표적이 보이지 않을까?</span>',
+    met2: '18%', met2Col: '#E11D48', met2Sub: '현행 이탈 상태',
+    met3: '-74%p', met3Sub: '예시 단절 폭',
+    chartTitle: '4단계 2030 유입 퍼널 (기존 일방향 홍보 시 82% 이탈)',
+    loopTag: '바이럴 루프 없음', loopBg: '#FFF1F2', loopCol: '#E11D48',
+    diagBadge: '현황 진단 · 마케팅 맹점 2가지',
+    diagTitle: '인스타·유튜브 매체는 많지만 "누가 표적인지"가 빠져 있습니다',
+    diagList: `<li><b>일방향 홍보 나열:</b> 인스타·유튜브·배너에 행사 소식만 올려 MZ세대의 클릭 동기가 없음</li>
+               <li><b>올드한 이미지 고착:</b> "전통 축제는 어른들만 가는 지루한 행사"라는 2030의 인식 벽</li>
+               <li><b>측정·확산 부재:</b> 보고 지나치면 끝나는 구조라 SNS 알고리즘 확산이 일어나지 않음</li>`,
+    bars: [
+      { w: 100, col: '#002FA7', txt: '노출 100%', val: '100%', sub: 'SNS / 앱 알림 접점', dots: 2 },
+      { w: 42, col: '#4D6DC1', txt: '클릭 42% (-58% 이탈)', val: '42%', sub: '일방향 포스터 스킵', dots: 1 },
+      { w: 24, col: '#F59E0B', txt: '참여 24%', val: '24%', sub: '읽고 바로 종료', dots: 0 },
+      { w: 18, col: '#E11D48', txt: '공유 18%', val: '18%', sub: '바이럴 연결 부재', dots: 0 }
+    ]
+  },
+  proposed: {
+    headline: '토스 앱테크를 결합하면,<br><span style="color:#002FA7;">2030이 스스로 퀴즈를 풀고 퍼뜨립니다</span>',
+    met2: '68%', met2Col: '#002FA7', met2Sub: '자랑·재도전 루프',
+    met3: '-24%p', met3Sub: '단절 폭 50%p 개선 가정',
+    chartTitle: '4단계 2030 유입 퍼널 (토스 앱테크 + 강제 숏폼 루프 적용)',
+    loopTag: '↻ SNS 알고리즘 재유입 ON', loopBg: '#ECFDF5', loopCol: '#059669',
+    diagBadge: '제안 해법 · 2030 참여형 전환',
+    diagTitle: '금융 앱 리워드(26,000원 훅) + 숏폼 공유로 퍼널을 닫습니다',
+    diagList: `<li><b>명확한 타겟(2030):</b> 젊은 세대가 매일 켜는 토스 앱 안에서 하회탈 퀴즈로 즉시 유입</li>
+               <li><b>성공·실패 양방향 바이럴:</b> 성공 시 '자랑하기', 실패 시 '공유 재도전'으로 숏폼 노출</li>
+               <li><b>지역경제 연결:</b> 퀴즈 보상·할인 쿠폰을 들고 KTX·안동 현장 소비로 연결</li>`,
+    bars: [
+      { w: 100, col: '#002FA7', txt: '노출 100% (토스 알림)', val: '100%', sub: '2030 타겟 푸시 접점', dots: 3 },
+      { w: 84, col: '#3182F6', txt: '클릭 84% (리워드 유입)', val: '84%', sub: '26회 기념 이벤트 클릭', dots: 3 },
+      { w: 74, col: '#0EA5E9', txt: '참여 74% (1~5단계 퀴즈)', val: '74%', sub: '하회탈 유래·퀴즈 몰입', dots: 2 },
+      { w: 68, col: '#10B981', txt: '공유 68% ↻ 알고리즘 확산', val: '68%', sub: '숏폼 자랑 & 친구 초대', dots: 2 }
+    ]
+  }
+};
+
+function animateFunnel(fromZero) {
+  const d = FUNNEL_DATA[funnelMode];
+  document.getElementById('fnHeadline').innerHTML = d.headline;
+  document.getElementById('fnMet2').textContent = d.met2;
+  document.getElementById('fnMet2').style.color = d.met2Col;
+  document.getElementById('fnMet2Sub').textContent = d.met2Sub;
+  document.getElementById('fnMet3').textContent = d.met3;
+  document.getElementById('fnMet3Sub').textContent = d.met3Sub;
+  document.getElementById('fnChartTitle').textContent = d.chartTitle;
+  const lt = document.getElementById('fnLoopTag');
+  lt.textContent = d.loopTag; lt.style.background = d.loopBg; lt.style.color = d.loopCol;
+  document.getElementById('fnDiagBadge').textContent = d.diagBadge;
+  document.getElementById('fnDiagTitle').textContent = d.diagTitle;
+  document.getElementById('fnDiagList').innerHTML = d.diagList;
+
+  d.bars.forEach((b, i) => {
+    const bar = document.getElementById('fBar' + i);
+    const val = document.getElementById('fVal' + i);
+    const sub = document.getElementById('fSub' + i);
+    if (!bar) return;
+    if (fromZero) {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+    }
+    bar.style.background = b.col;
+    let dotsHtml = '';
+    for (let k = 0; k < b.dots; k++) {
+      dotsHtml += `<span class="f-particle" style="animation-delay:${k * 0.7}s;"></span>`;
+    }
+    bar.innerHTML = `<span>${b.txt}</span>${dotsHtml}`;
+    if (val) { val.textContent = b.val; val.style.color = b.col; }
+    if (sub) sub.textContent = b.sub;
+  });
+
+  if (fromZero) {
+    void document.getElementById('slide_cap2').offsetWidth;
+    requestAnimationFrame(() => {
+      d.bars.forEach((b, i) => {
+        const bar = document.getElementById('fBar' + i);
+        if (bar) {
+          bar.style.transition = `width .85s cubic-bezier(.22,.68,.18,1) ${i * 90}ms, background .4s ease`;
+          bar.style.width = b.w + '%';
+        }
+      });
+    });
+  } else {
+    d.bars.forEach((b, i) => {
+      const bar = document.getElementById('fBar' + i);
+      if (bar) {
+        bar.style.transition = `width .75s cubic-bezier(.22,.68,.18,1) ${i * 60}ms, background .4s ease`;
+        bar.style.width = b.w + '%';
+      }
+    });
+  }
+}
+
+function setFunnelMode(m, btn) {
+  funnelMode = m;
+  if (btn) {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  animateFunnel(false);
+  PgyAudio.tick();
+}
+
+/* -------- Slide 3: STP Segmentation & 2D Positioning Map -------- */
+const SEG_DATA = {
+  '10s': {
+    title: '10대 청소년 · 숏폼 소비자층', tag: 'SUB TARGET',
+    m: [38, 86, 62],
+    note: '<b>분석:</b> 숏폼 확산력은 높으나 금융 앱테크 결제·이동 자율성과 지역 상권 소비력이 2030 대비 낮습니다.'
+  },
+  '2030': {
+    title: '2030 MZ세대 · 국내외 핵심 타겟', tag: 'PRIMARY TARGET ★',
+    m: [92, 95, 90],
+    note: '<b>타겟(T) 이중 축:</b> ① 국내 2030(토스 앱테크 고빈도 유저) + ② 한류에 관심 있는 해외 2030 관광객(인플루언서·MICE 투어)을 동시 공략!'
+  },
+  '4050': {
+    title: '4050 가족층 · 주말 체험 동반객', tag: 'SECONDARY',
+    m: [58, 42, 48],
+    note: '<b>분석:</b> 자녀와 함께 방문하는 안정적 수요층이나, SNS 바이럴 확산 및 리포지셔닝 주도 세대로는 한계가 있습니다.'
+  },
+  '60p': {
+    title: '60+ 전통 관람층 · 기존 방문 기반', tag: 'LEGACY BASE',
+    m: [18, 15, 22],
+    note: '<b>분석:</b> 기존 축제의 충성 관람층이지만, 이 세대에만 의존할 경우 2030에게 "올드한 축제" 인식이 고착됩니다.'
+  }
+};
+
+function pickSeg(k, btn) {
+  const d = SEG_DATA[k];
+  if (!d) return;
+  if (btn) {
+    btn.parentElement.querySelectorAll('.stp-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+  }
+  document.getElementById('segTitle').textContent = d.title;
+  document.getElementById('segTag').textContent = d.tag;
+  document.getElementById('segNote').innerHTML = d.note;
+  d.m.forEach((val, idx) => {
+    document.getElementById(`segM${idx+1}Txt`).textContent = val + '%';
+    document.getElementById(`segBar${idx+1}`).style.width = val + '%';
+  });
+  PgyAudio.tick();
+}
+
+function playPosAnim() {
+  const path = document.getElementById('posTrajPath');
+  const bubble = document.getElementById('posTargetBubble');
+  if (!path || !bubble) return;
+  path.classList.remove('drawn');
+  bubble.style.transition = 'none';
+  bubble.style.transform = 'translate(130px, 285px)';
+  void path.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    path.classList.add('drawn');
+    bubble.style.transition = 'transform 1.15s cubic-bezier(.22,.68,.18,1)';
+    bubble.style.transform = 'translate(405px, 95px)';
+  });
+  PgyAudio.chime();
+}
+
+/* -------- Slide 4: Klein Blue Chart + 100-Cell Waffle + SWOT Drawer -------- */
+const WAFFLE_DATA = [
+  { key: 'toss', count: 50, color: '#002FA7', name: '토스·숏폼' },
+  { key: 'ktx', count: 25, color: '#4D6DC1', name: '체험관·KTX' },
+  { key: 'local', count: 15, color: '#FF7A00', name: '지역상권' },
+  { key: 'reserve', count: 10, color: '#D0D6DE', name: '예비비' }
+];
+
+(function initWaffle() {
+  const box = document.getElementById('cap4Waffle');
+  if (!box) return;
+  let cells = [];
+  let idx = 0;
+  WAFFLE_DATA.forEach(cat => {
+    for (let i = 0; i < cat.count; i++) {
+      cells.push(`<div class="wf-cell" data-cat="${cat.key}" data-i="${idx}" style="background:${cat.color};" title="${cat.name} (${cat.count}%)" onclick="pickCap4Waffle('${cat.key}')"></div>`);
+      idx++;
+    }
+  });
+  box.innerHTML = cells.join('');
+})();
+
+function animateCap4() {
+  setOdometer(document.getElementById('cap4OdoScore'), 94, 0, true);
+  const svg = document.getElementById('cap4BarSvg');
+  if (svg) {
+    svg.classList.remove('grow');
+    void svg.getBoundingClientRect();
+    requestAnimationFrame(() => svg.classList.add('grow'));
+  }
+  animateWaffle();
+}
+
+function animateWaffle() {
+  const box = document.getElementById('cap4Waffle');
+  if (!box) return;
+  const cells = [...box.children];
+  cells.forEach(c => c.classList.remove('pop', 'dim'));
+  void box.offsetWidth;
+  cells.forEach((c, i) => {
+    c.style.setProperty('--d', `${i * 8}ms`);
+    c.classList.add('pop');
+  });
+}
+
+const CAP4_NOTES = {
+  toss: '<b>토스 앱테크 · 숏폼 집중 (1.0억 · 50%):</b> 토스 [빼빼로 줍기]류 화제성을 응용해 퀴즈 성공 자랑 + 실패 공유 재도전 시 숏폼을 강제 노출합니다.',
+  global: '<b>해외 인플루언서 × K-컬처:</b> K-컬처 한류 수요가 높은 해외 2030 타겟으로 매체별 맞춤 인플루언서와 MICE 인센티브 투어를 연결합니다.',
+  ktx: '<b>오프라인 KTX · 공항 팝업 (5,000만 · 25%):</b> KTX 안동역·유입 동선에서 오프라인 체험존과 토스 퀴즈 QR 참여를 즉시 연결합니다.',
+  old: '<b>기존 종이 전단 · 일방향 공지 (축소 대상):</b> 타겟이 불분명하고 재공유 측정이 불가능해 예산을 대폭 줄여 앱테크 채널로 재배치합니다.',
+  local: '<b>안동 음식점 · 숙박 바우처 제휴 (3,000만 · 15%):</b> 앱테크 퀴즈 리워드를 실제 지역 상권 소비 쿠폰으로 연결해 지역경제를 활성화합니다.',
+  reserve: '<b>리워드 예치 예비비 (2,000만 · 10%):</b> 26,000원 퀴즈 이벤트 참여 폭증 시 추가 포인트 충당 및 안전 운영비로 확보합니다.'
+};
+
+function setCap4Mode(mode, btn) {
+  document.getElementById('kChartBtnBar').classList.toggle('on', mode === 'bar');
+  document.getElementById('kChartBtnGrid').classList.toggle('on', mode === 'grid');
+  document.getElementById('cap4BarView').style.display = mode === 'bar' ? 'flex' : 'none';
+  document.getElementById('cap4GridView').style.display = mode === 'grid' ? 'flex' : 'none';
+  if (mode === 'bar') {
+    document.getElementById('cap4ChartTitle').textContent = '매체별 2030 타겟 도달·바이럴 적합도 비교 (100점 기준 가정)';
+    document.getElementById('cap4ChartHint').textContent = '막대를 클릭하면 상세 전략이 바뀝니다';
+    const svg = document.getElementById('cap4BarSvg');
+    svg.classList.remove('grow'); void svg.getBoundingClientRect();
+    requestAnimationFrame(() => svg.classList.add('grow'));
+  } else {
+    document.getElementById('cap4ChartTitle').textContent = '100칸으로 보는 2억 원 예산 집중 배분 비율 (예시 설계)';
+    document.getElementById('cap4ChartHint').textContent = '격자 칸이나 항목을 클릭해 비중 확인';
+    animateWaffle();
+  }
+  PgyAudio.tick();
+}
+
+function pickCap4Bar(k) {
+  document.getElementById('cap4BarNote').innerHTML = CAP4_NOTES[k] || CAP4_NOTES.toss;
+  PgyAudio.tick();
+}
+
+function pickCap4Waffle(k) {
+  document.getElementById('cap4BarNote').innerHTML = CAP4_NOTES[k] || CAP4_NOTES.toss;
+  const cells = [...document.querySelectorAll('#cap4Waffle .wf-cell')];
+  cells.forEach(c => c.classList.toggle('dim', c.dataset.cat !== k));
+  PgyAudio.tick();
+}
+
+function toggleCap4Drawer(open) {
+  const d = document.getElementById('cap4Drawer');
+  if (d) d.classList.toggle('open', open);
+  PgyAudio.tick();
+}
+
+/* -------- Slide 5: Interactive Toss Quiz + 4-Step Flow Sync -------- */
+const QUIZ_STEPS = [
+  {
+    badge: 'STEP 1 / 3 · 현재 적립 0원',
+    q: '1단계: 웃는 표정으로 가장 유명한 안동 하회탈은?',
+    sub: '정답을 누르면 상금 적립과 함께 다음 단계로 넘어갑니다!',
+    opts: [
+      ['① 양반탈 (눈꼬리가 처진 넉넉한 미소)', true],
+      ['② 각시탈 (입을 다문 수줍은 표정)', false],
+      ['③ 파계승탈 (익살스럽게 비웃는 모습)', false]
+    ],
+    reward: 1500
+  },
+  {
+    badge: 'STEP 2 / 3 · 현재 적립 1,500원',
+    q: '2단계: 하회탈 중 유일하게 턱이 분리되어 말할 때 움직이는 구조는?',
+    sub: '2단계 통과 시 5,000원 보너스 적립!',
+    opts: [
+      ['① 턱끈이 묶인 가변 턱 구조', true],
+      ['② 금칠이 입혀진 왕관 장식', false],
+      ['③ 3D 프린팅 플라스틱 탈', false]
+    ],
+    reward: 5000
+  },
+  {
+    badge: 'STEP 3 / 3 · 마지막 관문!',
+    q: '3단계: 올해 제26회 안동국제탈춤페스티벌 메인 도전 상금은?',
+    sub: '최종 통과 시 26,000원 응모 + 인스타 자랑하기 실행!',
+    opts: [
+      ['① 26,000원 (제26회 기념!)', true],
+      ['② 1,000원', false],
+      ['③ 커피 1잔 교환권만 증정', false]
+    ],
+    reward: 26000
+  }
+];
+let qStep = 0, qTries = 1, qCurReward = 0, qTimer = null, qLocked = false;
+
+function highlightFlowStep(idx) {
+  [0, 1, 2, 3].forEach(i => {
+    const el = document.getElementById('flowStep' + i);
+    if (el) el.classList.toggle('cur', i === idx);
+  });
+}
+
+function openViralModal(type) {
+  const m = document.getElementById('viralModal');
+  const badge = document.getElementById('vmBadge');
+  const title = document.getElementById('vmTitle');
+  const desc = document.getElementById('vmDesc');
+  const clip = document.getElementById('vmClipTxt');
+  const btn = document.getElementById('vmCloseBtn');
+  if (type === 'success') {
+    badge.style.background = '#10B981'; badge.textContent = 'STEP 3 · 성공 시 자랑하기 필수!';
+    title.textContent = '🎉 26,000원 도전 완료 + 숏폼 공유';
+    desc.textContent = '리워드 수령 전 "자랑하기" 화면에 8초 안동탈춤 숏폼이 자동 삽입되어 SNS 알고리즘에 퍼집니다.';
+    clip.textContent = '[8초 탈춤 숏폼] "나 26,000원 퀴즈 성공함🔥" 자동 첨부';
+    btn.textContent = '인스타 자랑하기 완료 (시연 닫기)';
+  } else {
+    badge.style.background = '#E11D48'; badge.textContent = 'STEP 4 · 실패 시 친구 공유 재도전';
+    title.textContent = '😅 아쉽네요! 친구 공유로 +1회 획득';
+    desc.textContent = '카톡 친구에게 퀴즈를 공유하면 다시 도전하기 직전에 5초 탈춤 광고가 노출됩니다!';
+    clip.textContent = '[5초 탈춤 광고] 시청 완료 → 도전 기회 +1회 충전!';
+    btn.textContent = '5초 광고 보고 재도전하기';
+  }
+  m.classList.add('open');
+}
+
+function closeViralModal() {
+  document.getElementById('viralModal').classList.remove('open');
+  PgyAudio.tick();
+}
+
+function renderQuiz() {
+  if (qStep >= QUIZ_STEPS.length) qStep = QUIZ_STEPS.length - 1;
+  qLocked = false;
+  const s = QUIZ_STEPS[qStep];
+  document.getElementById('qStepBadge').textContent = s.badge;
+  document.getElementById('qTitle').textContent = s.q;
+  document.getElementById('qSub').textContent = s.sub;
+  document.getElementById('quizOpts').innerHTML = s.opts.map(([txt, ok]) =>
+    `<button class="quiz-opt" onclick="pickQuiz(${ok}, this)">${txt}</button>`
+  ).join('');
+  setOdometer(document.getElementById('quizOdo'), qCurReward, 0, false);
+  highlightFlowStep(qStep === 0 && qCurReward === 0 ? 0 : 1);
+}
+
+function pickQuiz(ok, btn) {
+  if (qLocked) return;
+  [...document.querySelectorAll('.quiz-opt')].forEach(b => b.classList.remove('correct','wrong'));
+  const res = document.getElementById('quizResult');
+  const stepData = QUIZ_STEPS[qStep];
+  if (!stepData) return;
+  if (ok) {
+    btn.classList.add('correct');
+    qCurReward = stepData.reward;
+    setOdometer(document.getElementById('quizOdo'), qCurReward, 0, false);
+    PgyAudio.chime();
+    if (qStep < QUIZ_STEPS.length - 1) {
+      qLocked = true;
+      highlightFlowStep(1);
+      res.style.background = '#ECFDF5'; res.style.color = '#065F46';
+      res.innerHTML = '<b>✅ 통과!</b> 적립금이 올라갔습니다. 다음 단계로 넘어갑니다...';
+      clearTimeout(qTimer);
+      qTimer = setTimeout(() => { qStep = Math.min(qStep + 1, QUIZ_STEPS.length - 1); renderQuiz(); }, 520);
+    } else {
+      highlightFlowStep(2);
+      res.style.background = '#DBEAFE'; res.style.color = '#1E3A8A';
+      res.innerHTML = '<b>🎉 26,000원 최종 도전 성공!</b> [자랑하기] 숏폼 팝업이 실행되었습니다!';
+      openViralModal('success');
+    }
+  } else {
+    btn.classList.add('wrong');
+    qTries++;
+    highlightFlowStep(3);
+    PgyAudio.reject();
+    document.getElementById('tryLeft').textContent = `공유 보상 +1회 (누적 ${qTries}회)`;
+    res.style.background = '#FFF1F2'; res.style.color = '#9F1239';
+    res.innerHTML = '<b>😅 오답!</b> 친구 공유 + 5초 탈춤 광고 시청 후 재도전 기회가 지급됩니다!';
+    openViralModal('fail');
+  }
+}
+
+function resetQuiz() {
+  clearTimeout(qTimer);
+  qLocked = false;
+  qStep = 0; qCurReward = 0; qTries = 1;
+  closeViralModal();
+  document.getElementById('tryLeft').textContent = '도전 기회 1회';
+  document.getElementById('quizResult').style.background = '#F2F4F6';
+  document.getElementById('quizResult').style.color = '#333D4B';
+  document.getElementById('quizResult').textContent = '👆 위 보기를 클릭해 실제 앱 흐름을 시연해 보세요!';
+  renderQuiz();
+  highlightFlowStep(0);
+  PgyAudio.tick();
+}
+renderQuiz();
+
+/* -------- Slide 6: 4Ps Mix & Timeline Flywheel -------- */
+const P4_MSGS = [
+  '<b>P1 PRODUCT:</b> 토스 앱테크 5단계 하회탈 퀴즈로 흥미를 유발하고, 오프라인 탈춤 체험존과 MICE 인센티브 투어로 현장 경험을 완성합니다.',
+  '<b>P2 PRICE:</b> 참여 진입장벽은 0원(무료)으로 낮추고, 제26회 26,000원 리워드와 안동 지역 상권·숙박 할인 바우처로 체감 혜택을 극대화합니다.',
+  '<b>P3 PLACE:</b> 2030이 모이는 토스·인스타·틱톡·유튜브(온라인)와 KTX 안동역·축제장(오프라인)을 QR과 리워드로 매끄럽게 연결합니다.',
+  '<b>P4 PROMOTION:</b> 성공 시 자랑하기·실패 시 재도전 공유마다 탈춤 숏폼을 노출해 전 플랫폼 알고리즘 확산과 매체별 인플루언서 시너지를 만듭니다.'
+];
+let fwTimers = [];
+function pick4P(idx) {
+  [0, 1, 2, 3].forEach(i => {
+    const el = document.getElementById('p4c' + i);
+    if (el) el.classList.toggle('on', i === idx);
+  });
+  document.getElementById('p4DetailTxt').innerHTML = P4_MSGS[idx] || P4_MSGS[0];
+  PgyAudio.tick();
+}
+
+function playFlywheel() {
+  fwTimers.forEach(t => clearTimeout(t));
+  fwTimers = [];
+  const stepHighlight = (nodeIdx) => {
+    [0, 1, 2].forEach(i => {
+      const n = document.getElementById('tlNode' + i);
+      if (n) n.classList.toggle('lit', i === nodeIdx);
+    });
+    pick4P(nodeIdx);
+  };
+  stepHighlight(0);
+  fwTimers.push(setTimeout(() => stepHighlight(1), 850));
+  fwTimers.push(setTimeout(() => stepHighlight(2), 1700));
+  fwTimers.push(setTimeout(() => {
+    [0, 1, 2].forEach(i => document.getElementById('tlNode' + i).classList.add('lit'));
+    pick4P(3);
+  }, 2550));
+}
+
+/* -------- Slide 7: 3-Lever Budget & KPI Simulator -------- */
+function updateSim(fromZero = false) {
+  const budgetTenths = parseInt(document.getElementById('lv1').value, 10);
+  const digPct = parseInt(document.getElementById('lv2').value, 10);
+  const convPct = parseInt(document.getElementById('lv3').value, 10);
+
+  const budgetWon = budgetTenths * 10000000;
+  const digBudget = budgetWon * (digPct / 100);
+  const offBudget = budgetWon - digBudget;
+  const usersThousand = Math.round((digBudget / 1000) / 1000);
+  const visitThousand = Math.max(1, Math.round(usersThousand * (convPct / 100)));
+
+  document.getElementById('lv1Val').textContent = `${(budgetTenths/10).toFixed(1)}억 원`;
+  document.getElementById('lv2Val').textContent = `${digPct}%`;
+  document.getElementById('lv3Val').textContent = `${convPct}%`;
+
+  setOdometer(document.getElementById('simOdoUsers'), usersThousand, 0, fromZero);
+  setOdometer(document.getElementById('simOdoVisit'), visitThousand, 0, fromZero);
+
+  const deltaVisit = visitThousand - 15;
+  const badge = document.getElementById('simDeltaBadge');
+  if (badge) {
+    if (deltaVisit === 0) badge.textContent = '기준안(2억·50%·15% = 15천 명)과 동일';
+    else badge.textContent = `기준 대비 현장 모객 ${deltaVisit > 0 ? '+' : ''}${deltaVisit}천 명`;
+  }
+
+  const bar1 = document.getElementById('simBar1');
+  const bar2 = document.getElementById('simBar2');
+  if (fromZero && bar1 && bar2) {
+    bar1.style.transition = 'none'; bar2.style.transition = 'none';
+    bar1.style.width = '0%'; bar2.style.width = '0%';
+    void bar1.offsetWidth;
+    requestAnimationFrame(() => {
+      bar1.style.transition = 'width .75s cubic-bezier(.22,.68,.18,1)';
+      bar2.style.transition = 'width .75s cubic-bezier(.22,.68,.18,1)';
+      bar1.style.width = `${digPct}%`;
+      bar2.style.width = `${100 - digPct}%`;
+    });
+  } else if (bar1 && bar2) {
+    bar1.style.width = `${digPct}%`;
+    bar2.style.width = `${100 - digPct}%`;
+  }
+
+  document.getElementById('simBar1Txt').textContent = `${(digBudget/100000000).toFixed(2)}억 원 (${digPct}%)`;
+  document.getElementById('simBar2Txt').textContent = `${(offBudget/100000000).toFixed(2)}억 원 (${100-digPct}%)`;
+  document.getElementById('simExplain').innerHTML =
+    `총 <b>${(budgetTenths/10).toFixed(1)}억 원</b> 중 토스·숏폼 <b>${digPct}%</b>(${(digBudget/100000000).toFixed(2)}억) 투입 시 가정 참여 <b>${usersThousand}천 명</b> × 전환 <b>${convPct}%</b> = 안동 현장 방문 <b>${visitThousand}천 명</b> (예시 계산).`;
+}
+
+function resetSim() {
+  document.getElementById('lv1').value = 20;
+  document.getElementById('lv2').value = 50;
+  document.getElementById('lv3').value = 15;
+  updateSim(true);
+  PgyAudio.tick();
+}
+updateSim(false);
+
+/* -------- Slide Navigation & Per-Slide Entrance Hooks -------- */
+function onSlideEnter(idx) {
+  if (idx !== 5) {
+    fwTimers.forEach(t => clearTimeout(t));
+    fwTimers = [];
+  }
+  if (idx === 1) animateFunnel(true);
+  else if (idx === 2) playPosAnim();
+  else if (idx === 3) animateCap4();
+  else if (idx === 4) setOdometer(document.getElementById('quizOdo'), qCurReward, 0, true);
+  else if (idx === 5) playFlywheel();
+  else if (idx === 6) updateSim(true);
+}
+
+function go(n) {
+  cur = (n + slides.length) % slides.length;
+  slides.forEach((el, i) => el.classList.toggle('active', i === cur));
+  document.getElementById('counter').textContent = `${cur + 1} / ${slides.length}`;
+  document.getElementById('progBar').style.width = `${(cur + 1) / slides.length * 100}%`;
+  buildGrid();
+  onSlideEnter(cur);
+}
+
+function buildGrid() {
+  const box = document.getElementById('gridCards');
+  box.innerHTML = slides.map((s, i) => `
+    <button class="grid-item ${i === cur ? 'cur' : ''}" onclick="go(${i}); toggleGrid();">
+      <div style="font-size:12px;color:#60A5FA;font-weight:800;">SLIDE 0${i+1}</div>
+      <div style="font-family:var(--display);font-weight:700;font-size:15px;margin-top:8px;line-height:1.35;">${s.dataset.title}</div>
+    </button>
+  `).join('');
+}
+buildGrid();
+
+function toggleGrid() { document.getElementById('gridOverlay').classList.toggle('open'); }
+function toggleFS() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen().catch(()=>{});
+}
+
+function copyMaster() {
+  const text = document.getElementById('demoPromptBox').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur+1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur-1); }
+  else if (e.key.toLowerCase() === 'g') toggleGrid();
+  else if (e.key.toLowerCase() === 'f') toggleFS();
+  else if (e.key.toLowerCase() === 's') PgyAudio.toggle();
+  else if (e.key === 'Escape') {
+    document.getElementById('gridOverlay').classList.remove('open');
+    toggleCap4Drawer(false);
+    closeViralModal();
+  }
+});
+</script>
+</body>
+</html>
