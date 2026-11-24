@@ -75,12 +75,13 @@ ol.st p{margin:4px 0 0;color:var(--ink-2)}
 <li><b>설치하고 Sign in</b><p>개인 구글 계정으로 로그인 → 하는 일 고르기에서 <span class="btn">Knowledge Work</span> → <span class="btn">Continue</span></p></li>
 </ol>
 
-<h2><span>C</span>두 앱 연결하기 (MCP)</h2>
-<p class="sub">Aside 쪽에서 「연결 도구(CLI)」를 깔고, 안티그래비티 설정 파일에 Aside를 한 줄 넣는 방식이에요.</p>
+<h2><span>C</span>두 앱 연결하기</h2>
+<p class="sub">Aside가 설정 내용을 만들어 주면, 안티그래비티에 복사해 붙여 넣기만 하면 돼요.</p>
 <ol class="st">
-<li><b>Aside 설정에서 CLI 설치</b><p>Aside 설정의 <span class="btn">Developer settings</span> 에서 CLI를 설치해요. 여기에 CLI 경로가 보이면 적어 두세요.</p><div class="tip">메뉴가 안 보이면 <a href="https://docs.aside.com/help/developers#install-the-cli" target="_blank" rel="noopener">Aside 개발자 안내</a> → Windows 탭 코드를 복사해 PowerShell에 붙여 넣으세요. 설치 뒤 명령을 못 찾으면 PowerShell 창을 새로 여세요.</div></li>
-<li><b>안티그래비티 MCP 설정 열기</b><p>왼쪽 <span class="btn">Customizations</span> → <span class="btn">Installed</span> → 아래로 내려 <span class="btn">MCP Servers</span> → 위의 <span class="btn">Copy Config File Path</span> 로 설정 파일 경로를 복사해 메모장으로 열기</p></li>
-<li><b>아래 내용 붙여 넣고 저장</b>
+<li><b>Aside 설정 → Developers</b><p>Aside <span class="btn">설정</span> → 왼쪽 목록 Features 칸의 <span class="btn">Developers</span> → 맨 위 Aside CLI <span class="btn">Install</span> → 아래 <span class="btn">Enable Aside MCP server</span> 켜기</p><img src="aside_developers.jpg" alt="Aside 설정 Developers 화면" style="width:100%;border:1px solid var(--line);border-radius:10px;margin-top:10px"></li>
+<li><b>설정 내용 복사</b><p>스위치 밑 <span class="btn">How to set up MCP server?</span> → 창 오른쪽 위 복사 단추</p><img src="aside_mcp_copy.jpg" alt="Aside MCP 설정 복사 창" style="width:100%;border:1px solid var(--line);border-radius:10px;margin-top:10px"><div class="tip">내 PC 경로가 이미 들어 있어서 고칠 게 없어요.</div></li>
+<li><b>안티그래비티에 붙여 넣기</b><p>왼쪽 <span class="btn">Customizations</span> → <span class="btn">Installed</span> → 아래 <span class="btn">MCP Servers</span> → <span class="btn">Copy Config File Path</span> 로 경로를 복사해 메모장으로 열고, 복사한 내용을 붙여 넣고 저장</p><div class="tip">파일에 이미 다른 서버가 있으면 통째로 덮지 말고 <b>"mcpServers" 안에 "aside" 부분만</b> 넣으세요.</div>
+<details style="margin-top:10px"><summary style="cursor:pointer;color:var(--ink-2);font-size:15px">복사 창이 안 열리면: 기본 설정 내용</summary>
 <div class="code"><div class="code-head"><span>mcp_config.json</span><button class="copy" data-copy="j1">복사</button></div><pre id="j1">{
   "mcpServers": {
     "aside": {
@@ -88,8 +89,7 @@ ol.st p{margin:4px 0 0;color:var(--ink-2)}
       "args": ["mcp"]
     }
   }
-}</pre></div>
-<div class="tip">파일에 이미 다른 서버가 있으면 통째로 덮지 말고 <b>"mcpServers" 안에 "aside" 부분만</b> 넣으세요. Aside Developer settings에 CLI 경로가 따로 보였다면 <span class="btn">"aside"</span> 대신 그 경로를 넣으세요(윈도는 경로의 <span class="btn">\</span> 를 <span class="btn">\\</span> 로 두 번 써요).</div></li>
+}</pre></div></details></li>
 <li><b>Restart</b><p>MCP Servers 목록의 aside 옆 <span class="btn">⋮</span> → <span class="btn">Restart</span></p></li>
 </ol>
 
